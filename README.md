@@ -1,5 +1,9 @@
 # PHPBU Documentation
 
+This repository is used to generate the `phpbu` documentation in various formats. You can find the current result [here](http://phpbu.de/manual/current/en/index.html).
+
+[![Build Status](https://travis-ci.org/sebastianfeldmann/phpbu-documentation.svg?branch=master)](https://travis-ci.org/sebastianfeldmann/phpbu-documentation)
+
 ## Requirements
 
 - Apache Ant
