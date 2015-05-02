@@ -1,0 +1,154 @@
+.btn-primary {
+  background-color: #fc9809;
+  border-color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #ff7709;
+  border-color: #fff;
+}
+
+.improve {
+  text-align: center;
+  width: 60%;
+  margin: 20px auto;
+}
+
+@media ( max-width :1100px) {
+    .improve {
+        width: 80%;
+    }
+}
+
+@media ( max-width :900px) {
+  .improve {
+    width: 100%;
+  }
+}
+
+#footer {
+    margin-bottom: 50px;
+}
+
+#footer .copyright {
+    float:left;
+}
+
+#footer .social {
+    float: right;
+}
+
+#footer .social img {
+    position: relative;
+    top: -2px;
+}
+
+#footer .social a {
+    color: #000;
+    text-decoration: none;
+}
+
+#footer .social .twitter {
+    display: block;
+    padding-left: 20px;
+    height: 21px;
+    background: transparent url("../images/twitter.png") no-repeat 0 5px;
+    background-size: 16px 16px;
+}
+
+.flag {
+    background: url('../images/flags.png') no-repeat;
+    display: block;
+    float: left;
+    width: 20px;
+    height: 14px;
+    margin: 2px 5px 0 0;
+}
+
+.flag.de {
+    background-position: 0 0;
+}
+
+.flag.en {
+    background-position: 0 -17px;
+}
+
+.em, h1, h2, h3, h4, h5, h6, code {
+  color: #429a6c;
+}
+
+body {
+  font-size: 1.6em;
+  line-height: 1.6;
+}
+
+.prev {
+  padding-left: 30px;
+}
+
+.next {
+  margin-right: 30px;
+}
+
+.doc-sidebar {
+  font-size: 0.8125em;
+}
+
+.doc-sidebar dt {
+  font-weight: normal;
+  line-height: 1.9;
+}
+
+dd {
+  margin-left:1em;
+}
+
+pre.programlisting, pre.screen, code {
+  /*font-family: 'Source Code Pro', sans-serif;*/
+  font-size: 1em;
+}
+
+pre.screen {
+  background-color: #000;
+  color: #fff;
+}
+
+pre span.bg {
+  color: #eeeeec;
+  font-weight: bold;
+}
+
+pre span.comment {
+  color: #8f5902;
+  font-weight: bold;
+}
+
+pre span.default {
+  color: #204a87;
+  font-weight: bold;
+}
+
+pre span.html {
+  color: #000;
+  font-weight: bold;
+}
+
+pre span.keyword {
+  color: #4e9a06;
+  font-weight: bold;
+}
+
+pre span.string {
+  color: #a40000;
+  font-weight: bold;
+}
+
+strong.userinput {
+  font-weight: normal;
+}
+
+ul.itemizedlist li {
+    width: 30%;
+    display: inline-block;
+    margin-right: 5px;
+}

@@ -1,0 +1,93 @@
+<project name="phpbu-manual" default="build-current" basedir=".">
+
+  <target name="check-current" depends="check-en-2.1"/>
+  <target name="build-current" depends="build-en-2.1"/>
+
+  <!-- check book xml syntax for a given version in a given language -->
+  <target name="check">
+    <exec dir="${basedir}" executable="xmllint" failonerror="true">
+      <arg line="--noout --noent src/${version}/${language}/book.xml"/>
+    </exec>
+  </target>
+
+  <!-- build the manual for a given version in a given language -->
+  <target name="build">
+    <delete dir="build/output/${version}/${language}"/>
+    <mkdir dir="build/output/${version}/${language}"/>
+    <mkdir dir="build/figures"/>
+
+    <copy todir="build/output/${version}/${language}">
+      <fileset dir="assets"/>
+    </copy>
+
+    <!-- create the multi html file version -->
+    <exec dir="${basedir}" executable="xsltproc" failonerror="true">
+      <arg line="--xinclude --stringparam base.dir build/output/${version}/${language}/ --stringparam l10n.gentext.language ${language} docbook/html-chunked.xsl src/${version}/${language}/book.xml"/>
+    </exec>
+
+    <!-- create the single file html version -->
+    <exec dir="${basedir}" executable="xsltproc" failonerror="true">
+      <arg line="--xinclude --stringparam l10n.gentext.language ${language} --output build/output/${version}/${language}/phpbu-manual.html docbook/html.xsl src/${version}/${language}/book.xml"/>
+    </exec>
+
+    <!-- create the epub format -->
+    <exec dir="${basedir}" executable="docbook/docbook-xsl/epub/bin/dbtoepub" failonerror="true">
+      <arg line="-o build/output/${version}/${language}/phpbu-manual.epub src/${version}/${language}/book.xml"/>
+    </exec>
+
+    <!-- create the apache fop file -->
+    <exec dir="${basedir}" executable="xsltproc" failonerror="true">
+      <arg line="--xinclude --stringparam fop1.extensions 1 --stringparam l10n.gentext.language ${language} --output build/output/${version}/${language}/phpbu-book.fo docbook/fo.xsl src/${version}/${language}/book.xml"/>
+    </exec>
+
+    <!-- copy linked images to include into the manual -->
+    <copy todir="build/figures">
+      <fileset dir="src/${version}/${language}/figures" erroronmissingdir="false">
+        <include name="*.png"/>
+      </fileset>
+    </copy>
+
+    <!-- enhance the code highlighting -->
+    <exec dir="${basedir}" executable="./scripts/HighlightPDF.php">
+      <arg line="build/output/${version}/${language}/phpbu-book.fo"/>
+    </exec>
+
+    <!-- create the pdf version with apache fop and the enhanced fop file -->
+    <exec dir="${basedir}" executable="./docbook/fop/fop">
+      <env key="FOP_OPTS" value="-Djava.util.logging.config.file=docbook/log4j.properties"/>
+      <arg line="-fo build/output/${version}/${language}/phpbu-book.fo -c docbook/fop.xconf -pdf build/output/${version}/${language}/phpbu-manual.pdf"/>
+    </exec>
+
+    <!-- remove the unnecessary fop config file -->
+    <delete file="build/output/${version}/${language}/phpbu-book.fo"/>
+    <move file="build/figures" todir="build/output/${version}/${language}"/>
+
+    <!-- enhance the docbook html files with a base template, some navigation and custom styles -->
+    <exec dir="${basedir}" executable="./scripts/webify.php">
+      <arg line="build/output/${version}/${language} ${language} ${version}"/>
+    </exec>
+
+    <!-- compress all together into a single download file -->
+    <tar destfile="build/output/${version}/${language}/download.tar.bz2" basedir="build/output/${version}/${language}" compression="bzip2"/>
+
+  </target>
+
+
+  <!-- build and check all available versions -->
+
+  <!-- 2.1 -->
+  <target name="build-en-2.1" depends="check-en-2.1">
+    <antcall target="build">
+      <param name="language" value="en"/>
+      <param name="version" value="2.1"/>
+    </antcall>
+  </target>
+  <target name="check-en-2.1">
+    <antcall target="check">
+      <param name="language" value="en"/>
+      <param name="version" value="2.1"/>
+    </antcall>
+  </target>
+
+</project>
+

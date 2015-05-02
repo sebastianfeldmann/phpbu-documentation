@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="sync">
+
+  <indexterm><primary>sync</primary></indexterm>
+
+  <title>Sync Backups</title>
+
+  <para>
+    You can copy your backups to other locations.
+  </para>
+
+  <table id="sync.tables.available-syncs">
+    <title>Supported types of syncs:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>amazon</entry>
+          <entry>Copy your backup to your amazon s3 account.</entry>
+        </row>
+        <row>
+          <entry>copy.com</entry>
+          <entry>Copy your backup to a copy account.</entry>
+        </row>
+        <row>
+          <entry>dropbox</entry>
+          <entry>Copy your backup to a dropbox account.</entry>
+        </row>
+        <row>
+          <entry>rsync</entry>
+          <entry>Sync your backups with rsync.</entry>
+        </row>
+        <row>
+          <entry>sftp</entry>
+          <entry>Copy your backup to a server via SFTP.</entry>
+        </row>
+        <row>
+          <entry>SoftLayer Object Storage</entry>
+          <entry>Sync your backup to a Softlayer Object Storage account.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="sync.amazon">
+
+    <indexterm><primary>amazon s3</primary></indexterm>
+
+    <title>Amazon S3</title>
+
+    <para>
+      Sync your backup to an amazon S3 account.
+    </para>
+
+    <table id="sync.tables.options.amazon">
+      <title>amazons3-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>key</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The amazon s3 key.</entry>
+          </row>
+          <row>
+            <entry>secret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The amazon S3 secret.</entry>
+          </row>
+          <row>
+            <entry>bucket</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>A bucket where to store the backup.</entry>
+          </row>
+          <row>
+            <entry>region</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The region where the bucket is located e.g. 'eu-central-1'.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>/</entry>
+            <entry>Path where to store the backup in your bucket.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.amazons3.example.xml">
+
+      <title>amazons3 XML example</title>
+
+      <programlisting><![CDATA[<!-- sync amazon s3 -->
+<sync type="amazons3">
+  <option name="key" value="myawskey"/>
+  <option name="secret" value="myawssecret"/>
+  <option name="bucket" value="backup"/>
+  <option name="region" value="eu-central-1"/>
+  <option name="path" value="/some/dir"/>
+</sync>]]></programlisting>
+
+    </example>
+
+  </section>
+
+  <section id="sync.copycom">
+
+    <indexterm><primary>copy.com</primary></indexterm>
+    <title>copy.com</title>
+
+    <para>
+      Sync your backup to a copy.com account.
+    </para>
+
+    <table id="sync.tables.options.copycom">
+      <title>copycom-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>app.key</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              The copy app key.
+              Go to <ulink url="https://developers.copy.com/applications">developers.copy.com/applications</ulink>
+              Create your app and grant access to write files
+              Obtain your application key and your application secret
+              Use the API-Console to acquire your personal user-key and user-secret.
+            </entry>
+          </row>
+          <row>
+            <entry>app.secret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The copy app secret.</entry>
+          </row>
+          <row>
+            <entry>user.key</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>User oauth token.</entry>
+          </row>
+          <row>
+            <entry>user.secret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>User oauth secret.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Directory where to store the backup in your copy account.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.copycom.example.xml">
+
+      <title>copycom XML example</title>
+
+      <programlisting><![CDATA[<!-- sync copy.com -->
+<sync type="copycom">
+  <option name="app.key" value="myappkey"/>
+  <option name="app.secret" value="mycrazylongapisecret"/>
+  <option name="user.key" value="oauthuserkey"/>
+  <option name="user.secret" value="oauthusersecret"/>
+  <option name="path" value="/some/dir"/>
+</sync>]]></programlisting>
+
+    </example>
+
+  </section>
+
+  <section id="sync.dropbox">
+
+    <indexterm><primary>dropbox</primary></indexterm>
+    <title>Dropbox</title>
+
+    <para>
+      Sync your backup to a dropbox account.
+    </para>
+
+    <table id="sync.tables.options.dropbox">
+      <title>dropbox-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>token</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              The dropbox authentication token.
+              Go to <ulink url="https://www.dropbox.com/developers/apps">www.dropbox.com/developers/apps</ulink>
+              Create your app
+              Choose:
+              dropbox api app
+              files and datastore
+              yes
+              provide some app name "my-dropbox-app"
+              generate access token to authenticate connection to your dropbox
+            </entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Directory where to store the backup in your dropbox account.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.dropbox.example.xml">
+
+      <title>dropbox XML example</title>
+
+      <programlisting><![CDATA[<!-- sync dropbox -->
+<sync type="dropbox">
+  <option name="token" value="mycrazylongapitokenthatigotfromdropbox"/>
+  <option name="path" value="/some/dir"/>
+</sync>
+</section>]]></programlisting>
+
+    </example>
+
+  </section>
+
+  <section id="sync.rsync">
+
+    <indexterm><primary>rsync</primary></indexterm>
+    <title>Rsync</title>
+
+    <para>
+      Sync your backup via the rsync command.
+    </para>
+
+    <table id="sync.tables.options.rsync">
+      <title>rsync-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where your backups should be synced to.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote host where your backups should be synced to.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>
+              The user to connect to the remote host.
+              Make sure the user is able to connect without entering a password otherwise you get prompted for a password while executing phpbu.
+            </entry>
+          </row>
+          <row>
+            <entry>dirsync</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Sync the target directory instead of syncing only the target file.</entry>
+          </row>
+          <row>
+            <entry>delete</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Add the --delete option to the rsync call, so locally deleted files will be deleted remotely as well.</entry>
+          </row>
+          <row>
+            <entry>exclude</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of files to exclude from the sync separated by ":" e.g. "*.suffix:foo.bar".</entry>
+          </row>
+          <row>
+            <entry>args</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>
+              Advanced mode to use completely custom options. "rsync {args}".
+              WARNING: phpbu is not escaping this in any way so use with caution!
+              Use %TARGET_FILE% and %TARGET_DIR% as reference to your created backup.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.rsync.example.xml">
+
+      <title>rsync XML example</title>
+
+      <programlisting><![CDATA[<!-- sync rsync -->
+<sync type="rsync">
+  <option name="path" value="/backup/some/path"/>
+  <option name="dirsync" value="true"/>
+  <option name="host" value="backup.example.com"/>
+  <option name="user" value="backup"/>
+</sync>]]></programlisting>
+
+    </example>
+
+  </section>
+
+  <section id="sync.sftp">
+
+    <title>SFTP</title>
+
+    <para>
+      Copy your backup to another server via SFTP.
+    </para>
+
+    <table id="sync.tables.options.sftp">
+      <title>sftp-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The host you want do copy your backups to.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user you want to connect with.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The password to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where to copy the backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.sftp.example.xml">
+
+      <title>sftp XML example</title>
+
+      <programlisting><![CDATA[<!-- sync sftp -->
+<sync type="sftp">
+  <option name="host" value="backup.mydomain.com"/>
+  <option name="user" value="user.name"/>
+  <option name="password" value="topsecret"/>
+  <option name="path" value="backup/someName"/>
+</sync>]]></programlisting>
+
+    </example>
+
+  </section>
+
+  <section id="sync.softlayer">
+
+    <title>Softlayer Object Storage</title>
+
+    <para>
+      Sync your backup to a Softlayer account.
+    </para>
+
+    <table id="sync.tables.options.softlayer">
+      <title>softlayer-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user you want to connect with.</entry>
+          </row>
+          <row>
+            <entry>secret</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The api key to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The host you want do copy your backups to.</entry>
+          </row>
+          <row>
+            <entry>container</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The Object Storage Container where to put the backup.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where to copy the backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.softlayer.example.xml">
+
+      <title>softlayer XML example</title>
+
+      <programlisting><![CDATA[<!-- sync softlayer object storage -->
+<sync type="softlayer">
+  <option name="user" value="user.name"/>
+  <option name="secret" value="topsecret"/>
+  <option name="host" value="some.softlayer.domain.com"/>
+  <option name="container" value="backup"/>
+  <option name="path" value="/backup/someName"/>
+</sync>]]></programlisting>
+
+    </example>
+
+  </section>
+
+</chapter>

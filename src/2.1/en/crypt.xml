@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="crypt">
+
+  <indexterm><primary>encryption</primary></indexterm>
+
+  <title>Encryption</title>
+
+  <para>
+    You can encrypt your backup after creation for example with mcrypt.
+  </para>
+
+  <table id="crypt.tables.available-crypts">
+    <title>Available crypts:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>mcrypt</entry>
+          <entry>Encrypts your backup with the mcrypt command line tool.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="crypt.mcrypt">
+
+    <indexterm><primary>mcrypt</primary></indexterm>
+
+    <title>mcrypt</title>
+
+    <table id="crypt.tables.options.mcrypt">
+      <title>mcryp options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>algorithm</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Algorithm to use to encrypt the backup.</entry>
+          </row>
+          <row>
+            <entry>key</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Secret key to use for encryption.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="crypt.mcrypt.example.xml">
+
+      <title>mcrypt XML example</title>
+
+      <programlisting><![CDATA[<!-- encryption -->
+<crypt type="mcrypt">
+  <option name="algorithm" value="blowfish"/>
+  <option name="key" value="mySecretKey"/>
+</crypt>]]></programlisting>
+
+    </example>
+
+  </section>
+
+</chapter>

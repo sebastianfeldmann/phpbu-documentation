@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="check">
+
+  <indexterm><primary>validation</primary></indexterm>
+  <indexterm><primary>check</primary></indexterm>
+
+  <title>Backup Validation</title>
+
+  <para>
+    You can validate your backup after creation with some simple Checks.
+  </para>
+
+  <table id="check.tables.available-checks">
+    <title>Available checks:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>SizeMin</entry>
+          <entry>Checks if the backups is at least as big as the configured size.</entry>
+        </row>
+        <row>
+          <entry>SizeDiffPreviousPercent</entry>
+          <entry>Checks if your backup doesn't differ more then a configured value from the previous backup.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="check.sizemin">
+
+    <title>Minimal size</title>
+
+    <example id="check.sizemin.example.xml">
+
+      <title>SizeMin XML example</title>
+
+      <programlisting><![CDATA[<!-- check min size -->
+<check type="SizeMin" value="30M"/>]]></programlisting>
+
+    </example>
+
+  </section>
+
+  <section id="check.sizediff">
+
+    <title>Compare to previous Backups</title>
+
+    <example id="check.sizediff.example.xml">
+
+      <title>SizeDiffPreviousPercent XML example</title>
+
+      <programlisting><![CDATA[<!-- check size against previous backups -->
+<check type="SizeDiffPreviousPercent" value="10"/>]]></programlisting>
+
+    </example>
+
+  </section>
+
+</chapter>
