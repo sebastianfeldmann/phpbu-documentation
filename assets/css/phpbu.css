@@ -15,62 +15,62 @@
 }
 
 @media ( max-width :1100px) {
-    .improve {
-        width: 80%;
-    }
+  .improve {
+    width: 80%;
+  }
 }
 
 @media ( max-width :900px) {
   .improve {
-    width: 100%;
+  width: 100%;
   }
 }
 
 #footer {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 #footer .copyright {
-    float:left;
+  float:left;
 }
 
 #footer .social {
-    float: right;
+  float: right;
 }
 
 #footer .social img {
-    position: relative;
-    top: -2px;
+  position: relative;
+  top: -2px;
 }
 
 #footer .social a {
-    color: #000;
-    text-decoration: none;
+  color: #000;
+  text-decoration: none;
 }
 
 #footer .social .twitter {
-    display: block;
-    padding-left: 20px;
-    height: 21px;
-    background: transparent url("../images/twitter.png") no-repeat 0 5px;
-    background-size: 16px 16px;
+  display: block;
+  padding-left: 20px;
+  height: 21px;
+  background: transparent url("../images/twitter.png") no-repeat 0 5px;
+  background-size: 16px 16px;
 }
 
 .flag {
-    background: url('../images/flags.png') no-repeat;
-    display: block;
-    float: left;
-    width: 20px;
-    height: 14px;
-    margin: 2px 5px 0 0;
+  background: url('../images/flags.png') no-repeat;
+  display: block;
+  float: left;
+  width: 20px;
+  height: 14px;
+  margin: 2px 5px 0 0;
 }
 
 .flag.de {
-    background-position: 0 0;
+  background-position: 0 0;
 }
 
 .flag.en {
-    background-position: 0 -17px;
+  background-position: 0 -17px;
 }
 
 .em, h1, h2, h3, h4, h5, h6, code {
@@ -86,12 +86,20 @@
 }
 
 .doc-sidebar {
-  font-size: 0.8125em;
+  font-size: 0.9em;
 }
 
 .doc-sidebar dt {
   font-weight: normal;
   line-height: 1.9;
+}
+
+dl {
+  margin-bottom: 0;
+}
+
+.doc-sidebar > dl > dd > dl {
+  margin-bottom: 20px;
 }
 
 dd {
@@ -142,7 +150,7 @@ strong.userinput {
 }
 
 ul.itemizedlist li {
-    width: 30%;
-    display: inline-block;
-    margin-right: 5px;
+  width: 30%;
+  display: inline-block;
+  margin-right: 5px;
 }
