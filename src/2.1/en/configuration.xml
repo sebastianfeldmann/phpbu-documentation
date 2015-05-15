@@ -444,4 +444,55 @@
 
   </section>
 
+  <section id="configuration.json">
+    <indexterm><primary>JSON-Configuration</primary></indexterm>
+    <title>JSON-Configuration</title>
+
+    <para>
+      This is roughly the same skeleton as shown above at the XML-Section.
+    </para>
+    <example>
+      <title>JSON-Configuration</title>
+      <programlisting><![CDATA[
+{
+  "verbose": true,
+  "logging": [
+    {
+      "type": "json",
+      "target": "backup/json.log"
+    }
+  ],
+  "backups": [
+    {
+      "source": {
+        "type": "mysqldump",
+        "options": {
+          "databases": "mydbname",
+          "user": "user.name",
+          "password": "topsecret"
+        }
+      },
+      "target": {
+        "dirname": "backup",
+        "filename": "mysql-%Y%m%d-%H%i.sql",
+        "compress": "bzip2"
+      },
+      "checks": [
+        {
+          "type": "sizemin",
+          "value": "10MB"
+        }
+      ],
+      "cleanup": {
+        "type": "Capacity",
+        "options": {
+          "size": "200M"
+        }
+      }
+    }
+  ]
+}]]></programlisting>
+    </example>
+  </section>
+
 </chapter>

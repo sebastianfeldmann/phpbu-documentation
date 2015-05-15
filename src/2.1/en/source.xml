@@ -136,16 +136,25 @@
     </table>
 
     <example id="source.arangodump.example.xml">
-
       <title>arangodump XML example</title>
-
       <programlisting><![CDATA[<!-- source arangodump -->
 <source type="arangodump">
   <option name="database" value="myDatabase" />
   <option name="dumpData" value="true" />
   <option name="collections" value="myCollection1,myCollection2" />
 </source>]]></programlisting>
+    </example>
 
+    <example id="source.arangodump.example.json">
+      <title>arangodump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "arangodump",
+  "options": {
+    "database": "myDatabase",
+    "dumpData": "true",
+    "collections": "myCollection1,myCollection2"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -234,17 +243,27 @@
     </table>
 
     <example id="source.mongodump.example.xml">
-
       <title>mongodump XML example</title>
-
       <programlisting><![CDATA[<!-- source mongodump -->
 <source type="mongodump">
-  <option name="databases" value="mydbname"/>
+  <option name="databases" value="myDatabase"/>
   <option name="user" value="user.name"/>
   <option name="password" value="topsecret"/>
   <option name="excludeCollections" value="collectionFoo,collectionBar"/>
 </source>]]></programlisting>
+    </example>
 
+    <example id="source.mongodump.example.json">
+      <title>mongodump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mongodump",
+  "options": {
+    "databases": "myDatabase",
+    "user": "user.name",
+    "password": "topsecret",
+    "excludeCollections": "collectionFoo,collectionBar"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -327,18 +346,29 @@
     </table>
 
     <example id="source.mysqldump.example.xml">
-
       <title>mysqldump XML example</title>
-
       <programlisting><![CDATA[<!-- source mysqldump -->
 <source type="mysqldump">
-  <option name="databases" value="mydbname"/>
+  <option name="databases" value="myDatabase"/>
   <option name="user" value="user.name"/>
   <option name="password" value="topsecret"/>
   <option name="ignoreTable" value="tableFoo,tableBar"/>
   <option name="structureOnly" value="logTable1,logTable2"/>
 </source>]]></programlisting>
+    </example>
 
+    <example id="source.mysqldump.example.json">
+      <title>mysqldump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mysqldump",
+  "options": {
+    "databases": "myDatabase",
+    "user": "user.name",
+    "password": "topsecret",
+    "ignoreTable": "tableFoo,tableBar",
+    "structureOnly": "logTable1,logTable2"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -414,13 +444,21 @@
     </table>
 
     <example id="source.xtrabackup.example.xml">
-
       <title>xtrabackup XML example</title>
-
       <programlisting><![CDATA[<!-- source xtrabackup -->
 <source type="xtrabackup">
   <option name="databases" value="myDB1,myDB2" />
 </source>]]></programlisting>
+    </example>
+
+    <example id="source.xtrabackup.example.json">
+      <title>xtrabackup JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "xtrabackup",
+  "options": {
+    "databases": "myDB1,myDB2"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -467,14 +505,21 @@
     </table>
 
     <example id="source.tar.example.xml">
-
       <title>tar XML example</title>
-
       <programlisting><![CDATA[<!-- source tar -->
 <source type="tar">
   <option name="path" value="htdocs/uploads"/>
 </source>]]></programlisting>
+    </example>
 
+    <example id="source.tar.example.json">
+      <title>tar JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "tar",
+  "options": {
+    "path": "htdocs/uploads"
+  }
+}]]></programlisting>
     </example>
 
   </section>

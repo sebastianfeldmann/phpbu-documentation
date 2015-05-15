@@ -65,15 +65,23 @@
     </table>
 
     <example id="crypt.mcrypt.example.xml">
-
       <title>mcrypt XML example</title>
-
       <programlisting><![CDATA[<!-- encryption -->
 <crypt type="mcrypt">
   <option name="algorithm" value="blowfish"/>
   <option name="key" value="mySecretKey"/>
 </crypt>]]></programlisting>
+    </example>
 
+    <example id="crypt.mcrypt.example.json">
+      <title>mcrypt JSON example</title>
+      <programlisting><![CDATA[<{
+  "type": "mcrypt",
+  "option": {
+    "algorithm": "blowfish",
+    "key": "mySecretKey"
+  }
+}]]></programlisting>
     </example>
 
   </section>

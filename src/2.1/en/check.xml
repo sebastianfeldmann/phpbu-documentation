@@ -45,6 +45,15 @@
 
     </example>
 
+    <example id="check.sizemin.example.json">
+
+      <title>SizeMin JSON example</title>
+
+      <programlisting><![CDATA[
+{"type": "SizeMin", "value": "30M"}]]></programlisting>
+
+    </example>
+
   </section>
 
   <section id="check.sizediff">
@@ -57,6 +66,15 @@
 
       <programlisting><![CDATA[<!-- check size against previous backups -->
 <check type="SizeDiffPreviousPercent" value="10"/>]]></programlisting>
+
+    </example>
+
+    <example id="check.sizediff.example.json">
+
+      <title>SizeDiffPreviousPercent JSON example</title>
+
+      <programlisting><![CDATA[
+{"type": "SizeDiffPreviousPercent", "value": "10"}]]></programlisting>
 
     </example>
 

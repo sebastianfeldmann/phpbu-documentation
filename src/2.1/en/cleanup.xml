@@ -85,14 +85,23 @@
     </table>
 
     <example id="cleanup.capacity.example.xml">
-
       <title>capacity XML example</title>
-
       <programlisting><![CDATA[<!-- cleanup capacity: keep 250 Megabytes of backups -->
 <cleanup type="capacity">
   <option name="size" value="250M"/>
   <option name="deleteTarget" value="false"/>
 </cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.capacity.example.json">
+      <title>capacity JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "capacity",
+  "options": {
+    "size": "250M",
+    "deleteTarget": "false"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -130,14 +139,21 @@
     </table>
 
     <example id="cleanup.outdated.example.xml">
-
       <title>outdated XML example</title>
-
       <programlisting><![CDATA[<!-- cleanup outdated: keep backups for 2 weeks -->
 <cleanup type="outdated">
   <option name="older" value="2W"/>
 </cleanup>]]></programlisting>
+    </example>
 
+    <example id="cleanup.outdated.example.json">
+      <title>outdated JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "Outdated",
+  "options": {
+    "older": "2W"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -175,14 +191,21 @@
     </table>
 
     <example id="cleanup.quantity.example.xml">
-
       <title>quantity XML example</title>
-
       <programlisting><![CDATA[<!-- cleanup quantity: keep the last 20 backups -->
 <cleanup type="quantity">
   <option name="amount" value="20"/>
 </cleanup>]]></programlisting>
+    </example>
 
+    <example id="cleanup.quantity.example.json">
+      <title>quantity JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "quantity",
+  "options": {
+    "amount": "20"
+  }
+}]]></programlisting>
     </example>
 
   </section>

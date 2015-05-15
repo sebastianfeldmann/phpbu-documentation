@@ -110,18 +110,29 @@
     </table>
 
     <example id="sync.amazons3.example.xml">
-
       <title>amazons3 XML example</title>
-
       <programlisting><![CDATA[<!-- sync amazon s3 -->
 <sync type="amazons3">
-  <option name="key" value="myawskey"/>
-  <option name="secret" value="myawssecret"/>
+  <option name="key" value="myAwsKey"/>
+  <option name="secret" value="myAwsSecret"/>
   <option name="bucket" value="backup"/>
   <option name="region" value="eu-central-1"/>
   <option name="path" value="/some/dir"/>
 </sync>]]></programlisting>
+    </example>
 
+    <example id="sync.amazons3.example.json">
+      <title>amazons3 JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "amazons3",
+  "options": {
+    "key": "myAwsKey",
+    "secret": "myAwsSecret",
+    "bucket": "backup",
+    "region": "eu-central-1",
+    "path": "/some/dir"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -194,18 +205,29 @@
     </table>
 
     <example id="sync.copycom.example.xml">
-
       <title>copycom XML example</title>
-
       <programlisting><![CDATA[<!-- sync copy.com -->
 <sync type="copycom">
-  <option name="app.key" value="myappkey"/>
-  <option name="app.secret" value="mycrazylongapisecret"/>
-  <option name="user.key" value="oauthuserkey"/>
-  <option name="user.secret" value="oauthusersecret"/>
+  <option name="app.key" value="myAppKey"/>
+  <option name="app.secret" value="myCrazyLongApiSecret"/>
+  <option name="user.key" value="oauthUserKey"/>
+  <option name="user.secret" value="oauthUserSecret"/>
   <option name="path" value="/some/dir"/>
 </sync>]]></programlisting>
+    </example>
 
+    <example id="sync.copycom.example.json">
+      <title>copycom JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "copycom",
+  "options": {
+    "app.key": "myAppKey",
+    "app.secret": "myCrazyLongApiSecret",
+    "user.key": "oauthUserKey",
+    "user.secret": "oauthUserSecret",
+    "path": "/some/dir"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -261,16 +283,24 @@
     </table>
 
     <example id="sync.dropbox.example.xml">
-
       <title>dropbox XML example</title>
-
       <programlisting><![CDATA[<!-- sync dropbox -->
 <sync type="dropbox">
-  <option name="token" value="mycrazylongapitokenthatigotfromdropbox"/>
+  <option name="token" value="myCrazyLongApiTokenThatIGotFromDropbox"/>
   <option name="path" value="/some/dir"/>
 </sync>
 </section>]]></programlisting>
+    </example>
 
+    <example id="sync.dropbox.example.json">
+      <title>dropbox JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "dropbox",
+  "options": {
+    "token": "myCrazyLongApiTokenThatIGotFromDropbox",
+    "path": "/some/dir"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -358,9 +388,7 @@
     </table>
 
     <example id="sync.rsync.example.xml">
-
       <title>rsync XML example</title>
-
       <programlisting><![CDATA[<!-- sync rsync -->
 <sync type="rsync">
   <option name="path" value="/backup/some/path"/>
@@ -368,7 +396,19 @@
   <option name="host" value="backup.example.com"/>
   <option name="user" value="backup"/>
 </sync>]]></programlisting>
+    </example>
 
+    <example id="sync.rsync.example.json">
+      <title>rsync JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "rsync",
+  "options": {
+    "path": "/backup/some/path",
+    "dirsync": "true",
+    "host": "backup.example.com",
+    "user": "backup"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -427,17 +467,27 @@
     </table>
 
     <example id="sync.sftp.example.xml">
-
       <title>sftp XML example</title>
-
       <programlisting><![CDATA[<!-- sync sftp -->
 <sync type="sftp">
-  <option name="host" value="backup.mydomain.com"/>
+  <option name="host" value="backup.example.com"/>
   <option name="user" value="user.name"/>
   <option name="password" value="topsecret"/>
   <option name="path" value="backup/someName"/>
 </sync>]]></programlisting>
+    </example>
 
+    <example id="sync.sftp.example.json">
+      <title>sftp JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "sftp",
+  "options": {
+    "host": "backup.example.com",
+    "user": "user.name",
+    "password": "topsecret",
+    "path": "backup/someName"
+  }
+}]]></programlisting>
     </example>
 
   </section>
@@ -503,9 +553,7 @@
     </table>
 
     <example id="sync.softlayer.example.xml">
-
       <title>softlayer XML example</title>
-
       <programlisting><![CDATA[<!-- sync softlayer object storage -->
 <sync type="softlayer">
   <option name="user" value="user.name"/>
@@ -514,7 +562,20 @@
   <option name="container" value="backup"/>
   <option name="path" value="/backup/someName"/>
 </sync>]]></programlisting>
+    </example>
 
+    <example id="sync.softlayer.example.json">
+      <title>softlayer JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "softlayer",
+  "options": {
+    "user": "user.name",
+    "secret": "topsecret",
+    "host": "some.softlayer.domain.com",
+    "container": "backup",
+    "path": "/backup/someName"
+  }
+}]]></programlisting>
     </example>
 
   </section>

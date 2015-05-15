@@ -14,12 +14,14 @@
     </para>
 
     <example id="logging.json.example.xml">
-
       <title>json XML example</title>
-
       <programlisting><![CDATA[<!-- create a json logfile -->
 <log type="json" target="backup/log.json"/>]]></programlisting>
+    </example>
 
+    <example id="logging.json.example.json">
+      <title>json JSON example</title>
+      <programlisting><![CDATA[{"type": "json", "target": "backup/log.json"}]]></programlisting>
     </example>
 
   </section>
@@ -142,15 +144,23 @@
     </table>
 
     <example id="logging.mail.example.xml">
-
       <title>mail XML example</title>
-
       <programlisting><![CDATA[<!-- use mail to keep up to date with you backup creation -->
 <log type="mail">
   <option name="transport" value="mail"/>
   <option name="recipients" value="user.name@example.com"/>
 </log>]]></programlisting>
+    </example>
 
+    <example id="logging.mail.example.json">
+      <title>mail JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mail",
+  "options": {
+     "transport": "mail",
+     "recipients": "user.name@example.com"
+   }
+}]]></programlisting>
     </example>
 
   </section>
