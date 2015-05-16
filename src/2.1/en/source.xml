@@ -335,6 +335,20 @@
             <entry>List of tables where only the table structure will be stored.</entry>
           </row>
           <row>
+            <entry>hexBlog</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use the --hex-blob option to dump blog fields in hex.</entry>
+          </row>
+          <row>
+            <entry>extendedInsert</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use multiple-row INSERT syntax. This results in a smaller dump file and speeds up inserts when the file is reloaded.</entry>
+          </row>
+          <row>
             <entry>showStdErr</entry>
             <entry>boolean</entry>
             <entry>no</entry>
