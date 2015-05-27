@@ -57,6 +57,10 @@
       Sync your backup to an amazon S3 account.
     </para>
 
+    <para>
+      If you are not using the PHAR Version you have to require <literal>"aws/aws-sdk-php": "2.7.*"</literal> in your composer file.
+    </para>
+
     <table id="sync.tables.options.amazon">
       <title>amazons3-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
@@ -144,6 +148,11 @@
 
     <para>
       Sync your backup to a copy.com account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"barracuda/copy": "1.1.*"</literal> in your composer file.
     </para>
 
     <table id="sync.tables.options.copycom">
@@ -239,6 +248,11 @@
 
     <para>
       Sync your backup to a dropbox account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"dropbox/dropbox-sdk": "1.1.*"</literal> in your composer file.
     </para>
 
     <table id="sync.tables.options.dropbox">
@@ -421,6 +435,12 @@
       Copy your backup to another server via SFTP.
     </para>
 
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"phpseclib/phpseclib": "2.0.*@dev"</literal> in your composer file.
+      For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
+    </para>
+
     <table id="sync.tables.options.sftp">
       <title>sftp-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
@@ -498,6 +518,12 @@
 
     <para>
       Sync your backup to a Softlayer account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"softlayer/objectstorage": "dev-master"</literal> in your composer file.
+      For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
     </para>
 
     <table id="sync.tables.options.softlayer">
