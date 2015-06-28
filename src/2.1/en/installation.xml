@@ -104,6 +104,32 @@
 
   </section>
 
+  <section id="installation.integrations">
+
+    <title>Framework integrations</title>
+
+    <para>
+      The following framework integrations are available:
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          <literal>phpbu-laravel</literal>
+        </term>
+
+        <listitem>
+          <para>
+            Integrates phpbu with the laravel artisan command line tool.
+            See <xref linkend="integrations.laravel"/> for details.
+          </para>
+
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+  </section>
+
   <!--
   <section id="installation.optional-packages">
 
