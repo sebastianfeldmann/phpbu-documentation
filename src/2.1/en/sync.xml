@@ -429,20 +429,24 @@
 
   <section id="sync.sftp">
 
-    <title>SFTP</title>
+    <title>SFTP / FTP</title>
 
     <para>
-      Copy your backup to another server via SFTP.
+      Copy your backup to another server via SFTP or FTP.
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require
+      If you want to use SFTP and you are not using the PHAR version you have to require
       <literal>"phpseclib/phpseclib": "2.0.*@dev"</literal> in your composer file.
       For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
     </para>
 
+    <para>
+      If you want to use the FTP-Sync your PHP has to be compiled with <literal>--enable-ftp</literal>.
+    </para>
+
     <table id="sync.tables.options.sftp">
-      <title>sftp-Options</title>
+      <title>(s)ftp-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
@@ -509,6 +513,10 @@
   }
 }]]></programlisting>
     </example>
+
+    <para>
+      If you want to use plain FTP just use <literal>ftp</literal> as type, options stay the same.
+    </para>
 
   </section>
 
