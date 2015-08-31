@@ -202,6 +202,37 @@
 }]]></programlisting>
     </example>
 
+    <bridgehead>Create a private key and a certificate pem file</bridgehead>
+
+    <para>
+      To encrypt your backups with a cert file
+      you have to create a <emphasis>private key</emphasis> and a <emphasis>certificate pem file</emphasis>.
+    </para>
+
+    <screen><prompt>$</prompt> <userinput>openssl req -x509 -new -days 100000 -key private.pem -out certificate.pem</userinput></screen>
+
+    <para>
+      The created <literal>certificate.pem</literal> is used to encrypt your backups
+      and should be referenced in your phpbu configuration as <literal>certFile</literal>.
+      The <literal>private.pem</literal> file is used to decrypt your backups.
+    </para>
+
+    <bridgehead>Decrypt</bridgehead>
+
+    <para>Decrypt a cert file encoded backup</para>
+
+    <screen><prompt>$</prompt> <userinput>openssl smime -decrypt -aes256 -inform DER \
+  -in backup.tar.bz2.enc \
+  -out backup.tar.bz2 \
+  -inkey private.pem</userinput></screen>
+
+    <para>Decrypt a password encoded backup</para>
+
+    <screen><prompt>$</prompt> <userinput>openssl enc -d -a -aes-256-cbc \
+  -in backup.tar.bz2.enc \
+  -out backup.tar.bz2 \
+  -pass pass:mySecretPassword</userinput></screen>
+
   </section>
 
 </chapter>
