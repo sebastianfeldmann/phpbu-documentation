@@ -480,7 +480,7 @@
       "checks": [
         {
           "type": "sizemin",
-          "value": "10MB"
+          "value": "10M"
         }
       ],
       "cleanup": {
