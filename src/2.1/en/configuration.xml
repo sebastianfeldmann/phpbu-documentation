@@ -495,4 +495,31 @@
     </example>
   </section>
 
+  <section id="configuration.schedule">
+    <indexterm><primary>schedule</primary></indexterm>
+    <title>Schedule backups</title>
+    <para>
+      Scheduling your backups is not part of phpbu. Nevertheless here is an example how to do
+      it with <ulink url="https://de.wikipedia.org/wiki/Cron">Cron</ulink>. Adding one of the following lines
+      to your crontab will execute your backup every morning at 3:10 AM.
+    </para>
+    <example>
+      <title>Crontab example</title>
+        <programlisting># +------------------------- min (0 - 59)
+# |    +-------------------- hour (0 - 23)
+# |    |    +--------------- day of month (1 - 31)
+# |    |    |    +---------- month (1 - 12)
+# |    |    |    |    +----- day of week (0 - 7) (Sunday=0 or 7)
+# |    |    |    |    |
+# *    *    *    *    *
+
+# this requires phpbu to be in the cron users path
+10     3    *    *    * phpbu /var/www/my-backup/phpbu.xml
+
+# alternatively you can specify the full path
+#10     3    *    *    * /home/user/bin/phpbu.phar /var/www/my-backup/phpbu.xml
+        </programlisting>
+    </example>
+  </section>
+
 </chapter>
