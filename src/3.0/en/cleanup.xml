@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="cleanup">
+
+  <indexterm><primary>cleanup</primary></indexterm>
+  <title>Cleanup backups</title>
+
+  <para>
+    You can remove old backups to limit the space your backups consume on your hard drive.
+  </para>
+
+  <table id="cleanup.tables.available-cleanups">
+    <title>Supported types of cleanups:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>Capacity</entry>
+          <entry>
+            Define the size your backups should occupy.
+            If your backups start to exceed this value PHPBU will start to delete backups,
+            starting with the oldest ones.
+          </entry>
+        </row>
+        <row>
+          <entry>Outdated</entry>
+          <entry>
+            Remove backups older than a configured time-value.
+            For example "2W" to delete all backup older than two weeks.
+          </entry>
+        </row>
+        <row>
+          <entry>Quantity</entry>
+          <entry>Keep only a configured amount of backups.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="cleanup.capacity">
+
+    <title>Cleanup by capacity</title>
+
+    <para>
+      Remove oldest backups if all created backups exceed the configured limit.
+    </para>
+
+    <table id="cleanup.tables.options.capacity">
+      <title>Capacity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>size</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Space your backups are allowed to occupy. e.g. 500M for 500 Megabytes or 1G for one Gigabyte.</entry>
+          </row>
+          <row>
+            <entry>deleteTarget</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>
+              If you don't want to keep any backups locally,
+              just specify a size of "0B", set this to "true"
+              and even the current backup will be deleted.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.capacity.example.xml">
+      <title>capacity XML example</title>
+      <programlisting><![CDATA[<!-- cleanup capacity: keep 250 Megabytes of backups -->
+<cleanup type="capacity">
+  <option name="size" value="250M"/>
+  <option name="deleteTarget" value="false"/>
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.capacity.example.json">
+      <title>capacity JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "capacity",
+  "options": {
+    "size": "250M",
+    "deleteTarget": "false"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.outdated">
+
+    <title>Cleanup by date</title>
+
+    <para>
+      Remove backups that are older than a configured value.
+    </para>
+
+    <table id="cleanup.tables.options.outdated">
+      <title>Outdated-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>older</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Time to keep backups. e.g. 1m for one month or 20d for twenty days.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.outdated.example.xml">
+      <title>outdated XML example</title>
+      <programlisting><![CDATA[<!-- cleanup outdated: keep backups for 2 weeks -->
+<cleanup type="outdated">
+  <option name="older" value="2W"/>
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.outdated.example.json">
+      <title>outdated JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "Outdated",
+  "options": {
+    "older": "2W"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.quantity">
+
+    <title>Cleanup by quantity</title>
+
+    <para>
+      Keep only a configured amount of backups.
+    </para>
+
+    <table id="cleanup.tables.options.quantity">
+      <title>Quantity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>amount</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The amount of backups to keep.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.quantity.example.xml">
+      <title>quantity XML example</title>
+      <programlisting><![CDATA[<!-- cleanup quantity: keep the last 20 backups -->
+<cleanup type="quantity">
+  <option name="amount" value="20"/>
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.quantity.example.json">
+      <title>quantity JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "quantity",
+  "options": {
+    "amount": "20"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+</chapter>

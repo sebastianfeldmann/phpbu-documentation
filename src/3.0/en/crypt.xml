@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="crypt">
+
+  <indexterm><primary>encryption</primary></indexterm>
+
+  <title>Encryption</title>
+
+  <para>
+    You can encrypt your backup after creation for example with mcrypt.
+  </para>
+
+  <table id="crypt.tables.available-crypts">
+    <title>Available crypts:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>mcrypt</entry>
+          <entry>Encrypts your backup with the mcrypt command line tool.</entry>
+        </row>
+        <row>
+          <entry>openssl</entry>
+          <entry>Encrypts your backup with the openssl command line tool.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="crypt.mcrypt">
+
+    <indexterm><primary>mcrypt</primary></indexterm>
+
+    <title>mcrypt</title>
+
+    <table id="crypt.tables.options.mcrypt">
+      <title>mcrypt options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>algorithm</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Algorithm to use to encrypt the backup.</entry>
+          </row>
+          <row>
+            <entry>key</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Secret key to use for encryption.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="crypt.mcrypt.example.xml">
+      <title>mcrypt XML example</title>
+      <programlisting><![CDATA[<!-- encryption -->
+<crypt type="mcrypt">
+  <option name="algorithm" value="blowfish"/>
+  <option name="key" value="mySecretKey"/>
+</crypt>]]></programlisting>
+    </example>
+
+    <example id="crypt.mcrypt.example.json">
+      <title>mcrypt JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mcrypt",
+  "options": {
+    "algorithm": "blowfish",
+    "key": "mySecretKey"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="crypt.openssl">
+
+    <indexterm><primary>openssl</primary></indexterm>
+
+    <title>openssl</title>
+    <para>
+      Please be sure to use <emphasis>only</emphasis> <literal>password</literal> or <literal>certFile</literal>.
+    </para>
+
+    <table id="crypt.tables.options.openssl">
+      <title>openssl options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Encrypt backup with 'openssl enc -pass...'.</entry>
+          </row>
+          <row>
+            <entry>certFile</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Encrypt backup with 'openssl smime ... myCert.pem'.</entry>
+          </row>
+          <row>
+            <entry>algorithm</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              Algorithm to use to encrypt the backup.
+              <emphasis>Attention</emphasis> you have to specify different algorithm names
+              for using <literal>password</literal> and using a <literal>cert file</literal>.
+            </entry>
+          </row>
+          <row>
+            <entry>keepUncrypted</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Don't remove the uncrypted backup.</entry>
+          </row>
+          <row>
+            <entry>showStdError</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Echo stdErr to stdOut.</entry>
+          </row>
+          <row>
+            <entry>pathToOpenSSL</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Used to specify a special path to the openssl command.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="crypt.openssl.example.xml.password">
+      <title>openssl XML example using password encryption</title>
+      <programlisting><![CDATA[<!-- encryption -->
+<crypt type="openssl">
+  <option name="password" value="mySecretPassword"/>
+  <option name="algorithm" value="aes-256-cbc"/>
+</crypt>]]></programlisting>
+    </example>
+
+    <example id="crypt.openssl.example.json.password">
+      <title>openssl JSON example using password encryption</title>
+      <programlisting><![CDATA[{
+  "type": "openssl",
+  "options": {
+    "password": "mySecretPassword",
+    "algorithm": "aes-256-cbc"
+  }
+}]]></programlisting>
+    </example>
+
+    <example id="crypt.openssl.example.xml.cert">
+      <title>openssl XML example using SSL cert encryption</title>
+      <programlisting><![CDATA[<!-- encryption -->
+<crypt type="openssl">
+  <option name="certFile" value="ssl/MyCert.pem"/>
+  <option name="algorithm" value="aes256"/>
+</crypt>]]></programlisting>
+    </example>
+
+    <example id="crypt.openssl.example.json.cert">
+      <title>openssl JSON example using SSL cert encryption</title>
+      <programlisting><![CDATA[{
+  "type": "openssl",
+  "options": {
+    "certFile": "ssl/MyCert.pem",
+    "algorithm": "aes256"
+  }
+}]]></programlisting>
+    </example>
+
+    <bridgehead>Create a private key and a certificate pem file</bridgehead>
+
+    <para>
+      To encrypt your backups with a cert file
+      you have to create a <emphasis>private key</emphasis> and a <emphasis>certificate pem file</emphasis>.
+    </para>
+
+    <screen><prompt>$</prompt> <userinput>openssl req -x509 -new -days 100000 -key private.pem -out certificate.pem</userinput></screen>
+
+    <para>
+      The created <literal>certificate.pem</literal> is used to encrypt your backups
+      and should be referenced in your phpbu configuration as <literal>certFile</literal>.
+      The <literal>private.pem</literal> file is used to decrypt your backups.
+    </para>
+
+    <bridgehead>Decrypt</bridgehead>
+
+    <para>Decrypt a cert file encoded backup</para>
+
+    <screen><prompt>$</prompt> <userinput>openssl smime -decrypt -aes256 -inform DER \
+  -in backup.tar.bz2.enc \
+  -out backup.tar.bz2 \
+  -inkey private.pem</userinput></screen>
+
+    <para>Decrypt a password encoded backup</para>
+
+    <screen><prompt>$</prompt> <userinput>openssl enc -d -a -aes-256-cbc \
+  -in backup.tar.bz2.enc \
+  -out backup.tar.bz2 \
+  -pass pass:mySecretPassword</userinput></screen>
+
+  </section>
+
+</chapter>
