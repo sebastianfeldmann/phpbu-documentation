@@ -45,6 +45,10 @@ function webify_directory($directory, $language, $version)
             'flag' => 'stable',
             'lang' => array('en'),
         ),
+        '3.0' => array(
+            'flag' => 'beta',
+            'lang' => array('en'),
+        ),
     );
 
     $editionAmount = count($editions);

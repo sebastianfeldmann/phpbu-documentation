@@ -34,6 +34,10 @@
           <entry>Backup MySQL with the mysqldump command line tool.</entry>
         </row>
         <row>
+          <entry>redis</entry>
+          <entry>Backup redis with the redis-cli command line tool.</entry>
+        </row>
+        <row>
           <entry>tar</entry>
           <entry>Backup a directory with the tar command line tool.</entry>
         </row>
@@ -471,6 +475,87 @@
   "type": "xtrabackup",
   "options": {
     "databases": "myDB1,myDB2"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.redis">
+    <indexterm><primary>redis</primary></indexterm>
+
+    <title>redis</title>
+
+    <para>
+      Backup redis data structure store using redis-cli.
+    </para>
+
+    <table id="source.tables.options.redis">
+      <title>tar-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>pathToRedisData</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to the redis data .rdb file.</entry>
+          </row>
+          <row>
+            <entry>pathToRedisCli</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to the redis-cli binary.</entry>
+          </row>
+          <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>6379</entry>
+            <entry>Port to use to connect to the redis server.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Password to use to authenticate.</entry>
+          </row>
+          <row>
+            <entry>showStdErr</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Show stdErr for debugging.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.redis.example.xml">
+      <title>redis XML example</title>
+      <programlisting><![CDATA[<!-- source redis -->
+<source type="redis">
+  <option name="pathToRedisData" value="/var/lib/redis/6379/dump.rdb"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.redis.example.json">
+      <title>redis JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "redis",
+  "options": {
+    "pathToRedisData": "/var/lib/redis/6379/dump.rdb"
   }
 }]]></programlisting>
     </example>
