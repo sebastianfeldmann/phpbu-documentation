@@ -416,6 +416,13 @@
         </thead>
         <tbody>
           <row>
+            <entry>dataDir</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>MySQL data directory.</entry>
+          </row>
+          <row>
             <entry>host</entry>
             <entry>string</entry>
             <entry>no</entry>
