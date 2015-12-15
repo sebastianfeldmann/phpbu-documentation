@@ -483,6 +483,17 @@
           "value": "10M"
         }
       ],
+      "syncs": [
+        {
+          "type": "sftp",
+          "options": {
+            "host": "backup.example.com",
+            "user": "user.name",
+            "password": "topsecret",
+            "path": "backup/someName"
+          }
+        }
+      ],
       "cleanup": {
         "type": "Capacity",
         "options": {
