@@ -346,6 +346,13 @@
             <entry>Use the --hex-blob option to dump blog fields in hex.</entry>
           </row>
           <row>
+            <entry>lockTables</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Use the --lock-tables option to lock tables during the dump.</entry>
+          </row>
+          <row>
             <entry>extendedInsert</entry>
             <entry>true | false</entry>
             <entry>no</entry>
