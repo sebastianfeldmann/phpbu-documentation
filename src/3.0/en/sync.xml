@@ -10,13 +10,14 @@
     With PHPBU you can copy your backups to different locations.
   </para>
 
-  <warning>
+  <caution>
+    <title>Caution</title>
     <para>
-      If you are syncing your backup to a cloud service it's advised to <xref linkend="crypt">encrypt</xref> your backup
+      If you are syncing your backup to a cloud service it's advised to <link linkend="crypt">encrypt</link> your backup
       beforehand. Especially if your backup contains
       <ulink url="https://en.wikipedia.org/wiki/Personally_identifiable_information">personal identifiable information</ulink>.
     </para>
-  </warning>
+  </caution>
 
   <table id="sync.tables.available-syncs">
     <title>Supported types of syncs:</title>
