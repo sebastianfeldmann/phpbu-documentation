@@ -154,3 +154,15 @@ ul.itemizedlist li {
   display: inline-block;
   margin-right: 5px;
 }
+
+.alert h3 {
+  margin-top: 0;
+}
+
+.alert-danger h3 {
+  color: #a94442;
+}
+
+.alert p {
+  color: #000;
+}
