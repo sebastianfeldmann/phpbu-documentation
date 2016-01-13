@@ -12,7 +12,7 @@
 
   <warning>
     <para>
-      If you are syncing your backup to a cloud service it's advised to <xref linked="crypt">encrypt</xref> your backup
+      If you are syncing your backup to a cloud service it's advised to <xref linkend="crypt">encrypt</xref> your backup
       beforehand. Especially if your backup contains
       <ulink url="https://en.wikipedia.org/wiki/Personally_identifiable_information">personal identifiable information</ulink>.
     </para>
