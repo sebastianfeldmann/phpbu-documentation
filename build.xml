@@ -3,8 +3,9 @@
   <target name="check-current" depends="check-en-3.0"/>
   <target name="build-current" depends="build-en-3.0"/>
 
-  <target name="build-old" depends="build-en-2.1"/>
   <target name="check-old" depends="check-en-2.1"/>
+  <target name="build-old" depends="build-en-2.1"/>
+  <target name="build-all" depends="build-current,build-old"/>
 
   <!-- check book xml syntax for a given version in a given language -->
   <target name="check">
