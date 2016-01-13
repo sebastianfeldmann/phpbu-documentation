@@ -6,8 +6,17 @@
   <title>Sync Backups</title>
 
   <para>
-    You can copy your backups to other locations.
+    It's best practice to not store all you backups locally or not only storing them locally.
+    With PHPBU you can copy your backups to different locations.
   </para>
+
+  <warning>
+    <para>
+      If you are syncing your backup to a cloud service it's advised to <xref linked="crypt">encrypt</xref> your backup
+      beforehand. Especially if your backup contains
+      <ulink url="https://en.wikipedia.org/wiki/Personally_identifiable_information">personal identifiable information</ulink>.
+    </para>
+  </warning>
 
   <table id="sync.tables.available-syncs">
     <title>Supported types of syncs:</title>
