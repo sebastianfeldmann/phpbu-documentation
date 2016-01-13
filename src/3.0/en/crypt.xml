@@ -6,8 +6,17 @@
   <title>Encryption</title>
 
   <para>
-    You can encrypt your backup after creation for example with mcrypt.
+    PHPBU can encrypt your backup using <literal>openssl</literal> or <literal>mcrypt</literal>.
   </para>
+
+  <caution>
+    <title>Hint</title>
+    <para>
+      If the choice is yours, I strongly recommend using openssl.
+      <ulink url="https://paragonie.com/blog/2015/05/if-you-re-typing-word-mcrypt-into-your-code-you-re-doing-it-wrong">Here</ulink>
+      is a good article explaining why.
+    </para>
+  </caution>
 
   <table id="crypt.tables.available-crypts">
     <title>Available crypts:</title>
