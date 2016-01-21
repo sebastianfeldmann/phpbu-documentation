@@ -154,13 +154,6 @@
             <entry>Don't remove the uncrypted backup.</entry>
           </row>
           <row>
-            <entry>showStdError</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Echo stdErr to stdOut.</entry>
-          </row>
-          <row>
             <entry>pathToOpenSSL</entry>
             <entry>string</entry>
             <entry>no</entry>

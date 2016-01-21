@@ -128,13 +128,6 @@
             <entry>all</entry>
             <entry>List of collections to dump.</entry>
           </row>
-          <row>
-            <entry>showStdErr</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Show stdErr for debugging.</entry>
-          </row>
         </tbody>
       </tgroup>
     </table>
@@ -234,13 +227,6 @@
             <entry>no</entry>
             <entry>null</entry>
             <entry>List of collection prefixes to exclude matching collections from backup.</entry>
-          </row>
-          <row>
-            <entry>showStdErr</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Show stdErr for debugging.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -359,13 +345,6 @@
             <entry>false</entry>
             <entry>Use multiple-row INSERT syntax. This results in a smaller dump file and speeds up inserts when the file is reloaded.</entry>
           </row>
-          <row>
-            <entry>showStdErr</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Show stdErr for debugging.</entry>
-          </row>
         </tbody>
       </tgroup>
     </table>
@@ -464,13 +443,6 @@
             <entry>-</entry>
             <entry>Pattern to include databases and tables to the backup e.g. <literal>^mydatabase[.]mytable</literal>.</entry>
           </row>
-          <row>
-            <entry>showStdErr</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Show stdErr for debugging.</entry>
-          </row>
         </tbody>
       </tgroup>
     </table>
@@ -545,13 +517,6 @@
             <entry>-</entry>
             <entry>Password to use to authenticate.</entry>
           </row>
-          <row>
-            <entry>showStdErr</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Show stdErr for debugging.</entry>
-          </row>
         </tbody>
       </tgroup>
     </table>
@@ -605,13 +570,6 @@
             <entry>yes</entry>
             <entry>-</entry>
             <entry>Path to the source directory.</entry>
-          </row>
-          <row>
-            <entry>showStdErr</entry>
-            <entry>boolean</entry>
-            <entry>no</entry>
-            <entry>false</entry>
-            <entry>Show stdErr for debugging.</entry>
           </row>
         </tbody>
       </tgroup>
