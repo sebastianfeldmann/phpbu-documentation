@@ -121,6 +121,8 @@ class MySource implements Source
 
     /**
      * Here you should validate the configuration and setup your class.
+     *
+     * @param array $conf
      */
     public function setup(array $conf)
     {
@@ -131,6 +133,9 @@ class MySource implements Source
 
     /**
      * In here you should create your backup.
+     *
+     * @return \phpub\App\Backup\Source\Status
+     * @throws \phpbu\App\Backup\Source\Exception
      */
     public function backup(Target $target, Result $result)
     {
@@ -145,6 +150,9 @@ class MySource implements Source
         // if you want to log some debug information use
         // $result->debug('some message');
         // anything bad happens throw a \phpbu\App\Exception
+        // return a backup status
+        // this is important so the runner knows if it still has to compress the backup
+        // return Status::create()->uncompressed($pathToUncompressedFile);
     }
 }]]></programlisting>
     </example>
