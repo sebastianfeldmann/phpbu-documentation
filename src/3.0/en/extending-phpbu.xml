@@ -181,7 +181,7 @@ class MyCheck implements Check
     /**
      * Perform your check.
      */
-    public function pass(Target $target, $value, Collector $collector, Result $result)
+    public function pass(Target $target, $value, Collector $collector)
     {
         // use Target to refer to the created backup
         // $target->getPathname()
