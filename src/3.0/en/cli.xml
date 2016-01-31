@@ -104,4 +104,35 @@ Usage: phpbu [option]
 
   </section>
 
+  <section id="cli.simulation">
+
+    <indexterm><primary>simulation</primary></indexterm>
+    <indexterm>dry run</indexterm>
+
+    <title>Simulation</title>
+
+    <para>
+      In order to test phpbu, phpbu supports a simulation mode where no backup is actually created and no
+      sync and cleanup tasks are executed. In simulation phpbu will show you what it would have done if this would
+      not have been a simulation run. You will get some output so you can track every action phpbu
+      would have performed.
+    </para>
+    <para>
+      This is a great way of testing if all the right backups will be cleaned up.
+      And if the correct backup commands will be executed.
+    </para>
+    <caution>
+      <title>Warning</title>
+      <para>
+        If you are using any kind of credentials for example for MySQL to authenticate on the command line,
+        this credentials will maybe shown in the simulation debug information.
+      </para>
+    </caution>
+    <para>
+      If you are extending phpbu you can support simulation as well. You can find more detailed information on this
+      in <xref linkend="extending-phpbu"/>.
+    </para>
+  </section>
+
+
 </chapter>
