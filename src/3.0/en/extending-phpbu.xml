@@ -5,7 +5,7 @@
   <title>Extending PHPBU</title>
 
   <para>
-    You can extend PHPBU with your own Source, Check, Sync, Cleanup and Logger implementations.
+    You can extend PHPBU with your own Source, Check, Crypt, Sync, Cleanup and Logger implementations.
   </para>
 
   <para>
@@ -44,8 +44,8 @@
 
   <para>
     If the alias is already taken this will throw an Exception.
-    You can force to overwrite any previously registered class using the $force Parameter.
-    Even the PHPBU sources could be replaced with custom implementations.
+    You can force phpbu to overwrite any previously registered class using the $force Parameter.
+    Even the phpbu sources could be replaced with custom implementations.
   </para>
 
   <example>
@@ -57,43 +57,67 @@ require 'Acme/MyMysqldump.php';
 phpbu\App\Factory::register('source', 'mysqldump', '\\Acme\\MyMysqldump', true);]]></programlisting>
   </example>
 
-  <table id="extending-phpbu.tables.available-interfaces">
-    <title>Types to register:</title>
-    <tgroup cols="2" align="left" colsep="1" rowsep="1">
-      <thead>
-        <row>
-          <entry>Type</entry>
-          <entry>Interface</entry>
-        </row>
-      </thead>
-      <tbody>
-        <row>
-          <entry>source</entry>
-          <entry>phpbu\App\Backup\Source</entry>
-        </row>
-        <row>
-          <entry>check</entry>
-          <entry>phpbu\App\Backup\Check</entry>
-        </row>
-        <row>
-          <entry>crypt</entry>
-          <entry>phpbu\App\Backup\Crypt</entry>
-        </row>
-        <row>
-          <entry>sync</entry>
-          <entry>phpbu\App\Backup\Sync</entry>
-        </row>
-        <row>
-          <entry>cleanup</entry>
-          <entry>phpbu\App\Backup\Cleanup</entry>
-        </row>
-        <row>
-          <entry>logger</entry>
-          <entry>phpbu\App\Backup\Logger</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
+  <section id="extending.simulation">
+
+    <title>Executing and simulating</title>
+
+    <para>
+      If you are extending phpbu you have two options. The first is to simply implement the execution interface. This way
+      you can execute your own Source, Check, Crypt, Sync or Cleanup tasks. The second option is to implement the
+      respective <literal>Simulator</literal> interface. Choosing this option you not only have to implement the execution
+      part but rather implement a simulation part as well.
+    </para>
+    <para>
+      Simulation is supported out of the box for every implementation, but choosing option two enables you to add
+      viable information about the actions you perform in your code within a simulation run.
+    </para>
+
+    <table id="extending-phpbu.tables.available-interfaces">
+      <title>Types to register:</title>
+      <tgroup cols="3" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Type</entry>
+            <entry>Interface for execution only</entry>
+            <entry>Interface for execution and simulation</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>source</entry>
+            <entry>phpbu\App\Backup\Source</entry>
+            <entry>phpbu\App\Backup\Source\Simulator</entry>
+          </row>
+          <row>
+            <entry>check</entry>
+            <entry>phpbu\App\Backup\Check</entry>
+            <entry>phpbu\App\Backup\Check\Simulator</entry>
+          </row>
+          <row>
+            <entry>crypt</entry>
+            <entry>phpbu\App\Backup\Crypt</entry>
+            <entry>phpbu\App\Backup\Crypt</entry>
+          </row>
+          <row>
+            <entry>sync</entry>
+            <entry>phpbu\App\Backup\Sync</entry>
+            <entry>phpbu\App\Backup\Sync\Simulator</entry>
+          </row>
+          <row>
+            <entry>cleanup</entry>
+            <entry>phpbu\App\Backup\Cleanup</entry>
+            <entry>phpbu\App\Backup\Cleanup\Simulator</entry>
+          </row>
+          <row>
+            <entry>logger</entry>
+            <entry>phpbu\App\Backup\Logger</entry>
+            <entry>-</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+  </section>
 
   <section id="extending.source">
 
