@@ -34,6 +34,10 @@
           <entry>Backup MySQL with the mysqldump command line tool.</entry>
         </row>
         <row>
+          <entry>pgdump</entry>
+          <entry>Backup PostgresSQL with the pg_dump command line tool.</entry>
+        </row>
+        <row>
           <entry>redis</entry>
           <entry>Backup redis with the redis-cli command line tool.</entry>
         </row>
@@ -461,6 +465,173 @@
   "type": "xtrabackup",
   "options": {
     "databases": "myDB1,myDB2"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.pgdump">
+    <indexterm><primary>pgdump</primary></indexterm>
+
+    <title>pgdump</title>
+
+    <para>Backup PostgresSQL databases using the pg_dump command line tool.</para>
+
+    <table id="source.pgdump.options">
+      <title>tar-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>pathToPgdump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to the pg_dump binary.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Host to connect to.</entry>
+          </row>
+          <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Port to use to connect to the PostgresSQL server.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>User to use to connect.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Password to use to authenticate.</entry>
+          </row>
+          <row>
+            <entry>database</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Database to backup.</entry>
+          </row>
+          <row>
+            <entry>schemaOnly</entry>
+            <entry>bool</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Dump only schema information.</entry>
+          </row>
+          <row>
+            <entry>dataOnly</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Dump no schema information.</entry>
+          </row>
+          <row>
+            <entry>schemas</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of schemas to dump, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>excludeSchemas</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of schemas to exclude, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>tables</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of tables to backup, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>excludeTables</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of tables to exclude, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>excludeTableData</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of tables where data is not dumped, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>noPermissions</entry>
+            <entry>bool</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Don't dump any permission schemas.</entry>
+          </row>
+          <row>
+            <entry>noOwner</entry>
+            <entry>bool</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Don't dump any owner changing statements.</entry>
+          </row>
+          <row>
+            <entry>format</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>plain</entry>
+            <entry>Dump format, plain, custom, directory.</entry>
+          </row>
+          <row>
+            <entry>encoding</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Set the dump encoding.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.pgdump.example.xml">
+      <title>pgdump XML example</title>
+      <programlisting><![CDATA[<!-- source pgdump -->
+<source type="pgdump">
+  <option name="database" value="myDstabase"/>
+  <option name="user" value="myName"/>
+  <option name="password" value="topSecret"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.pgdump.example.json">
+      <title>pgdump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "pgdump",
+  "options": {
+    "database": "myDatabase",
+    "user": "myName",
+    "password": "topSecret",
   }
 }]]></programlisting>
     </example>
