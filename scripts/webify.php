@@ -34,22 +34,26 @@ function webify_directory($directory, $language, $version)
     );
 
     // list of available languages
-    $languages = array(
+    $languages = [
         'de' => 'German',
         'en' => 'English',
-    );
+    ];
 
     // list of available versions with their respective languages
-    $editions = array(
-        '2.1' => array(
+    $editions = [
+        '3.1' => [
             'flag' => 'stable',
-            'lang' => array('en'),
-        ),
-        '3.0' => array(
-            'flag' => 'beta',
-            'lang' => array('en'),
-        ),
-    );
+            'lang' => ['en'],
+        ],
+        '3.0' => [
+            'flag' => 'old stable',
+            'lang' => ['en'],
+        ],
+        '2.1' => [
+            'flag' => 'old',
+            'lang' => ['en'],
+        ],
+    ];
 
     $editionAmount = count($editions);
     $editionItter  = 1;

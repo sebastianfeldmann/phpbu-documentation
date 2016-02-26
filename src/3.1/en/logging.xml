@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="logging">
+
+  <indexterm><primary>Logging</primary></indexterm>
+
+  <title>Logging</title>
+
+  <section id="logging.json">
+
+    <title>JSON</title>
+
+    <para>
+      You can create a simple json logfile with PHPBU's json logger.
+    </para>
+
+    <example id="logging.json.example.xml">
+      <title>json XML example</title>
+      <programlisting><![CDATA[<!-- create a json logfile -->
+<log type="json" target="backup/log.json"/>]]></programlisting>
+    </example>
+
+    <example id="logging.json.example.json">
+      <title>json JSON example</title>
+      <programlisting><![CDATA[{"type": "json", "target": "backup/log.json"}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="logging.email">
+
+    <title>E-Mail</title>
+
+    <para>
+      PHPBU uses SwiftMailer to send backup reports to one or more configured E-Mail-Addresses.
+      If you just want to get notified if something went wrong,
+      you can use the <literal>sendOnlyOnError</literal> option to not send any E-Mail on a successful backup.
+    </para>
+
+    <table id="logging.tables.options.email">
+      <title>Capacity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>recipients</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>List of emails separated by semicolon.</entry>
+          </row>
+          <row>
+            <entry>transport</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>SwiftMailer Transport that's used to send the E-Mail (mail, sendmail, smtp, null).</entry>
+          </row>.
+          <row>
+            <entry>sender.mail</entry>
+            <entry>string</entry>
+            <entry>phpbu@hostname</entry>
+            <entry>-</entry>
+            <entry>The sender E-Mail-Address</entry>
+          </row>
+          <row>
+            <entry>sender.name</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>The sender name.</entry>
+          </row>
+          <row>
+            <entry>sender.name</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>The sender name.</entry>
+          </row>
+          <row>
+            <entry>sendmail options</entry>
+          </row>
+          <row>
+            <entry>sendmail.path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to local sendmail binary.</entry>
+          </row>
+          <row>
+            <entry>sendmail.options</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Sendmail options (e.g. -bs).</entry>
+          </row>
+          <row>
+            <entry>SMTP options</entry>
+          </row>
+          <row>
+            <entry>smtp.port</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>587</entry>
+            <entry>Port to use to connect to SMTP server.</entry>
+          </row>
+          <row>
+            <entry>smtp.host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>SMTP hostname.</entry>
+          </row>
+          <row>
+            <entry>smtp.username</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The SMTP login.</entry>
+          </row>
+          <row>
+            <entry>smtp.password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The SMTP password.</entry>
+          </row>
+          <row>
+            <entry>smtp.encryption</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Type of encryption (e.g. ssl).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="logging.mail.example.xml">
+      <title>mail XML example</title>
+      <programlisting><![CDATA[<!-- use mail to keep up to date with you backup creation -->
+<log type="mail">
+  <option name="transport" value="mail"/>
+  <option name="recipients" value="user.name@example.com"/>
+</log>]]></programlisting>
+    </example>
+
+    <example id="logging.mail.example.json">
+      <title>mail JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mail",
+  "options": {
+     "transport": "mail",
+     "recipients": "user.name@example.com"
+   }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+</chapter>

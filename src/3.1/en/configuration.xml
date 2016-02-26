@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="configuration">
+
+  <indexterm><primary>Configuration</primary></indexterm>
+  <title>Configuration</title>
+
+  <para>
+    To use PHPBU and create your backups you first have to create a configuration file.
+  </para>
+
+  <para>
+    The configuration of PHPBU is done with a simple XML file.
+    You can validate your config files with the respective PHPBU schema definition found at
+    <ulink url="http://schema.phpbu.de">schema.phpbu.de</ulink>.
+  </para>
+
+  <section id="configuration.xml">
+
+    <indexterm><primary>XML-Configuration</primary></indexterm>
+    <title>XML-Configuration</title>
+
+    <para>
+      You should name your configuration file <literal>phpbu.xml</literal> or <literal>phpbu.xml.dist</literal>
+      so you don't have to specify the path with the <literal>--configuration</literal> option.
+    </para>
+
+    <para>
+      The following skeleton is a good point to start and get into detail from here.
+    </para>
+
+    <example>
+    <title>XML-Configuration</title>
+    <programlisting><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/3.1/phpbu.xsd">
+  <backups>
+    <backup>
+      <!-- backup source -->
+      <source type="mysqldump">
+        <option name="databases" value="mydbname"/>
+        <option name="user" value="user.name"/>
+        <option name="password" value="topsecret"/>
+      </source>
+      <!-- where should the backup be stored -->
+      <target dirname="backup/mysql"
+              filename="mysqldump-%Y%m%d-%H%i.sql"
+              compress="bzip2"/>
+      <!-- check the created backup -->
+      <check type="MinSize" value="10M"/>
+      <!-- cleanup the backup location
+           as soon as all created backups exceed 500MB
+           remove oldest backups -->
+      <cleanup type="Capacity">
+        <option name="size" value="500M"/>
+      </cleanup>
+    </backup>
+  </backups>
+</phpbu>]]></programlisting>
+    </example>
+
+    <section id="configuration.xml.elements">
+
+      <title>List of tags</title>
+
+      <section id="configuration.xml.elements.phpbu">
+
+        <title><![CDATA[<phpbu>]]></title>
+
+        <para>
+          The XML root element with at least xmlns:xsi and xsi:noNamespaceSchemaLocation.
+        </para>
+
+        <table id="configuration.xml.elements.tables.phpbu">
+          <title><![CDATA[<phpbu> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>bootstrap</entry>
+                <entry>filename</entry>
+                <entry>no</entry>
+                <entry>null</entry>
+                <entry>Include a php file to extend PHPBU</entry>
+              </row>
+              <row>
+                <entry>verbose</entry>
+                <entry>true | false</entry>
+                <entry>no</entry>
+                <entry>false</entry>
+                <entry>Controls the output verbosity</entry>
+              </row>
+              <row>
+                <entry>debug</entry>
+                <entry>true | false</entry>
+                <entry>no</entry>
+                <entry>false</entry>
+                <entry>Controls the debug output</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.backup">
+
+        <title><![CDATA[<backup>]]></title>
+
+        <para>
+          Configures a backup process.
+          You can have as many of these as you need.
+        </para>
+
+        <table id="configuration.xml.elements.tables.backup">
+          <title><![CDATA[<backup> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>name</entry>
+                <entry>string</entry>
+                <entry>no</entry>
+                <entry>null</entry>
+                <entry>A custom name for your backup used in the PHPBU output.</entry>
+              </row>
+              <row>
+                <entry>stopOnError</entry>
+                <entry>true | false</entry>
+                <entry>no</entry>
+                <entry>false</entry>
+                <entry>Tells if the execution of phpbu will be stopped if this backup fails.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.source">
+
+        <title><![CDATA[<source>]]></title>
+
+        <para>
+          Defines the data that is backed up.
+        </para>
+
+        <table id="configuration.xml.elements.tables.source">
+          <title><![CDATA[<source> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>type</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Type of backup, <xref linkend="logging" /> has a list of all supported source types.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.target">
+
+        <title><![CDATA[<target>]]></title>
+
+        <para>
+          Defines where the backup is stored.
+        </para>
+
+        <table id="configuration.xml.elements.tables.target">
+          <title><![CDATA[<target> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>dirname</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Path to the directory where the backup is stored, absolute or relative to the config file.</entry>
+              </row>
+              <row>
+                <entry>filename</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Filename of the stored backup.</entry>
+              </row>
+              <row>
+                <entry>compress</entry>
+                <entry>string</entry>
+                <entry>no</entry>
+                <entry>null</entry>
+                <entry>Type of compressor to use to compress the backup.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.check">
+
+        <title><![CDATA[<check>]]></title>
+
+        <para>
+          Specifies what kind of tests should be performed to validate the backup.
+        </para>
+
+        <table id="configuration.xml.elements.tables.check">
+          <title><![CDATA[<check> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>type</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Type of check, <xref linkend="check" /> has a list of all supported check types.</entry>
+              </row>
+              <row>
+                <entry>value</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Value the backup is getting checked against.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.crypt">
+
+        <title><![CDATA[<crypt>]]></title>
+
+        <para>
+          Specifies what kind of encryption should be used to encrypt the backup.
+        </para>
+
+        <table id="configuration.xml.elements.tables.crypt">
+          <title><![CDATA[<crypt> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>type</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Type of encryption, <xref linkend="crypt" /> has a list of all supported crypt types.</entry>
+              </row>
+              <row>
+                <entry>skipOnFailure</entry>
+                <entry>true | false</entry>
+                <entry>no</entry>
+                <entry>false</entry>
+                <entry>You can still execute the encryption, even of some failure occurred.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.sync">
+
+        <title><![CDATA[<sync>]]></title>
+
+        <para>
+          Copy the created backup to another location.
+        </para>
+
+        <table id="configuration.xml.elements.tables.sync">
+          <title><![CDATA[<sync> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>type</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Type of sync, <xref linkend="sync" /> has a list of all supported sync types.</entry>
+              </row>
+              <row>
+                <entry>skipOnFailure</entry>
+                <entry>true | false</entry>
+                <entry>no</entry>
+                <entry>false</entry>
+                <entry>You can still execute the sync, even of some failure occurred.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.cleanup">
+
+        <title><![CDATA[<cleanup>]]></title>
+
+        <para>
+         Tells phpbu which files to delete after a successful backup.
+        </para>
+
+        <table id="configuration.xml.elements.tables.cleanup">
+          <title><![CDATA[<cleanup> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>type</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Type of cleanup, <xref linkend="cleanup" /> has a list of all supported cleanup types.</entry>
+              </row>
+              <row>
+                <entry>skipOnFailure</entry>
+                <entry>true | false</entry>
+                <entry>no</entry>
+                <entry>-</entry>
+                <entry>You can still execute the cleanup, even of some failure occurred.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+      <section id="configuration.xml.elements.option">
+
+        <title><![CDATA[<option>]]></title>
+
+        <para>
+          <![CDATA[A simple key value tag to configure <source>, <crypt>, <sync> and <cleanup>.]]>
+        </para>
+
+        <table id="configuration.xml.elements.tables.option">
+          <title><![CDATA[<option> attributes]]></title>
+          <tgroup cols="5" align="left" colsep="1" rowsep="1">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Values</entry>
+                <entry>Required</entry>
+                <entry>Default</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>name</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Option key.</entry>
+              </row>
+              <row>
+                <entry>value</entry>
+                <entry>string</entry>
+                <entry>yes</entry>
+                <entry>-</entry>
+                <entry>Option value.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+      </section>
+
+    </section>
+
+  </section>
+
+  <section id="configuration.json">
+    <indexterm><primary>JSON-Configuration</primary></indexterm>
+    <title>JSON-Configuration</title>
+
+    <para>
+      This is roughly the same skeleton as shown above at the XML-Section.
+    </para>
+    <example>
+      <title>JSON-Configuration</title>
+      <programlisting><![CDATA[
+{
+  "verbose": true,
+  "logging": [
+    {
+      "type": "json",
+      "target": "backup/json.log"
+    }
+  ],
+  "backups": [
+    {
+      "source": {
+        "type": "mysqldump",
+        "options": {
+          "databases": "mydbname",
+          "user": "user.name",
+          "password": "topsecret"
+        }
+      },
+      "target": {
+        "dirname": "backup",
+        "filename": "mysql-%Y%m%d-%H%i.sql",
+        "compress": "bzip2"
+      },
+      "checks": [
+        {
+          "type": "sizemin",
+          "value": "10M"
+        }
+      ],
+      "syncs": [
+        {
+          "type": "sftp",
+          "options": {
+            "host": "backup.example.com",
+            "user": "user.name",
+            "password": "topsecret",
+            "path": "backup/someName"
+          }
+        }
+      ],
+      "cleanup": {
+        "type": "Capacity",
+        "options": {
+          "size": "200M"
+        }
+      }
+    }
+  ]
+}]]></programlisting>
+    </example>
+  </section>
+
+  <section id="configuration.schedule">
+    <indexterm><primary>schedule</primary></indexterm>
+    <title>Schedule backups</title>
+    <para>
+      Scheduling your backups is not part of phpbu. Nevertheless here is an example how to do
+      it with <ulink url="https://de.wikipedia.org/wiki/Cron">Cron</ulink>. Adding one of the following lines
+      to your crontab will execute your backup every morning at 3:10 AM.
+    </para>
+    <example>
+      <title>Crontab example</title>
+        <programlisting># +------------------------- min (0 - 59)
+# |    +-------------------- hour (0 - 23)
+# |    |    +--------------- day of month (1 - 31)
+# |    |    |    +---------- month (1 - 12)
+# |    |    |    |    +----- day of week (0 - 7) (Sunday=0 or 7)
+# |    |    |    |    |
+# *    *    *    *    *
+
+# this requires phpbu to be in the cron users path
+10     3    *    *    * phpbu /var/www/my-backup/phpbu.xml
+
+# alternatively you can specify the full path
+#10     3    *    *    * /home/user/bin/phpbu.phar /var/www/my-backup/phpbu.xml
+        </programlisting>
+    </example>
+  </section>
+
+</chapter>
