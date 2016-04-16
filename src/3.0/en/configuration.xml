@@ -47,7 +47,7 @@
               filename="mysqldump-%Y%m%d-%H%i.sql"
               compress="bzip2"/>
       <!-- check the created backup -->
-      <check type="MinSize" value="10M"/>
+      <check type="SizeMin" value="10M"/>
       <!-- cleanup the backup location
            as soon as all created backups exceed 500MB
            remove oldest backups -->

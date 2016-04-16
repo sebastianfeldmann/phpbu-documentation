@@ -166,7 +166,7 @@
       </para>
 
       <programlisting><![CDATA[            'check' => [
-                'type'  => 'MinSize',
+                'type'  => 'SizeMin',
                 'value' => '10B',
             ],
             'sync' => [
