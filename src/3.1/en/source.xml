@@ -322,11 +322,18 @@
             <entry>List of tables you don't want to backup.</entry>
           </row>
           <row>
+            <entry>filePerTable</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Create directory with separate files for each table.</entry>
+          </row>
+          <row>
             <entry>structureOnly</entry>
             <entry>string</entry>
             <entry>no</entry>
             <entry>null</entry>
-            <entry>List of tables where only the table structure will be stored.</entry>
+            <entry>List of tables where only the table structure will be stored. Can not be used with <em>filePerTable</em></entry>
           </row>
           <row>
             <entry>hexBlog</entry>
