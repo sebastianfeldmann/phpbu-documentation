@@ -333,7 +333,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>null</entry>
-            <entry>List of tables where only the table structure will be stored. Can not be used with <em>filePerTable</em></entry>
+            <entry>List of tables where only the table structure will be stored. Can not be used with <emphasis>filePerTable</emphasis></entry>
           </row>
           <row>
             <entry>hexBlog</entry>
