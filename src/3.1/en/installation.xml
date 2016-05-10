@@ -9,7 +9,8 @@
     <title>Requirements</title>
 
     <para>
-      PHPBU 3.1 requires PHP 5.4, but using the latest version of PHP is highly recommended.
+      PHPBU 3.1 requires PHP 5.4, but using the latest version of PHP is highly recommended. If you want to use the
+      PHAR version the minimum PHP version is 5.5.
     </para>
 
     <para>
