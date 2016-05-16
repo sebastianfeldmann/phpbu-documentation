@@ -525,10 +525,10 @@
 # *    *    *    *    *
 
 # this requires phpbu to be in the cron users path
-10     3    *    *    * phpbu /var/www/my-backup/phpbu.xml
+10     3    *    *    * phpbu --configuration=/var/www/my-backup/phpbu.xml
 
 # alternatively you can specify the full path
-#10     3    *    *    * /home/user/bin/phpbu.phar /var/www/my-backup/phpbu.xml
+#10     3    *    *    * /home/user/bin/phpbu.phar --configuration=/var/www/my-backup/phpbu.xml
         </programlisting>
     </example>
   </section>
