@@ -486,7 +486,7 @@
     <para>Backup PostgresSQL databases using the pg_dump command line tool.</para>
 
     <table id="source.pgdump.options">
-      <title>tar-Options</title>
+      <title>pgdump-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
@@ -655,7 +655,7 @@
     </para>
 
     <table id="source.tables.options.redis">
-      <title>tar-Options</title>
+      <title>redis-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
@@ -748,6 +748,20 @@
             <entry>yes</entry>
             <entry>-</entry>
             <entry>Path to the source directory.</entry>
+          </row>
+          <row>
+            <entry>ignoreFailedRead</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Ignore changing source directory.</entry>
+          </row>
+          <row>
+            <entry>removeSourceDir</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Remove the directory after compression.</entry>
           </row>
         </tbody>
       </tgroup>
