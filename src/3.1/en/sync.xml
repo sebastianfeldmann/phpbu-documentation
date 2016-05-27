@@ -119,6 +119,13 @@
             <entry>/</entry>
             <entry>Path where to store the backup in your bucket.</entry>
           </row>
+          <row>
+            <entry>useMultiPartUpload</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use Amazon S3 MultiPartUpload functionality.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -144,7 +151,8 @@
     "secret": "myAwsSecret",
     "bucket": "backup",
     "region": "eu-central-1",
-    "path": "/some/dir"
+    "path": "/some/dir",
+    "useMultiPartUpload": "true"
   }
 }]]></programlisting>
     </example>
