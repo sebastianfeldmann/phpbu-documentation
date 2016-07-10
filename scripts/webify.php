@@ -41,12 +41,16 @@ function webify_directory($directory, $language, $version)
 
     // list of available versions with their respective languages
     $editions = [
-        '3.1' => [
+        '3.2' => [
             'flag' => 'stable',
             'lang' => ['en'],
         ],
-        '3.0' => [
+        '3.1' => [
             'flag' => 'old stable',
+            'lang' => ['en'],
+        ],
+        '3.0' => [
+            'flag' => 'old',
             'lang' => ['en'],
         ],
         '2.1' => [
