@@ -354,6 +354,13 @@
             <entry>Use the --lock-tables option to lock tables during the dump.</entry>
           </row>
           <row>
+            <entry>singleTransaction</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Use the --single-transaction option to add BEGIN SQL statement before dumping data from server.</entry>
+          </row>
+          <row>
             <entry>extendedInsert</entry>
             <entry>true | false</entry>
             <entry>no</entry>
