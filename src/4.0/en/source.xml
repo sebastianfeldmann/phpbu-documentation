@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="source">
+
+  <indexterm><primary>source</primary></indexterm>
+
+  <title>Backup Sources</title>
+
+  <para>
+    You can configure multiple Backups in one configuration file.
+    Each backup is represented by a <literal><![CDATA[<backup>]]></literal> Tag.
+    To configure the data that is stored use the <literal><![CDATA[<source>]]></literal> Tag.
+  </para>
+
+  <table id="source.tables.available-sources">
+    <title>Supported types of backup sources:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>arangodump</entry>
+          <entry>Backup ArangoDB with the arangodump command line tool.</entry>
+        </row>
+        <row>
+          <entry>mongodump</entry>
+          <entry>Backup MongoDB with the mongodump command line tool.</entry>
+        </row>
+        <row>
+          <entry>mysqldump</entry>
+          <entry>Backup MySQL with the mysqldump command line tool.</entry>
+        </row>
+        <row>
+          <entry>pgdump</entry>
+          <entry>Backup PostgresSQL with the pg_dump command line tool.</entry>
+        </row>
+        <row>
+          <entry>redis</entry>
+          <entry>Backup redis with the redis-cli command line tool.</entry>
+        </row>
+        <row>
+          <entry>rsync</entry>
+          <entry>Collect files via the rsync command line tool.</entry>
+        </row>
+        <row>
+          <entry>tar</entry>
+          <entry>Backup a directory with the tar command line tool.</entry>
+        </row>
+        <row>
+          <entry>xtrabackup</entry>
+          <entry>Backup MySQL with the percona xtrabackup command line tool.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="source.arangodump">
+
+    <indexterm><primary>ArangoDB</primary></indexterm>
+
+    <title>ArangoDB</title>
+
+    <para>
+      Backup a ArangoDB database with arangodump.
+    </para>
+
+    <table id="source.tables.options.arangodump">
+      <title>arangodump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>endpoint</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>tcp://localhost:8529</entry>
+            <entry>URI to your ArangoDB endpoint.</entry>
+          </row>
+          <row>
+            <entry>username</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Username for the ArangoDB authentication.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Password for the ArangoDB authentication.</entry>
+          </row>
+          <row>
+            <entry>disableAuthentication</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Disable the ArangoDB authentication.</entry>
+          </row>
+          <row>
+            <entry>database</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>_system</entry>
+            <entry>Database to backup.</entry>
+          </row>
+          <row>
+            <entry>dumpData</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>true</entry>
+            <entry>Dump database data.</entry>
+          </row>
+          <row>
+            <entry>includeSystemCollections</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Dump system collections as well.</entry>
+          </row>
+          <row>
+            <entry>collections</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>all</entry>
+            <entry>List of collections to dump.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.arangodump.example.xml">
+      <title>arangodump XML example</title>
+      <programlisting><![CDATA[<!-- source arangodump -->
+<source type="arangodump">
+  <option name="database" value="myDatabase" />
+  <option name="dumpData" value="true" />
+  <option name="collections" value="myCollection1,myCollection2" />
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.arangodump.example.json">
+      <title>arangodump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "arangodump",
+  "options": {
+    "database": "myDatabase",
+    "dumpData": "true",
+    "collections": "myCollection1,myCollection2"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.mongodump">
+
+    <indexterm><primary>MongoDB</primary></indexterm>
+
+    <title>MongoDB</title>
+
+    <para>
+      Backup a MongoDB database with mongodump.
+    </para>
+
+    <table id="source.tables.options.mongodump">
+      <title>mongodump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>localhost</entry>
+            <entry>Hostname of your MongoDB-Server.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>Username for the MongoDB authentication.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Password for the MongoDB authentication.</entry>
+          </row>
+          <row>
+            <entry>authenticationDatabase</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>MongoDB database that holds the user credentials.</entry>
+          </row>
+          <row>
+            <entry>databases</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>all</entry>
+            <entry>List of databases you want to backup, all by default.</entry>
+          </row>
+          <row>
+            <entry>excludeCollections</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>List of collections you don't want to backup.</entry>
+          </row>
+          <row>
+            <entry>excludeCollectionsWithPrefix</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>List of collection prefixes to exclude matching collections from backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.mongodump.example.xml">
+      <title>mongodump XML example</title>
+      <programlisting><![CDATA[<!-- source mongodump -->
+<source type="mongodump">
+  <option name="databases" value="myDatabase"/>
+  <option name="user" value="user.name"/>
+  <option name="password" value="topsecret"/>
+  <option name="excludeCollections" value="collectionFoo,collectionBar"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.mongodump.example.json">
+      <title>mongodump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mongodump",
+  "options": {
+    "databases": "myDatabase",
+    "user": "user.name",
+    "password": "topsecret",
+    "excludeCollections": "collectionFoo,collectionBar"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.mysqldump">
+
+    <indexterm><primary>MySQL</primary></indexterm>
+    <indexterm><primary>mysqldump</primary></indexterm>
+
+    <title>MySQL - mysqldump</title>
+
+    <para>
+      Backup a MySQL database with mysqldump.
+    </para>
+
+    <table id="source.tables.options.mysqldump">
+      <title>mysqldump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>localhost</entry>
+            <entry>Hostname of your MySQL-Server.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>Username for the MySQL authentication.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Password for the MySQL authentication.</entry>
+          </row>
+          <row>
+            <entry>databases</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>all</entry>
+            <entry>List of databases you want to backup, all by default.</entry>
+          </row>
+          <row>
+            <entry>ignoreTables</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>List of tables you don't want to backup.</entry>
+          </row>
+          <row>
+            <entry>filePerTable</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Create directory with separate files for each table.</entry>
+          </row>
+          <row>
+            <entry>structureOnly</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>List of tables where only the table structure will be stored. Can not be used with <emphasis>filePerTable</emphasis></entry>
+          </row>
+          <row>
+            <entry>hexBlog</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use the --hex-blob option to dump blog fields in hex.</entry>
+          </row>
+          <row>
+            <entry>lockTables</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Use the --lock-tables option to lock tables during the dump.</entry>
+          </row>
+          <row>
+            <entry>singleTransaction</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Use the --single-transaction option to add BEGIN SQL statement before dumping data from server.</entry>
+          </row>
+          <row>
+            <entry>extendedInsert</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use multiple-row INSERT syntax. This results in a smaller dump file and speeds up inserts when the file is reloaded.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.mysqldump.example.xml">
+      <title>mysqldump XML example</title>
+      <programlisting><![CDATA[<!-- source mysqldump -->
+<source type="mysqldump">
+  <option name="databases" value="myDatabase"/>
+  <option name="user" value="user.name"/>
+  <option name="password" value="topsecret"/>
+  <option name="ignoreTable" value="tableFoo,tableBar"/>
+  <option name="structureOnly" value="logTable1,logTable2"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.mysqldump.example.json">
+      <title>mysqldump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mysqldump",
+  "options": {
+    "databases": "myDatabase",
+    "user": "user.name",
+    "password": "topsecret",
+    "ignoreTable": "tableFoo,tableBar",
+    "structureOnly": "logTable1,logTable2"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.xtrabackup">
+
+    <indexterm><primary>xtrabackup</primary></indexterm>
+    <indexterm><primary>innobackupex</primary></indexterm>
+
+    <title>MySQL - xtrabackup</title>
+
+    <para>
+      Backup a MySQL database with percona xtrabackup.
+    </para>
+
+    <table id="source.tables.options.xtrabackup">
+      <title>xtrabackup-options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>dataDir</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>MySQL data directory.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>localhost</entry>
+            <entry>Host to connect to.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>User to connect with.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Password to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>databases</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of databases to backup, all by default.</entry>
+          </row>
+          <row>
+            <entry>include</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Pattern to include databases and tables to the backup e.g. <literal>^mydatabase[.]mytable</literal>.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.xtrabackup.example.xml">
+      <title>xtrabackup XML example</title>
+      <programlisting><![CDATA[<!-- source xtrabackup -->
+<source type="xtrabackup">
+  <option name="databases" value="myDB1,myDB2" />
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.xtrabackup.example.json">
+      <title>xtrabackup JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "xtrabackup",
+  "options": {
+    "databases": "myDB1,myDB2"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.pgdump">
+    <indexterm><primary>pgdump</primary></indexterm>
+
+    <title>pgdump</title>
+
+    <para>Backup PostgresSQL databases using the pg_dump command line tool.</para>
+
+    <table id="source.pgdump.options">
+      <title>pgdump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>pathToPgdump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to the pg_dump binary.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Host to connect to.</entry>
+          </row>
+          <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Port to use to connect to the PostgresSQL server.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>User to use to connect.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Password to use to authenticate.</entry>
+          </row>
+          <row>
+            <entry>database</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Database to backup.</entry>
+          </row>
+          <row>
+            <entry>schemaOnly</entry>
+            <entry>bool</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Dump only schema information.</entry>
+          </row>
+          <row>
+            <entry>dataOnly</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Dump no schema information.</entry>
+          </row>
+          <row>
+            <entry>schemas</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of schemas to dump, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>excludeSchemas</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of schemas to exclude, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>tables</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of tables to backup, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>excludeTables</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of tables to exclude, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>excludeTableData</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of tables where data is not dumped, separated by comma.</entry>
+          </row>
+          <row>
+            <entry>noPermissions</entry>
+            <entry>bool</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Don't dump any permission schemas.</entry>
+          </row>
+          <row>
+            <entry>noOwner</entry>
+            <entry>bool</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Don't dump any owner changing statements.</entry>
+          </row>
+          <row>
+            <entry>format</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>plain</entry>
+            <entry>Dump format, plain, custom, directory.</entry>
+          </row>
+          <row>
+            <entry>encoding</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Set the dump encoding.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.pgdump.example.xml">
+      <title>pgdump XML example</title>
+      <programlisting><![CDATA[<!-- source pgdump -->
+<source type="pgdump">
+  <option name="database" value="myDstabase"/>
+  <option name="user" value="myName"/>
+  <option name="password" value="topSecret"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.pgdump.example.json">
+      <title>pgdump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "pgdump",
+  "options": {
+    "database": "myDatabase",
+    "user": "myName",
+    "password": "topSecret",
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.redis">
+    <indexterm><primary>redis</primary></indexterm>
+
+    <title>redis</title>
+
+    <para>
+      Backup redis data structure store using redis-cli.
+    </para>
+
+    <table id="source.tables.options.redis">
+      <title>redis-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>pathToRedisData</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to the redis data .rdb file.</entry>
+          </row>
+          <row>
+            <entry>pathToRedisCli</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to the redis-cli binary.</entry>
+          </row>
+          <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>6379</entry>
+            <entry>Port to use to connect to the redis server.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Password to use to authenticate.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.redis.example.xml">
+      <title>redis XML example</title>
+      <programlisting><![CDATA[<!-- source redis -->
+<source type="redis">
+  <option name="pathToRedisData" value="/var/lib/redis/6379/dump.rdb"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.redis.example.json">
+      <title>redis JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "redis",
+  "options": {
+    "pathToRedisData": "/var/lib/redis/6379/dump.rdb"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.rsync">
+    <indexterm><primary>rsync</primary></indexterm>
+
+    <title>rsync</title>
+
+    <para>
+      Backup files via the rsync command line tool.
+    </para>
+
+    <table id="source.tables.options.rsync">
+      <title>rsync-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to file/directory to sync.</entry>
+          </row>
+          <row>
+            <entry>pathToRsync</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to the rsync binary.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Host to connecto to.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>User to use to authenticate.</entry>
+          </row>
+          <row>
+            <entry>delete</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Remove deleted files locally as well.</entry>
+          </row>
+          <row>
+            <entry>isDirSync</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Keep the directory instead of archiving it at every phpbu execution.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.rsync.example.xml">
+      <title>redis XML example</title>
+      <programlisting><![CDATA[<!-- source rsync -->
+<source type="rsync">
+  <option name="path" value="/tmp/foo"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.rsync.example.json">
+      <title>redis JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "rsync",
+  "options": {
+    "path": "/tmp/foo"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.tar">
+
+    <indexterm><primary>tar</primary></indexterm>
+
+    <title>Directories</title>
+
+    <para>
+      Backup directories using tar.
+    </para>
+
+    <table id="source.tables.options.tar">
+      <title>tar-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to the source directory.</entry>
+          </row>
+          <row>
+            <entry>ignoreFailedRead</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Ignore changing source directory.</entry>
+          </row>
+          <row>
+            <entry>removeSourceDir</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Remove the directory after compression.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.tar.example.xml">
+      <title>tar XML example</title>
+      <programlisting><![CDATA[<!-- source tar -->
+<source type="tar">
+  <option name="path" value="htdocs/uploads"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.tar.example.json">
+      <title>tar JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "tar",
+  "options": {
+    "path": "htdocs/uploads"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+</chapter>

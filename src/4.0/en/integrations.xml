@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="integrations">
+
+  <title>Framework integrations</title>
+
+  <section id="integrations.laravel">
+
+    <indexterm><primary>Laravel</primary></indexterm>
+    <title>Laravel</title>
+
+    <para>
+      The <literal>laravel-phpbu</literal> package integrates <literal>phpbu</literal> into the laravel
+      framework so you can use the <literal>artisan</literal> command to execute your backups
+      and a laravel style php configuration to set them up.
+    </para>
+
+    <bridgehead>Requirements</bridgehead>
+
+    <itemizedlist mark='bullet'>
+      <listitem>
+        <para>
+          PHP 5.5
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Laravel 5.*
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          phpbu 4.0.*
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <section id="integrations.laravel.installation">
+      <title>Installation</title>
+
+      <para>
+        Use composer to install the package.
+      </para>
+
+      <screen><userinput>composer require "phpbu/phpbu-laravel"</userinput></screen>
+
+      <para>
+        Add the package ServiceProvider to your <literal>config/app.php</literal> configuration file.
+      </para>
+
+      <programlisting><![CDATA['providers' => [
+    /*
+    * phpbu Backup Service Providers...
+    */
+    phpbu\Laravel\ServiceProvider::class,
+];]]></programlisting>
+
+      <para>
+        Finally use the laravel <literal>artisan</literal> command
+        to create a configuration skeleton by publishing the package.
+      </para>
+
+      <screen><userinput>php artisan vendor:publish --provider="phpbu\Laravel\ServiceProvider"</userinput></screen>
+
+      <para>
+        After publishing the ServiceProvider a <literal>phpbu.php</literal>
+        configuration file is created in your config directory.
+      </para>
+
+    </section>
+
+    <section id="integrations.laravel.configuration">
+      <title>Configuration</title>
+
+      <para>There are two ways of configuring your backup.</para>
+
+      <orderedlist>
+        <listitem>
+          <para>
+            Use the created <literal>phpbu.php</literal> configuration file
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Use a standard <literal>phpbu.xml</literal> or <literal>phpbu.json</literal> configuration file
+          </para>
+        </listitem>
+      </orderedlist>
+
+      <para>
+        The main difference between those two options is the implemented feature set.
+      </para>
+
+      <para>
+        While the phpbu configuration files give you full access to all features of phpbu
+        the laravel configuration file currently does not support all features of phpbu f.e. encryption.
+      </para>
+
+      <bridgehead>Using the laravel configuration</bridgehead>
+
+      <para>
+        The main concept of configuring backups stays the same. A backup consists of a source and a target.
+        The source represents the data you want to backup.
+        The target represents the location where you want to store your backup.
+        You can add checks, cleanups and syncs to a backup to validate, cleanup or sync your backup to another location.
+      </para>
+
+      <para>
+        In the laravel configuration file you can specify two types of backups,
+        <literal>directories</literal> and <literal>databases</literal> (MySQL, PostgreSQL).
+      </para>
+
+      <bridgehead>Directories</bridgehead>
+
+      <para>
+        Define the directory you want to backup and the target location where to store your backup.
+      </para>
+
+      <programlisting><![CDATA[    'directories' => [
+        [
+            'source' => [
+                'path'    => storage_path('app'),
+                'options' => [],
+            ],
+            'target' => [
+                'dirname'     => storage_path('/backup/app'),
+                'filename'    => 'app-%Y%m%d-%H%i.tar',
+                'compression' => 'bzip2',
+            ]
+        ]
+    ],]]></programlisting>
+
+      <bridgehead>Databases</bridgehead>
+
+      <para>
+        Just define the laravel database connection configured in your <literal>databases.php</literal> configuration
+        you want to backup and you are done. You can overwrite every setting defined with the specific option f.e.
+        <literal>username</literal> or <literal>password</literal> in case you have to use different credentials to
+        backup your database.
+      </para>
+
+      <para>
+        You can use every option the <link linkend="source.mysqldump">mysqldump</link> source supports
+        f.e. to exclude some tables.
+        Just use the <emphasis>option-name</emphasis> as index and the <emphasis>option-value</emphasis> as value.
+      </para>
+
+      <programlisting><![CDATA[    'databases' => [<emphasise>
+        [
+            'source' => [
+                'connection' => 'mysql',
+                'options'    => []
+            ],
+            'target' => [
+                'dirname'     => storage_path('backup/db'),
+                'filename'    => 'dump-%Y%m%d-%H%i.sql',
+                'compression' => 'bzip2',
+            ]
+        ],
+    ],]]></programlisting>
+
+      <bridgehead>Adding Check, Sync and Cleanup</bridgehead>
+
+      <para>
+        Add <emphasis>check</emphasis>, <emphasis>sync</emphasis> and <emphasis>cleanup</emphasis> definitions to
+        your backup configuration.
+      </para>
+
+      <programlisting><![CDATA[            'check' => [
+                'type'  => 'SizeMin',
+                'value' => '10B',
+            ],
+            'sync' => [
+              'filesystem' => 's3',
+              'path'       => '/backups/db'
+            ],
+            'cleanup' => [
+                'type'    => 'quantity',
+                'options' => [
+                    'amount' => '20'
+                ]
+            ]]]></programlisting>
+
+      <para>
+        For a list of available <link linkend="check"><literal>checks</literal></link>
+        and <link linkend="cleanup"><literal>cleanups</literal></link> check the corresponding
+        documentation sections.
+      </para>
+
+      <para>
+        To sync your backups you can use every filesystem defined in your laravel <literal>filesystems.php</literal>
+        configuration file.
+      </para>
+
+      <bridgehead>Using a phpbu configuration file</bridgehead>
+
+      <para>
+        If you want to use a phpbu configuration file your laravel phpbu.php
+        configuration should look something like this.
+      </para>
+
+      <programlisting><![CDATA[<?php
+return [
+    /*
+    |--------------------------------------------------
+    | phpbu configuration
+    |--------------------------------------------------
+    |
+    | Path to a phpbu configuration xml or json file.
+    */
+
+    'phpbu' => base_path('phpbu.xml'),
+];]]></programlisting>
+
+      <para>
+        For this to work you have to setup a valid phpbu.xml <link linkend="configuration.xml">configuration</link>
+        file in your project root.
+      </para>
+
+      <para>
+        Remember that all paths in a phpbu configuration have to to absolute
+        or relative to the specified phpbu configuration file.
+      </para>
+
+
+    </section>
+
+    <section id="integrations.laravel.usage">
+      <title>Usage</title>
+    </section>
+
+    <para>
+      To execute the backup use the <literal>artisan</literal> command line tool.
+    </para>
+
+    <screen><userinput>php artisan phpbu:backup</userinput></screen>
+
+    <para>
+      To execute a dry-run without making any changes.
+    </para>
+
+    <screen><userinput>php artisan phpbu:backup --phpbu-simulate</userinput></screen>
+
+  </section>
+
+</chapter>
