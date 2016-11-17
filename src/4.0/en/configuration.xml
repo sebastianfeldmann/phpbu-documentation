@@ -522,7 +522,7 @@
       You add an adapter to your phpbu configuration like shown in the examples below.
       You have to choose a <literal>type</literal> and a <literal>name</literal>. The name is completely up to you, but you are not allowed
       to use colons.
-      With this done you can now reference you adapter for any option value in your phpbu configuration like this.
+      With this done you can now reference your configured adapter for any option value in your phpbu configuration like this.
     </para>
 
     <para>
@@ -538,7 +538,7 @@
     </para>
 
     <para>
-      For a detailed adapter documentation check out the <link linkend="adapters">adapter section</link>.
+      For a list of available adapters and a more detailed documentation check out the <link linkend="adapters">adapter section</link>.
     </para>
 
     <example>
