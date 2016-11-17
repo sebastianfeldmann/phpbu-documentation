@@ -513,7 +513,7 @@
       Adapters are used to include configuration settings from other configuration sources.
     </para>
     <para>
-      So with adapters you don't have to put your passwords into you phpbu configuration file.
+      So with adapters you don't have to put your passwords into your phpbu configuration file.
       Instead you can use environment variables or .env configuration files.
     </para>
 
