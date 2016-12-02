@@ -11,7 +11,7 @@
   <screen>~$ <userinput>phpbu</userinput>
 phpbu 4.0.0
 
-Runtime:       PHP 7.0.2
+Runtime:       PHP 7.1.0
 Configuration: /home/user/phpbu.xml
 
 OK (1 backup, 0 checks, 0 encryption, 0 syncs, 0 cleanups)</screen>
@@ -49,6 +49,7 @@ Usage: phpbu [option]
 --configuration=<file> A phpbu xml config file.
 --colors               Use colors in output.
 --debug                Display debugging information during backup generation.
+--limit=<subset>       Limit backup execution to a subset.
 --simulate             Perform a trial run with no changes made.
 -h, --help             Print this usage information.
 -v, --verbose          Output more verbose information.
@@ -89,6 +90,16 @@ Usage: phpbu [option]
         <listitem>
           <para>
             Display debugging information during backup generation.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--limit</literal></term>
+        <listitem>
+          <para>
+            Limit backup execution to a subset.
+            See the <link linkend="cli.limit">limit section</link> for details.
           </para>
         </listitem>
       </varlistentry>
@@ -135,6 +146,29 @@ Usage: phpbu [option]
       If you are extending phpbu, you can support simulation as well. You can find detailed information on this
       in <xref linkend="extending-phpbu"/>.
     </para>
+  </section>
+
+  <section id="cli.limit">
+
+    <indexterm><primary>limit</primary></indexterm>
+    <indexterm>subset</indexterm>
+
+    <title>Limit</title>
+
+    <para>
+      If you don't want to execute all of your configured backups you can define a subset of backups by using the
+      limit option.
+    </para>
+    <para>
+      All you have to to, is to set the limit option to a comma separated list of backup names (nameA,nameB,nameC).
+    </para>
+    <caution>
+      <title>Warning</title>
+      <para>
+        If you don't define explicit backup names, phpbu will use the source type as backup name as fallback.
+        So be sure to
+      </para>
+    </caution>
   </section>
 
 
