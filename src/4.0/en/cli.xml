@@ -166,7 +166,6 @@ Usage: phpbu [option]
       <title>Warning</title>
       <para>
         If you don't define explicit backup names, phpbu will use the source type as backup name as fallback.
-        So be sure to
       </para>
     </caution>
   </section>
