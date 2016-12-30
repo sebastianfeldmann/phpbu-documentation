@@ -136,6 +136,13 @@
             <entry>all</entry>
             <entry>List of collections to dump.</entry>
           </row>
+          <row>
+            <entry>pathToArangoDump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom arangodump executable location.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -235,6 +242,13 @@
             <entry>no</entry>
             <entry>null</entry>
             <entry>List of collection prefixes to exclude matching collections from backup.</entry>
+          </row>
+          <row>
+            <entry>pathToMongodump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom mongodump executable location.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -367,6 +381,13 @@
             <entry>false</entry>
             <entry>Use multiple-row INSERT syntax. This results in a smaller dump file and speeds up inserts when the file is reloaded.</entry>
           </row>
+          <row>
+            <entry>pathToMysqldump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom mysqldump executable location.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -464,6 +485,13 @@
             <entry>no</entry>
             <entry>-</entry>
             <entry>Pattern to include databases and tables to the backup e.g. <literal>^mydatabase[.]mytable</literal>.</entry>
+          </row>
+          <row>
+            <entry>pathToXtraBackup</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom xtrabackup executable location.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -628,6 +656,13 @@
             <entry>-</entry>
             <entry>Set the dump encoding.</entry>
           </row>
+          <row>
+            <entry>pathToPgdump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom pgdump executable location.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -705,6 +740,13 @@
             <entry>no</entry>
             <entry>-</entry>
             <entry>Password to use to authenticate.</entry>
+          </row>
+          <row>
+            <entry>pathToRedisCli</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom redis-cli executable location.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -794,6 +836,13 @@
             <entry>false</entry>
             <entry>Keep the directory instead of archiving it at every phpbu execution.</entry>
           </row>
+          <row>
+            <entry>pathToRsync</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom rsync executable location.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -861,6 +910,13 @@
             <entry>no</entry>
             <entry>false</entry>
             <entry>Remove the directory after compression.</entry>
+          </row>
+          <row>
+            <entry>pathToTar</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom tar executable location.</entry>
           </row>
         </tbody>
       </tgroup>
