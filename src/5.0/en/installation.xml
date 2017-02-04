@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="installation">
+
+  <title>Installing PHPBU</title>
+
+  <section id="installation.requirements">
+
+    <indexterm><primary>requirements</primary></indexterm>
+    <title>Requirements</title>
+
+    <para>
+      PHPBU 5.0 requires PHP 7.0, but using the latest version of PHP is highly recommended.
+    </para>
+
+    <para>
+      PHPBU requires the <ulink url="http://php.net/manual/en/dom.setup.php">dom</ulink>
+      and <ulink url="http://php.net/manual/en/json.installation.php">json</ulink>
+      extensions, which are normally enabled by default.
+    </para>
+
+    <para>
+      PHPBU also requires the
+      <ulink url="http://php.net/manual/en/spl.installation.php">spl</ulink>
+      extension. It is required by the PHP core since 5.3.0 and normally cannot
+      be disabled.
+    </para>
+
+    <para>
+      The different backup sources may need their respective executable binary f.e. <literal>mysqldump</literal>.
+    </para>
+
+  </section>
+
+  <section id="installation.phar">
+
+    <indexterm><primary>PHAR</primary></indexterm>
+    <title>PHP Archive (PHAR)</title>
+
+    <para>
+      The easiest way to install PHPBU is to download a <ulink
+      url="http://php.net/phar">PHP Archive (PHAR)</ulink> that has all required
+      dependencies of PHPBU bundled in a single file.
+    </para>
+
+    <para>
+      If the <ulink url="http://suhosin.org/">Suhosin</ulink> extension is
+      enabled, you need to allow execution of PHARs in your
+      <literal>php.ini</literal>:
+
+      <screen>suhosin.executor.include.whitelist = phar</screen>
+
+    </para>
+
+    <para>
+      To globally install the PHAR:
+    </para>
+
+    <screen>
+<prompt>$</prompt> <userinput>wget http://phar.phpbu.de/phpbu.phar</userinput>
+<prompt>$</prompt> <userinput>chmod +x phpbu.phar</userinput>
+<prompt>$</prompt> <userinput>sudo mv phpbu.phar /usr/local/bin/phpbu</userinput>
+<prompt>$</prompt> <userinput>phpbu --version</userinput>
+<computeroutput>phpbu x.y.z by Sebastian Feldmann and Contributors.</computeroutput>
+</screen>
+
+    <para>
+      You may also use the downloaded PHAR file directly:
+    </para>
+
+    <screen>
+<prompt>$</prompt> <userinput>wget https://phar.phpbu.de/phpbu.phar</userinput>
+<prompt>$</prompt> <userinput>php phpbu.phar --version</userinput>
+<computeroutput>phpbu x.y.z by Sebastian Feldmann and Contributors.</computeroutput>
+</screen>
+
+  </section>
+
+  <section id="installation.composer">
+
+    <indexterm><primary>Composer</primary></indexterm>
+    <title>Composer</title>
+
+    <para>
+      If you are using <ulink url="https://getcomposer.org/">Composer</ulink> to manage
+      your dependencies, simply add <literal>phpbu/phpbu</literal> to your
+      <literal>composer.json</literal> file.
+    </para>
+
+    <programlisting><![CDATA[{
+    "require": {
+        "phpbu/phpbu": "5.0.*"
+    }
+}]]></programlisting>
+
+    <para>
+      For a system-wide installation via Composer, just run:
+    </para>
+
+    <screen><userinput>composer global require phpbu/phpbu</userinput></screen>
+
+    <para>
+      Make sure you have <literal>~/.composer/vendor/bin/</literal> in your path.
+    </para>
+
+  </section>
+
+  <section id="installation.integrations">
+
+    <title>Framework integrations</title>
+
+    <para>
+      The following framework integrations are available:
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          <literal>phpbu-laravel</literal>
+        </term>
+
+        <listitem>
+          <para>
+            Integrates phpbu with the laravel artisan command line tool.
+            See <xref linkend="integrations.laravel"/> for details.
+          </para>
+
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+  </section>
+
+  <!--
+  <section id="installation.optional-packages">
+
+    <title>Optional packages</title>
+
+    <para>
+      The following optional packages are available:
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          <literal>phpbu-monitoring</literal>
+        </term>
+
+        <listitem>
+          <para>
+            Still in development! Some utility classes to check a PHPBU json logfile.
+          </para>
+
+          <screen><userinput>"phpbu/monitoring": "*"</userinput></screen>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+  </section>
+  -->
+
+</chapter>

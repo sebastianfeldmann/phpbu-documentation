@@ -21,9 +21,9 @@ function webify_directory($directory, $language, $version)
         file_get_contents($directory . DIRECTORY_SEPARATOR . 'index.html'),
         '<dl class="toc">',
         '</dl>',
-        TRUE,
-        TRUE,
-        TRUE
+        true,
+        true,
+        true
     );
 
     // add some css classes to the toc navigation
@@ -38,9 +38,12 @@ function webify_directory($directory, $language, $version)
         'de' => 'German',
         'en' => 'English',
     ];
-
     // list of available versions with their respective languages
     $editions = [
+        '5.0' => [
+            'flag' => 'beta',
+            'lang' => ['en'],
+        ],
         '4.0' => [
             'flag' => 'stable',
             'lang' => ['en'],
@@ -50,15 +53,15 @@ function webify_directory($directory, $language, $version)
             'lang' => ['en'],
         ],
         '3.1' => [
-            'flag' => 'old',
+            'flag' => 'depricated',
             'lang' => ['en'],
         ],
         '3.0' => [
-            'flag' => 'old',
+            'flag' => 'unsupported',
             'lang' => ['en'],
         ],
         '2.1' => [
-            'flag' => 'old',
+            'flag' => 'unsupported',
             'lang' => ['en'],
         ],
     ];
