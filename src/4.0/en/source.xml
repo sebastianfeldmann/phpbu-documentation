@@ -898,6 +898,13 @@
             <entry>Path to the source directory.</entry>
           </row>
           <row>
+            <entry>exclude</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Comma separated list of paths to exclude.</entry>
+          </row>
+          <row>
             <entry>ignoreFailedRead</entry>
             <entry>boolean</entry>
             <entry>no</entry>
