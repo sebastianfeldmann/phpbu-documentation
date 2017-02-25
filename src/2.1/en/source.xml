@@ -339,7 +339,7 @@
             <entry>List of tables where only the table structure will be stored.</entry>
           </row>
           <row>
-            <entry>hexBlog</entry>
+            <entry>hexBlob</entry>
             <entry>true | false</entry>
             <entry>no</entry>
             <entry>false</entry>
