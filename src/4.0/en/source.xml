@@ -538,13 +538,6 @@
         </thead>
         <tbody>
           <row>
-            <entry>pathToPgdump</entry>
-            <entry>string</entry>
-            <entry>no</entry>
-            <entry>-</entry>
-            <entry>Path to the pg_dump binary.</entry>
-          </row>
-          <row>
             <entry>host</entry>
             <entry>string</entry>
             <entry>no</entry>
@@ -721,13 +714,6 @@
             <entry>Path to the redis data .rdb file.</entry>
           </row>
           <row>
-            <entry>pathToRedisCli</entry>
-            <entry>string</entry>
-            <entry>no</entry>
-            <entry>-</entry>
-            <entry>Path to the redis-cli binary.</entry>
-          </row>
-          <row>
             <entry>port</entry>
             <entry>integer</entry>
             <entry>no</entry>
@@ -800,13 +786,6 @@
             <entry>yes</entry>
             <entry>-</entry>
             <entry>Path to file/directory to sync.</entry>
-          </row>
-          <row>
-            <entry>pathToRsync</entry>
-            <entry>string</entry>
-            <entry>no</entry>
-            <entry>-</entry>
-            <entry>Path to the rsync binary.</entry>
           </row>
           <row>
             <entry>host</entry>
