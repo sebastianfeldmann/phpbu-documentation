@@ -179,7 +179,7 @@
                 <entry>string</entry>
                 <entry>yes</entry>
                 <entry>-</entry>
-                <entry>Type of backup, <xref linkend="logging" /> has a list of all supported source types.</entry>
+                <entry>Type of backup, <xref linkend="source" /> has a list of all supported source types.</entry>
               </row>
             </tbody>
           </tgroup>
