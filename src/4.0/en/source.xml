@@ -891,6 +891,13 @@
             <entry>Ignore changing source directory.</entry>
           </row>
           <row>
+            <entry>compressProgram</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Set custom compression program f.e. lbzip2.</entry>
+          </row>
+          <row>
             <entry>removeSourceDir</entry>
             <entry>boolean</entry>
             <entry>no</entry>
