@@ -44,6 +44,14 @@
           <entry>Quantity</entry>
           <entry>Keep only a configured amount of backups.</entry>
         </row>
+        <row>
+          <entry>Stepwise</entry>
+          <entry>
+            Keep different amount of backups for different periods of time.
+            For example keep all backups you made for the last 3 days, keep one for each week for the last 4 weeks,
+            keep one for each month for the last 6 month and one for every year for at least 3 years.
+          </entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -211,6 +219,106 @@
   "type": "quantity",
   "options": {
     "amount": "20"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.stepwise">
+
+    <title>Cleanup stepwise</title>
+
+    <para>
+      Keep more backups in the recent past and keep less backups for the distant past. The following table illustrates
+      how this works.
+    </para>
+
+    <programlisting><![CDATA[        | for x days  | for x days        | for x weeks           | for x month keep   |
+        | keep all    | keep one per day  | keep one per week     | keep one per month |
+--------+-------------+-------------------+-----------------------+--------------------+-
+backups | ............| . . . . . . . . . | .       .       .     | .                . | ]]></programlisting>
+
+    <para>
+      So if you start to backup now your amount of backups will grow for the configured years to keep at least one backup.
+      But by then the amount of your backups will be constantly the same.
+    </para>
+
+
+    <table id="cleanup.tables.options.stepwise">
+      <title>Capacity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>daysToKeepAll</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Days to keep all backups you made.</entry>
+          </row>
+          <row>
+            <entry>daysToKeepDaily</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Days to keep at least one backup you made a day.</entry>
+          </row>
+          <row>
+            <entry>weeksToKeepWeekly</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Amount of weeks to keep at least one backup for each week.</entry>
+          </row>
+          <row>
+            <entry>monthToKeepMonthly</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Amount of month to keep at least one backup for each month.</entry>
+          </row>
+          <row>
+            <entry>yearsToKeepYearly</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Amount of years to keep at least one backup for each year.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.stepwise.example.xml">
+      <title>stepwise XML example</title>
+      <programlisting><![CDATA[<!-- cleanup stepwise -->
+<cleanup type="stepwise">
+  <option name="daysToKeepAll" value="2" />
+  <option name="daysToKeepDaily" value="5" />
+  <option name="weeksToKeepWeekly" value="3" />
+  <option name="monthToKeepMonthly" value="4" />
+  <option name="yearsToKeepYearly" value="10" />
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.stepwise.example.json">
+      <title>stepwise JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "stepwise",
+  "options": {
+    "daysToKeepAll": "2",
+    "daysToKeepDaily": "5",
+    "weeksToKeepWeekly": "3",
+    "monthToKeepMonthly": "4",
+    "yearsToKeepYearly": "10"
   }
 }]]></programlisting>
     </example>
