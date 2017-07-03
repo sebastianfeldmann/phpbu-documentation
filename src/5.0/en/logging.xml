@@ -57,6 +57,20 @@
             <entry>List of emails separated by semicolon.</entry>
           </row>
           <row>
+            <entry>sendOnlyOnError</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Sending reports only if something goes wrong.</entry>
+          </row>
+          <row>
+            <entry>subject</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>PHPBU Backup Report from $HOSTNAME</entry>
+            <entry>E-Mail subject of the backup report.</entry>
+          </row>
+          <row>
             <entry>transport</entry>
             <entry>string</entry>
             <entry>yes</entry>
