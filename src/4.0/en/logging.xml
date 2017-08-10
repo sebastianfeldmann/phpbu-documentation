@@ -37,7 +37,7 @@
     </para>
 
     <table id="logging.tables.options.email">
-      <title>Capacity-Options</title>
+      <title>Mail-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
@@ -76,7 +76,7 @@
             <entry>yes</entry>
             <entry>-</entry>
             <entry>SwiftMailer Transport that's used to send the E-Mail (mail, sendmail, smtp, null).</entry>
-          </row>.
+          </row>
           <row>
             <entry>sender.mail</entry>
             <entry>string</entry>
@@ -178,5 +178,4 @@
     </example>
 
   </section>
-
 </chapter>
