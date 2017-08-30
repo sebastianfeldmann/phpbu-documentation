@@ -905,6 +905,13 @@
             <entry>Remove the directory after compression.</entry>
           </row>
           <row>
+            <entry>throttle</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Throttle IO throughput via 'pv' (Linux/Unix only).</entry>
+          </row>
+          <row>
             <entry>pathToTar</entry>
             <entry>string</entry>
             <entry>no</entry>
@@ -932,6 +939,36 @@
   }
 }]]></programlisting>
     </example>
+
+    <section id="source.tar.throttling">
+      <title>IO Throttling</title>
+      <para>
+        If you are experiencing high CPU load during your backups with <emphasis>tar</emphasis>
+        you can throttle the IO to take load of your CPU
+      </para>
+
+      <example id="source.tar.example.xml.throttle">
+        <title>Throttling XML example</title>
+        <programlisting><![CDATA[<!-- source tar -->
+<source type="tar">
+  <option name="path" value="htdocs/uploads"/>
+  <option name="throttle" value="5m"/>
+</source>]]></programlisting>
+      </example>
+
+      <para>
+        With a configuration like in the example above you make sure that you only write 5 Megabytes each second.
+        This way you backup may take longer, but your CPU is able to handle other stuff as well.
+      </para>
+      <para>
+        This is done via the CLI tool <emphasis>pv</emphasis>. To you this feature you must have <emphasis>pv</emphasis>
+        installed on your server. If you are using phpbu on Windows, you can't use this feature.
+      </para>
+      <para>
+        For more information on <emphasis>pv</emphasis> have a look <ulink url="https://packages.debian.org/de/stable/pv">here</ulink>
+      </para>
+
+    </section>
 
   </section>
 
