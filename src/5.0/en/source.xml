@@ -312,6 +312,13 @@
             <entry>Hostname of your MySQL-Server.</entry>
           </row>
           <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Port of your MySQL-Server.</entry>
+          </row>
+          <row>
             <entry>user</entry>
             <entry>string</entry>
             <entry>no</entry>
