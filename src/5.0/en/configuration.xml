@@ -526,7 +526,7 @@
     </para>
 
     <para>
-      <literal>adapter:my-chosen-adapter-name:path.to.value</literal>
+      <literal>:adapter:my-chosen-adapter-name:path.to.value:</literal>
     </para>
 
     <para>
@@ -536,6 +536,21 @@
       The identifier could be the name of a environment variable or a "path" through an configuration array like this
       "db.mysql.username" completely depending on the adapter implementation.
     </para>
+
+    <para>
+      You can use adapter values for whole configuration values, in that case you can skip the leading and trailing colons.
+      If you want to use multiple adapter values in a single configuration value you have to use the leading and trailing colons.
+    </para>
+
+    <example>
+      <title>Adapter examples</title>
+      <programlisting><![CDATA[
+<option name="singleValue" value="adapter:myAdp:foo"/>
+<option name="multipleValues" value="/foo/:adapter:myAdp:dir:/bar/:adapter:myAdp:file:.zip"/>]]></programlisting>
+      <programlisting><![CDATA[
+{"singleValue": "adapter:myAdp:foo"}
+{"multipleValues": "/foo/:adapter:myAdp:dir:/bar/:adapter:myAdp:file:.zip"}]]></programlisting>
+    </example>
 
     <para>
       For a list of available adapters and a more detailed documentation check out the <link linkend="adapters">adapter section</link>.
