@@ -26,6 +26,10 @@
           <entry>Backup ArangoDB with the arangodump command line tool.</entry>
         </row>
         <row>
+          <entry>elasticdump</entry>
+          <entry>Backup Elasticsearch with the elasticdump command line tool.</entry>
+        </row>
+        <row>
           <entry>mongodump</entry>
           <entry>Backup MongoDB with the mongodump command line tool.</entry>
         </row>
@@ -165,6 +169,95 @@
     "database": "myDatabase",
     "dumpData": "true",
     "collections": "myCollection1,myCollection2"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.elasticdump">
+
+    <indexterm><primary>Elasticsearch</primary></indexterm>
+
+    <title>Elastic</title>
+
+    <para>
+      Backup a Elastic index with elasticdump.
+    </para>
+
+    <table id="source.tables.options.elasticdump">
+      <title>arangodump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>localhost:9200</entry>
+            <entry>URI to your Elastic host.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Username for the Elastic authentication.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>null</entry>
+            <entry>Password for the Elastic authentication.</entry>
+          </row>
+          <row>
+            <entry>index</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>all</entry>
+            <entry>Index name to backup.</entry>
+          </row>
+          <row>
+            <entry>type</entry>
+            <entry>string</entry>
+            <entry>data</entry>
+            <entry>true</entry>
+            <entry>Elastic type to dump.</entry>
+          </row>
+          <row>
+            <entry>pathToElasticDump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom elasticdump executable location.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.elasticdump.example.xml">
+      <title>elasticdump XML example</title>
+      <programlisting><![CDATA[<!-- source elasticdump -->
+<source type="elasticdump">
+  <option name="index" value="myIndex" />
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.elasticdump.example.json">
+      <title>elasticdump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "elasticdump",
+  "options": {
+    "index": "myIndex"
   }
 }]]></programlisting>
     </example>
