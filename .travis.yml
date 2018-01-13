@@ -3,7 +3,7 @@ language: java
 before_install:
   - sudo apt-get update
   - sudo apt-get install xsltproc
-  - sudo apt-get install bash-completion
+  - sudo apt-get install libxml2-utils
   - sudo apt-get install php5
 
 script: ant check-current
