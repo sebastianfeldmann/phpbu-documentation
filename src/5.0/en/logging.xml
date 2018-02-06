@@ -250,7 +250,7 @@
       <title>webhook XML example</title>
       <programlisting><![CDATA[<!-- call webhook -->
 <log type="webhook">
-  <option name="url" value="http://example.com/hook"/>
+  <option name="uri" value="http://example.com/hook"/>
 </log>]]></programlisting>
     </example>
 
@@ -259,7 +259,7 @@
       <programlisting><![CDATA[{
   "type": "webhook",
   "options": {
-     "transport": "url",
+     "transport": "uri",
      "recipients": "http://example.com/hook"
    }
 }]]></programlisting>
