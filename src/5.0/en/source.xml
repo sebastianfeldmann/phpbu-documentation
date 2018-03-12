@@ -927,7 +927,7 @@
     </table>
 
     <example id="source.rsync.example.xml">
-      <title>redis XML example</title>
+      <title>rsync XML example</title>
       <programlisting><![CDATA[<!-- source rsync -->
 <source type="rsync">
   <option name="path" value="/tmp/foo"/>
@@ -935,7 +935,7 @@
     </example>
 
     <example id="source.rsync.example.json">
-      <title>redis JSON example</title>
+      <title>rsync JSON example</title>
       <programlisting><![CDATA[{
   "type": "rsync",
   "options": {
