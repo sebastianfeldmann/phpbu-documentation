@@ -2,11 +2,10 @@
 <chapter id="sync">
 
   <indexterm><primary>sync</primary></indexterm>
-
   <title>Sync Backups</title>
 
   <para>
-    It's best practice to not store all you backups locally or not only storing them locally.
+    It's a best practice to not store all you backups locally, or at least not only storing them locally.
     With PHPBU you can copy your backups to different locations.
   </para>
 
@@ -62,9 +61,7 @@
   </table>
 
   <section id="sync.amazon">
-
     <indexterm><primary>amazon s3</primary></indexterm>
-
     <title>Amazon S3</title>
 
     <para>
@@ -72,7 +69,7 @@
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require <literal>"aws/aws-sdk-php": "2.7.*"</literal> in your composer file.
+      If you are not using the PHAR Version you have to require <literal>"aws/aws-sdk-php": "^3.10"</literal> in your composer file.
     </para>
 
     <table id="sync.tables.options.amazon">
@@ -129,6 +126,23 @@
             <entry>no</entry>
             <entry>false</entry>
             <entry>Use Amazon S3 MultiPartUpload functionality.</entry>
+          </row>
+          <row>
+            <entry>cleanup.type</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The remote cleanup strategy (capacity|oudated|quantity|stepwise).</entry>
+          </row>
+          <row>
+            <entry>cleanup.*</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>
+              The remote cleanup strategy settings. For example "cleanup.size" if you use "cleanup.type" = "capacity".
+              For details have a look at the corresponding <link linkend="cleanup">Cleanup</link> configurations.
+            </entry>
           </row>
         </tbody>
       </tgroup>
@@ -509,6 +523,13 @@
             <entry>-</entry>
             <entry>The remote path where to copy the backup.</entry>
           </row>
+          <row>
+            <entry>passive</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use passive ftp mode.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -521,6 +542,7 @@
   <option name="user" value="user.name"/>
   <option name="password" value="topsecret"/>
   <option name="path" value="backup/someName"/>
+  <option name="passive" value="true"/>
 </sync>]]></programlisting>
     </example>
 
@@ -532,7 +554,8 @@
     "host": "backup.example.com",
     "user": "user.name",
     "password": "topsecret",
-    "path": "backup/someName"
+    "path": "backup/someName",
+    "passive": "false"
   }
 }]]></programlisting>
     </example>
