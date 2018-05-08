@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="logging">
+
+  <indexterm><primary>Logging</primary></indexterm>
+
+  <title>Logging</title>
+
+  <section id="logging.json">
+
+    <title>JSON</title>
+
+    <para>
+      You can create a simple json logfile with PHPBU's json logger.
+    </para>
+
+    <example id="logging.json.example.xml">
+      <title>json XML example</title>
+      <programlisting><![CDATA[<!-- create a json logfile -->
+<log type="json" target="backup/log.json"/>]]></programlisting>
+    </example>
+
+    <example id="logging.json.example.json">
+      <title>json JSON example</title>
+      <programlisting><![CDATA[{"type": "json", "target": "backup/log.json"}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="logging.email">
+
+    <title>E-Mail</title>
+
+    <para>
+      PHPBU uses SwiftMailer to send backup reports to one or more configured E-Mail-Addresses.
+      If you just want to get notified if something went wrong,
+      you can use the <literal>sendOnlyOnError</literal> option to not send any E-Mail on a successful backup.
+    </para>
+
+    <table id="logging.tables.options.email">
+      <title>Capacity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>recipients</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>List of emails separated by semicolon.</entry>
+          </row>
+          <row>
+            <entry>sendOnlyOnError</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Sending reports only if something goes wrong.</entry>
+          </row>
+          <row>
+            <entry>subject</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>PHPBU Backup Report from $HOSTNAME</entry>
+            <entry>E-Mail subject of the backup report.</entry>
+          </row>
+          <row>
+            <entry>transport</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>SwiftMailer Transport that's used to send the E-Mail (mail, sendmail, smtp, null).</entry>
+          </row>.
+          <row>
+            <entry>sender.mail</entry>
+            <entry>string</entry>
+            <entry>phpbu@hostname</entry>
+            <entry>-</entry>
+            <entry>The sender E-Mail-Address</entry>
+          </row>
+          <row>
+            <entry>sender.name</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>The sender name.</entry>
+          </row>
+          <row>
+            <entry>sender.name</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>The sender name.</entry>
+          </row>
+          <row>
+            <entry>sendmail options</entry>
+          </row>
+          <row>
+            <entry>sendmail.path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to local sendmail binary.</entry>
+          </row>
+          <row>
+            <entry>sendmail.options</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Sendmail options (e.g. -bs).</entry>
+          </row>
+          <row>
+            <entry>SMTP options</entry>
+          </row>
+          <row>
+            <entry>smtp.port</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>587</entry>
+            <entry>Port to use to connect to SMTP server.</entry>
+          </row>
+          <row>
+            <entry>smtp.host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>SMTP hostname.</entry>
+          </row>
+          <row>
+            <entry>smtp.username</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The SMTP login.</entry>
+          </row>
+          <row>
+            <entry>smtp.password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The SMTP password.</entry>
+          </row>
+          <row>
+            <entry>smtp.encryption</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Type of encryption (e.g. ssl).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="logging.mail.example.xml">
+      <title>mail XML example</title>
+      <programlisting><![CDATA[<!-- use mail to keep up to date with you backup creation -->
+<log type="mail">
+  <option name="transport" value="mail"/>
+  <option name="recipients" value="user.name@example.com"/>
+</log>]]></programlisting>
+    </example>
+
+    <example id="logging.mail.example.json">
+      <title>mail JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "mail",
+  "options": {
+     "transport": "mail",
+     "recipients": "user.name@example.com"
+   }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="logging.webhook">
+
+    <title>Webhook</title>
+
+    <para>
+      You can call a webhook and phpbu will send report data to the webhook.
+    </para>
+
+    <table id="logging.tables.options.webhook">
+      <title>Webhook-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>uri</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>URI to call</entry>
+          </row>
+          <row>
+            <entry>username</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Basic auth user name.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Basic auth password.</entry>
+          </row>
+          <row>
+            <entry>method</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>get</entry>
+            <entry>HTTP request method (get, post).</entry>
+          </row>
+          <row>
+            <entry>contentType</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>application/json</entry>
+            <entry>Post method request body content type.</entry>
+          </row>
+          <row>
+            <entry>template</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>A template to use for the request body For example if you want to you xml over json.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="logging.webhook.example.xml">
+      <title>webhook XML example</title>
+      <programlisting><![CDATA[<!-- call webhook -->
+<log type="webhook">
+  <option name="uri" value="http://example.com/hook"/>
+</log>]]></programlisting>
+    </example>
+
+    <example id="logging.webhook.example.json">
+      <title>webhook JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "webhook",
+  "options": {
+     "transport": "uri",
+     "recipients": "http://example.com/hook"
+   }
+}]]></programlisting>
+    </example>
+
+    <para>
+      If you change the request method to post by default you will receive a request body in the following format.
+    </para>
+
+    <example id="logging.webhook.example.request">
+      <title>Default request body example</title>
+      <programlisting><![CDATA[{
+  "status": 0,
+  "timestamp": 12783781381,
+  "duration": 234.3402,
+  "backupCount": 1,
+  "backupFailed": 0,
+  "errorCount": 0,
+  "errors": [],
+  "backups": [
+    {
+      "name":
+      "status":
+      "checks": {
+          "executed": 1,
+          "failed": 0,
+      },
+      "crypt": {
+          "executed": 1,
+          "skipped": 0,
+          "failed": 0,
+      },
+      "syncs" => {
+          "executed": 1,
+          "skipped": 0,
+          "failed": 0
+      },
+      "cleanup" => {
+          "executed": 1,
+          "skipped": 0,
+          "failed": 0
+      }
+    }
+  ]
+}]]></programlisting>
+    </example>
+
+    <para>
+      If this format doesn't work for you, you can define your own request body with a template.
+    </para>
+
+    <example id="logging.webhook.example.template">
+      <title>Template example</title>
+      <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<report>
+  <status>%status%</status>
+  <date>%timestamp%</date>
+  <backups>
+    %%backup%%
+    <backup>
+      <name>%name%</name>
+      <status>%status%</status>
+    </backup>
+    %%backup%%
+  </backups>
+  <errors>
+    %%error%%
+    <error class="%class%" message="%message%" file="%file%" line="%line%" />
+    %%error%%
+  </errors>
+</report>]]></programlisting>
+    </example>
+
+  </section>
+</chapter>
