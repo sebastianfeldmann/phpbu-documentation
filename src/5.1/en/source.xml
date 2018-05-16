@@ -1046,7 +1046,7 @@
         If you want to exclude some files or directories from the created tar file.
       </para>
 
-      <example id="source.tar.example.xml">
+      <example id="source.tar.example.xml.exclude">
         <title>tar XML example</title>
         <programlisting><![CDATA[<!-- source tar -->
 <source type="tar">
@@ -1055,7 +1055,7 @@
 </source>]]></programlisting>
       </example>
 
-      <example id="source.tar.example.json">
+      <example id="source.tar.example.json.exclude">
         <title>tar JSON example</title>
         <programlisting><![CDATA[{
   "type": "tar",
