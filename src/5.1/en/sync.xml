@@ -5,8 +5,8 @@
   <title>Sync Backups</title>
 
   <para>
-    It's a best practice to not store all you backups locally, or at least not only storing them locally.
-    With PHPBU you can copy your backups to different locations.
+    It's a best practice to NOT store your backups locally, or at least not only storing them locally.
+    With PHPBU <literal>Sync</literal> adapters you can copy your backups to different locations.
   </para>
 
   <caution>
@@ -17,6 +17,14 @@
       <ulink url="https://en.wikipedia.org/wiki/Personally_identifiable_information">personal identifiable information</ulink>.
     </para>
   </caution>
+
+  <para>
+    PHPBU supports cleaning up you locally stored backups by configuring a <link linkend="cleanup">Cleanup</link>.
+    Note that <literal>Cleanup</literal> configurations do not affect remote files synced with <literal>Sync</literal> configurations.
+    Though, some <literal>Sync</literal> adapters support cleaning up remote files as well.
+    This is done by using <literal>cleanup.*</literal> options within your <literal>Sync</literal> configuration.
+    In order to better understand how remote cleanups work and how they are configured have a look at the <link linkend="cleanup">Cleanups</link> section.
+  </para>
 
   <table id="sync.tables.available-syncs">
     <title>Supported types of syncs:</title>
@@ -514,7 +522,14 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>The password to authenticate the user.</entry>
+            <entry>The password to authenticate the user. If 'key' is provided this will be used as private key password.</entry>
+          </row>
+          <row>
+            <entry>key</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to private key file to authenticate the user.</entry>
           </row>
           <row>
             <entry>path</entry>
