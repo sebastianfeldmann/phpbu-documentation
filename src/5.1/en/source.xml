@@ -1040,6 +1040,34 @@
 }]]></programlisting>
     </example>
 
+    <section id="source.tar.exclude">
+      <title>Exclude files or directories</title>
+      <para>
+        If you want to exclude some files or directories from the created tar file.
+      </para>
+
+      <example id="source.tar.example.xml">
+        <title>tar XML example</title>
+        <programlisting><![CDATA[<!-- source tar -->
+<source type="tar">
+  <option name="path" value="htdocs/uploads"/>
+  <option name="exclude" value="folderA,fileA.txt,folderB"/>
+</source>]]></programlisting>
+      </example>
+
+      <example id="source.tar.example.json">
+        <title>tar JSON example</title>
+        <programlisting><![CDATA[{
+  "type": "tar",
+  "options": {
+    "path": "htdocs/uploads",
+    "exclude": "folderA,fileA.txt,folderB"
+  }
+}]]></programlisting>
+      </example>
+
+    </section>
+
     <section id="source.tar.throttling">
       <title>IO Throttling</title>
       <para>
