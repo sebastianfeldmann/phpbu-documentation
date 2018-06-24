@@ -11,8 +11,9 @@
     </para>
 
     <para>
-        If you want to remove your synced backups as well, currently the only way to do this is to use the
+        If you want to remove your synced backups as well, and you are not using the
         <link linkend="sync.rsync">Rsync</link> sync with it's <literal>delete</literal> option.
+      Have a look at the <link linkend="cleanup.remote">remote cleanup section</link>
     </para>
 
   <table id="cleanup.tables.available-cleanups">
@@ -319,6 +320,48 @@ backups | ............| . . . . . . . . . | .       .       .     | .           
     "weeksToKeepWeekly": "3",
     "monthToKeepMonthly": "4",
     "yearsToKeepYearly": "10"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.remote">
+    <title>Remote cleanup</title>
+
+    <para>
+      Some sync implementations support to cleanup remote files as well. To check if the sync of your
+      choice supports remote cleanup have a look at the <link linkend="sync">sync list</link>.
+    </para>
+
+    <para>
+      Remote cleanups are configured within your <link linkend="sync">Sync</link> configuration similar to local
+      cleanups. The only difference is that all options get prefixed by <literal>cleanup.</literal>.
+      To better understand this have a look at the following examples.
+    </para>
+
+    <example id="cleanup.remote.example.xml">
+      <title>Remote cleanup XML example</title>
+      <programlisting><![CDATA[<!-- cleanup stepwise -->
+<sync type="dropbox">
+  <!-- some sync relevant options -->
+  <option name="token" value="mysecrettoken" />
+  <option name="path" value="/backups" />
+  <!-- remote cleanup options -->
+  <option name="cleanup.type" value="quantity" />
+  <option name="cleanup.amount" value="10" />
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.remote.example.json">
+      <title>Remote cleanup JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "dropbox",
+  "options": {
+    "token": "mysecrettoken",
+    "path": "/backups",
+    "cleanup.type": "quantity",
+    "cleanup.amount": "10"
   }
 }]]></programlisting>
     </example>
