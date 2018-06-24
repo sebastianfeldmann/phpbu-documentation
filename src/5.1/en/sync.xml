@@ -21,48 +21,58 @@
   <para>
     PHPBU supports cleaning up you locally stored backups by configuring a <link linkend="cleanup">Cleanup</link>.
     Note that <literal>Cleanup</literal> configurations do not affect remote files synced with <literal>Sync</literal> configurations.
-    Though, some <literal>Sync</literal> adapters support cleaning up remote files as well.
-    This is done by using <literal>cleanup.*</literal> options within your <literal>Sync</literal> configuration.
+  </para>
+  <para>
+    But some <literal>Sync</literal> adapters support cleaning up remote files as well.
+    This is done by using <literal>cleanup.*</literal> options in your <literal>Sync</literal> configuration.
     In order to better understand how remote cleanups work and how they are configured have a look at the <link linkend="cleanup">Cleanups</link> section.
   </para>
 
   <table id="sync.tables.available-syncs">
     <title>Supported types of syncs:</title>
-    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
       <thead>
         <row>
           <entry>Type</entry>
           <entry>Description</entry>
+          <entry>Remote Cleanup</entry>
         </row>
       </thead>
       <tbody>
         <row>
           <entry>amazon</entry>
           <entry>Sync your backup to your <ulink url="https://aws.amazon.com">Amazon S3</ulink> account.</entry>
+          <entry>yes</entry>
         </row>
         <row>
-          <entry>copy.com</entry>
-          <entry>Sync your backup to a copy account.</entry>
-        </row>
-        <row>
-          <entry>dropbox</entry>
+          <entry>Dropbox</entry>
           <entry>Sync your backup to a <ulink url="https://www.dropbox.com">Dropbox</ulink> account.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>Google Drive</entry>
+          <entry>Sync your backup to a <ulink url="https://drive.google.com">Google Drive</ulink> account.</entry>
+          <entry>yes</entry>
         </row>
         <row>
           <entry>OpenStack</entry>
           <entry>Sync your backups to an <ulink url="https://www.openstack.org">OpenStack</ulink> storage.</entry>
+          <entry>yes</entry>
         </row>
         <row>
           <entry>rsync</entry>
           <entry>Sync your backups with rsync.</entry>
+          <entry>no</entry>
         </row>
         <row>
           <entry>sftp</entry>
           <entry>Sync your backup to a server via SFTP.</entry>
+          <entry>yes</entry>
         </row>
         <row>
           <entry>SoftLayer Object Storage</entry>
           <entry>Sync your backup to a <ulink url="http://www.softlayer.com/">Softlayer</ulink> Object Storage account.</entry>
+          <entry>no</entry>
         </row>
       </tbody>
     </tgroup>
@@ -191,7 +201,7 @@
     <title>Dropbox</title>
 
     <para>
-      Sync your backup to a dropbox account.
+      Sync your backup to a Dropbox account.
     </para>
 
     <para>
@@ -200,7 +210,7 @@
     </para>
 
     <table id="sync.tables.options.dropbox">
-      <title>dropbox-Options</title>
+      <title>Dropbox-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
@@ -241,7 +251,7 @@
     </table>
 
     <example id="sync.dropbox.example.xml">
-      <title>dropbox XML example</title>
+      <title>Dropbox XML example</title>
       <programlisting><![CDATA[<!-- sync dropbox -->
 <sync type="dropbox">
   <option name="token" value="myCrazyLongApiTokenThatIGotFromDropbox"/>
@@ -251,7 +261,7 @@
     </example>
 
     <example id="sync.dropbox.example.json">
-      <title>dropbox JSON example</title>
+      <title>Dropbox JSON example</title>
       <programlisting><![CDATA[{
   "type": "dropbox",
   "options": {
@@ -262,6 +272,87 @@
     </example>
   </section>
 
+  <section id="sync.googledrive">
+
+    <indexterm><primary>google drive</primary></indexterm>
+    <title>Google Drive</title>
+
+    <para>
+      Sync your backup to a Google Drive account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"google/apiclient":"^2.0"</literal> in your composer file.
+    </para>
+
+    <table id="sync.tables.options.googledrive">
+      <title>Google Drive-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>secret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Google Drive authentication json file.</entry>
+          </row>
+          <row>
+            <entry>access</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Json file containing your access token.</entry>
+          </row>
+          <row>
+            <entry>parentId</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The Google Drive element id where your backups should be stored.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>
+      If you are unsure on how to obtain the secret and access files or the directory ID have a look at
+      <literal><ulink url="https://github.com/sebastianfeldmann/phpbu-google-drive">sebastianfeldmann/phpbu-google-drive</ulink></literal>
+      a utility to generate your access token and to list the files and their IDs from your Google Drive account.
+    </para>
+
+    <example id="sync.googledrive.example.xml">
+      <title>Google Drive XML example</title>
+      <programlisting><![CDATA[<!-- sync dropbox -->
+<sync type="googledrive">
+  <option name="secret" value="config/google/secret.json"/>
+  <option name="access" value="config/google/access.json"/>
+  <option name="parentId" value="bkjnwqr8123njndcqw12r"/>
+</sync>
+</section>]]></programlisting>
+    </example>
+
+    <example id="sync.googledrive.example.json">
+      <title>Google Drive JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "googledrive",
+  "options": {
+    "secret": "config/google/secret.json",
+    "access": "config/google/access.json",
+    "parentId": "bkjnwqr8123njndcqw12r"
+  }
+}]]></programlisting>
+    </example>
+  </section>
 
   <section id="sync.openstack">
     <indexterm><primary>openstack</primary></indexterm>
