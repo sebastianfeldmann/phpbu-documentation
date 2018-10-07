@@ -565,7 +565,7 @@
        xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/5.1/phpbu.xsd">
   <adapters>
     <adapter type="dotenv" name="environment">
-      <option name="file" value=".env">
+      <option name="file" value=".env" />
     </adapter>
   <adapters>
   <backups>

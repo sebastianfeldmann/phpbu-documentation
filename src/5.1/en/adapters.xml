@@ -65,7 +65,7 @@
       <title>Adapter definition</title>
       <programlisting><![CDATA[
   <adapter type="dotenv" name="myName">
-    <option name="file" value="my-dot-env-dir/.env"/>
+    <option name="file" value="my-dot-env-dir/.env" />
   </adapter>
 ]]></programlisting>
     </example>
@@ -116,7 +116,7 @@
       <title>Adapter definition</title>
       <programlisting><![CDATA[
   <adapter type="array" name="myName">
-    <option name="file" value="my-config-dir/config.php"/>
+    <option name="file" value="my-config-dir/config.php" />
   </adapter>
 ]]></programlisting>
     </example>
