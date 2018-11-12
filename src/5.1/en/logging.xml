@@ -122,7 +122,7 @@
             <entry>smtp.port</entry>
             <entry>string</entry>
             <entry>no</entry>
-            <entry>587</entry>
+            <entry>25</entry>
             <entry>Port to use to connect to SMTP server.</entry>
           </row>
           <row>
