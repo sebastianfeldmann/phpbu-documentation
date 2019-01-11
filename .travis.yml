@@ -1,12 +1,24 @@
 language: java
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install xsltproc
-  - sudo apt-get install libxml2-utils
-  - sudo apt-get install php5
+addons:
+  ssh_known_hosts:
+  - $deploy_host
 
-script: ant check-current
+before_install:
+- sudo apt-get update
+- sudo apt-get install xsltproc
+- sudo apt-get install libxml2-utils
+- sudo apt-get install php5
+
+before_script:
+- echo -e "Host ${deploy_host}ntStrictHostKeyChecking non" >> ~/.ssh/config
+
+script: ant build-current
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: sshpass -p ${deploy_password} rsync -rav -e ssh ./build/output/5.1 $deploy_user@$deploy_host:test
 
 notifications:
   email: false
