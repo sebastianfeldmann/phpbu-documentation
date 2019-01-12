@@ -8,7 +8,7 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install xsltproc
 - sudo apt-get install libxml2-utils
-- sudo apt-get install php7
+- sudo apt-get install php73
 - sudo apt-get install sshpass
 
 before_script:
