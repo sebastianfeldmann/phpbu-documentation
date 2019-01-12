@@ -4,7 +4,7 @@ language:
 
 addons:
   ssh_known_hosts:
-  - $deploy_host
+  - $DEPLOY_HOST
 
 before_install:
 - sudo apt-get update
@@ -13,7 +13,7 @@ before_install:
 - sudo apt-get install sshpass
 
 before_script:
-- echo -e "Host ${deploy_host}ntStrictHostKeyChecking non" >> ~/.ssh/config
+- echo -e "Host ${DEPLOY_HOST}ntStrictHostKeyChecking non" >> ~/.ssh/config
 
 script: ant build-current
 
