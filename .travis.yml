@@ -18,7 +18,7 @@ script: ant build-current
 deploy:
 - provider: script
   skip_cleanup: true
-  script: sshpass -p ${deploy_password} rsync -rav -e ssh ./build/output/5.1 $deploy_user@$deploy_host:test
+  script: sshpass -p $DEPLOY_PASS rsync -rav -e ssh ./build/output/5.1 $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
 
 notifications:
   email: false
