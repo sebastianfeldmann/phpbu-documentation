@@ -2,25 +2,12 @@ language:
   - java
   - php
 
-addons:
-  ssh_known_hosts:
-  - $DEPLOY_HOST
-
 before_install:
 - sudo apt-get update
 - sudo apt-get install xsltproc
 - sudo apt-get install libxml2-utils
-- sudo apt-get install sshpass
-
-before_script:
-- echo -e "Host ${DEPLOY_HOST}ntStrictHostKeyChecking non" >> ~/.ssh/config
 
 script: ant build-current
-
-deploy:
-- provider: script
-  skip_cleanup: true
-  script: rsync -rav -e "ssh -p$DEPLOY_PASS -o StrictHostKeyChecking=no" ./build/output/5.1 $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
 
 notifications:
   email: false
