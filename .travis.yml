@@ -20,7 +20,7 @@ script: ant build-current
 deploy:
 - provider: script
   skip_cleanup: true
-  script: RSYNC_PASSWORD='$DEPLOY_PASS' rsync -rav -e "ssh -o StrictHostKeyChecking=no" ./build/output/5.1 $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  script: export SSHPASS='$DEPLOY_PASS' && rsync -rav -e "ssh -e -o StrictHostKeyChecking=no" ./build/output/5.1 $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
 
 notifications:
   email: false
