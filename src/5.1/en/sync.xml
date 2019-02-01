@@ -602,6 +602,13 @@
             <entry>The host you want do copy your backups to.</entry>
           </row>
           <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>22</entry>
+            <entry>The port you want do connect to.</entry>
+          </row>
+          <row>
             <entry>user</entry>
             <entry>string</entry>
             <entry>yes</entry>
@@ -645,6 +652,7 @@
       <programlisting><![CDATA[<!-- sync sftp -->
 <sync type="sftp">
   <option name="host" value="backup.example.com"/>
+  <option name="port" value="22"/>
   <option name="user" value="user.name"/>
   <option name="password" value="topsecret"/>
   <option name="path" value="backup/someName"/>
@@ -658,6 +666,7 @@
   "type": "sftp",
   "options": {
     "host": "backup.example.com",
+    "port": 22,
     "user": "user.name",
     "password": "topsecret",
     "path": "backup/someName",
