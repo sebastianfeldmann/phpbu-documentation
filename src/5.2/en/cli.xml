@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="cli">
+
+  <indexterm><primary>cli</primary></indexterm>
+  <title>The Command-Line-Runner</title>
+
+  <para>
+    If you have a configuration file named <literal>phpbu.xml</literal> in your current working directory you can execute phpbu like this
+  </para>
+
+  <screen>~$ <userinput>phpbu</userinput>
+phpbu 5.2.0 by Sebastian Feldmann and Contributors.
+
+OK (1 backup, 0 checks, 0 encryption, 0 syncs, 0 cleanups)</screen>
+
+  <para>
+    If you want to use a custom name for your configuration file you have to use the <literal>--configuration</literal> option.
+  </para>
+
+  <screen>~$ <userinput>phpbu --configuration=MyConfig.xml</userinput>
+phpbu 5.2.0 by Sebastian Feldmann abd Contributors.
+
+OK (1 backup, 0 checks, 0 encryption, 0 syncs, 0 cleanups)</screen>
+
+  <para>
+
+  </para>
+
+  <section id="cli.options">
+
+    <title>Command-Line-Runner options</title>
+
+    <para>
+      Here is the list of available options for the command line runner.
+    </para>
+
+    <screen>$ <userinput>phpbu --help</userinput>
+<![CDATA[phpbu 5.2.0 by Sebastian Feldmann and Contributors.
+
+Usage: phpbu [option]
+
+--bootstrap=<file>     A "bootstrap" PHP file that is included before the backup.
+--configuration=<file> A phpbu xml config file.
+--colors               Use colors in output.
+--debug                Display debugging information during backup generation.
+--limit=<subset>       Limit backup execution to a subset.
+--simulate             Perform a trial run with no changes made.
+-h, --help             Print this usage information.
+-v, --verbose          Output more verbose information.
+-V, --version          Output version information and exit.]]></screen>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><literal>--bootstrap</literal></term>
+        <listitem>
+          <para>
+            A "bootstrap" PHP file that is included before executing the backup.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--configuration</literal></term>
+        <listitem>
+          <para>
+            Path to the phpbu config file to use.
+            See <xref linkend="configuration" /> for more details.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--colors</literal></term>
+        <listitem>
+          <para>
+            Use colors in output.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--debug</literal></term>
+        <listitem>
+          <para>
+            Display debugging information during backup generation.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--limit</literal></term>
+        <listitem>
+          <para>
+            Limit backup execution to a subset.
+            See the <link linkend="cli.limit">limit section</link> for details.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--simulate</literal></term>
+        <listitem>
+          <para>
+            Execute phpbu without actually executing any backup, check, encryption, sync or cleanup task.
+            See the <link linkend="cli.simulation">simulation section</link> for details.
+          </para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </section>
+
+  <section id="cli.simulation">
+
+    <indexterm><primary>simulation</primary></indexterm>
+    <indexterm>dry run</indexterm>
+
+    <title>Simulation</title>
+
+    <para>
+      In order to check what actions phpbu would perform, phpbu supports a simulation mode where no backup is actually created and no
+      sync and cleanup tasks are executed. In simulation mode, phpbu will show you, what it would have done, if it would
+      not have been a simulation run. You will get detailed output, which enables you to track every action phpbu
+      would have performed.
+    </para>
+    <para>
+      This is a great way to test if the correct backup commands will be executed
+      and if all the right backups will be cleaned up.
+    </para>
+    <caution>
+      <title>Warning</title>
+      <para>
+        If phpbu has to use any kind of credentials executing a binaries, like for example the
+        <literal>mysqldump</literal> command, this credentials will maybe displayed in the simulation output.
+      </para>
+    </caution>
+    <para>
+      If you are extending phpbu, you can support simulation as well. You can find detailed information on this
+      in <xref linkend="extending-phpbu"/>.
+    </para>
+  </section>
+
+  <section id="cli.limit">
+
+    <indexterm><primary>limit</primary></indexterm>
+    <indexterm>subset</indexterm>
+
+    <title>Limit</title>
+
+    <para>
+      If you don't want to execute all of your configured backups you can define a subset of backups by using the
+      limit option.
+    </para>
+    <para>
+      All you have to to, is to set the limit option to a comma separated list of backup names (nameA,nameB,nameC).
+    </para>
+    <caution>
+      <title>Warning</title>
+      <para>
+        If you don't define explicit backup names, phpbu will use the source type as backup name as fallback.
+      </para>
+    </caution>
+  </section>
+
+
+</chapter>

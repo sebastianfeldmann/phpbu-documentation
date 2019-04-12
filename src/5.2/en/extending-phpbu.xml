@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="extending-phpbu">
+
+  <indexterm><primary>extending</primary></indexterm>
+  <title>Extending PHPBU</title>
+
+  <para>
+    You can extend PHPBU with your own Source, Check, Crypt, Sync, Cleanup, Adapter and Logger implementations.
+  </para>
+
+  <para>
+    All you have to do is to register your implementation at the PHPBU Factory.
+    You can do this by adding you own bootstrap file.
+  </para>
+
+  <screen><userinput>phpbu --bootstrap=extend.php</userinput></screen>
+
+  <para>Your extend.php file could look something like this:</para>
+
+  <example>
+    <title>Extend bootstrap</title>
+    <programlisting><![CDATA[<?php
+  // make your class accessible
+  require 'Acme/MySource.php';
+  // register your class as a source
+  try {
+      phpbu\App\Factory::register('source', 'mysource', '\\Acme\\MySource');
+  } catch (Exception $e) {
+      die($e->getMessage());
+  }]]></programlisting>
+  </example>
+
+  <para>
+    For this to work your class Acme\MySource hast to implement
+    the <literal>phpbu\App\Backup\Source</literal> Interface.
+    After registering your Source you can use <literal>mysource</literal> as source-type
+    within your XML or JSON configuration like this.
+  </para>
+
+  <example>
+    <title>Custom Source XML example</title>
+    <programlisting><![CDATA[<source type="mysource"></source>]]></programlisting>
+  </example>
+
+  <example>
+    <title>Custom Source JSON example</title>
+    <programlisting><![CDATA[{"type": "mysource"}]]></programlisting>
+  </example>
+
+  <para>
+    If the alias is already taken this will throw an Exception.
+    You can force phpbu to overwrite any previously registered class using the $force Parameter.
+    Even the phpbu sources could be replaced with custom implementations.
+  </para>
+
+  <example>
+    <title>Overwrite default sources</title>
+    <programlisting><![CDATA[<?php
+// make your class accessible
+require 'Acme/MyMysqldump.php';
+// register your class as source, override already registered class
+phpbu\App\Factory::register('source', 'mysqldump', '\\Acme\\MyMysqldump', true);]]></programlisting>
+  </example>
+
+  <section id="extending.simulation">
+
+    <title>Executing and simulating</title>
+
+    <para>
+      If you are extending phpbu you have two options. The first is to simply implement the execution interface. This way
+      you can execute your own Source, Check, Crypt, Sync or Cleanup tasks. The second option is to implement the
+      respective <literal>Simulator</literal> interface. Choosing this option you not only have to implement the execution
+      part but rather implement a simulation part as well.
+    </para>
+    <para>
+      Simulation is supported out of the box for every implementation, but choosing option two enables you to add
+      viable information about the actions you perform in your code within a simulation run.
+    </para>
+
+    <table id="extending-phpbu.tables.available-interfaces">
+      <title>Types to register:</title>
+      <tgroup cols="3" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Type</entry>
+            <entry>Interface for execution only</entry>
+            <entry>Interface for execution and simulation</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>source</entry>
+            <entry>phpbu\App\Backup\Source</entry>
+            <entry>phpbu\App\Backup\Source\Simulator</entry>
+          </row>
+          <row>
+            <entry>check</entry>
+            <entry>phpbu\App\Backup\Check</entry>
+            <entry>phpbu\App\Backup\Check\Simulator</entry>
+          </row>
+          <row>
+            <entry>crypt</entry>
+            <entry>phpbu\App\Backup\Crypt</entry>
+            <entry>phpbu\App\Backup\Crypt</entry>
+          </row>
+          <row>
+            <entry>sync</entry>
+            <entry>phpbu\App\Backup\Sync</entry>
+            <entry>phpbu\App\Backup\Sync\Simulator</entry>
+          </row>
+          <row>
+            <entry>cleanup</entry>
+            <entry>phpbu\App\Backup\Cleanup</entry>
+            <entry>phpbu\App\Backup\Cleanup\Simulator</entry>
+          </row>
+          <row>
+            <entry>adapter</entry>
+            <entry>phpbu\App\Adapter</entry>
+            <entry>-</entry>
+          </row>
+          <row>
+            <entry>logger</entry>
+            <entry>phpbu\App\Backup\Logger</entry>
+            <entry>-</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+  </section>
+
+  <section id="extending.source">
+
+    <title>Create a custom Source</title>
+
+    <para>
+      A minimal custom Source class could look like this.
+    </para>
+
+    <example>
+      <title>Create a custom source</title>
+      <programlisting><![CDATA[<?php
+namespace Acme;
+
+use \phpbu\App\Backup\Result;
+use \phpbu\App\Backup\Source;
+use \phpbu\App\Backup\Source\Status;
+use \phpbu\App\Backup\Target;
+
+class MySource implements Source
+{
+    /**
+     * Some data that has to be configured.
+     */
+    private $someConfigValue;
+
+    /**
+     * Here you should validate the configuration and setup your class.
+     *
+     * @param array $conf
+     */
+    public function setup(array $conf)
+    {
+        // here you are getting all of your configured options
+        // $conf[ <option name> ] = <option value>
+        $this->someConfigValue = $conf['foo']
+    }
+
+    /**
+     * In here you should create your backup.
+     *
+     * @return \phpub\App\Backup\Source\Status
+     * @throws \phpbu\App\Backup\Source\Exception
+     */
+    public function backup(Target $target, Result $result) : Status
+    {
+        // use these methods to store the backup at the configured location
+        // $target->getPath()
+        // $target->getPathname()
+        // $target->getFilename()
+        // to know if the backup should be compressed use
+        // $target->shouldBeCompressed()
+        // to get the compression settings use
+        // $target->getCompressor()
+        // if you want to log some debug information use
+        // $result->debug('some message');
+        // anything bad happens throw a \phpbu\App\Exception
+        // return a backup status
+        // this is important so the runner knows if it still has to compress the backup
+        // return Status::create()->uncompressed($pathToUncompressedFile);
+    }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="extending.check">
+
+    <title>Create a custom Check</title>
+
+    <para>
+      Custom Check implementation example.
+    </para>
+
+    <example>
+      <title>Create a custom check</title>
+      <programlisting><![CDATA[<?php
+namespace Acme;
+
+use \phpbu\App\Backup\Check;
+use \phpbu\App\Backup\Collector;
+use \phpbu\App\Backup\Target;
+
+class MyCheck implements Check
+{
+    /**
+     * Perform your check.
+     */
+    public function pass(Target $target, $value, Collector $collector) : bool
+    {
+        // use Target to refer to the created backup
+        // $target->getPathname()
+        // $value is the configured value
+        // <check type="mycheck" value="myvalue"/>
+        // $value = "myvalue"
+        // use the collector to get a list of previous backups array<splFileInfo>
+        // $history = $collector->getBackups()
+        // throw a \phpbu\App\Backup\Check\Exception if something bad is happening
+        // finally return if the check passes or not
+        return $boolean;
+    }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="extending.sync">
+
+    <title>Create a custom Sync</title>
+
+    <para>
+      Implementing a custom Sync.
+    </para>
+
+    <example>
+      <title>Create a custom sync</title>
+      <programlisting><![CDATA[<?php
+namespace Acme;
+
+use \phpbu\App\Backup\Sync;
+use \phpbu\App\Backup\Target;
+
+class MySync implements Sync
+{
+    /**
+     * Some data that has to be configured.
+     */
+    private $someConfigValue;
+
+    /**
+     * Here you should validate the configuration and setup your class.
+     */
+    public function setup(array $conf)
+    {
+        // here you are getting all of your configured options
+        // $conf[ <option name> ] = <option value>
+        $this->someConfigValue = $conf['foo']
+    }
+
+    /**
+     * Execute your sync.
+     */
+    public function sync(Target $target, Result $result)
+    {
+        // use Target to refer to the created backup
+        // $target->getPathname()
+        // execute your sync
+        // if you want to log some debug information use
+        // $result->debug('some message');
+        // throw a \phpbu\App\Backup\Sync\Exception if something is going wrong
+    }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="extending.cleaner">
+
+    <title>Create a custom Cleaner</title>
+
+      <para>
+        Implementing a custom cleaner.
+      </para>
+
+      <example>
+        <title>Create a custom cleaner</title>
+        <programlisting><![CDATA[<?php
+namespace Acme;
+
+use \phpbu\App\Backup\Collector;
+use \phpbu\App\Backup\Sync;
+use \phpbu\App\Backup\Target;
+
+class MyCleaner implements Sync
+{
+    /**
+     * Some data that has to be configured.
+     */
+    private $someConfigValue;
+
+    /**
+     * Here you should validate the configuration and setup your class.
+     */
+    public function setup(array $conf)
+    {
+        // here you are getting all of your configured options
+        // $conf[ <option name> ] = <option value>
+        $this->someConfigValue = $conf['foo']
+    }
+
+    /**
+     * Execute your cleanup.
+     */
+    public function cleanup(Target $target, Collector $collector, Result $result)
+    {
+        // use Target to refer to the created backup
+        // $target->getPathname()
+        // use the collector to get a list of previous backups array<splFileInfo>
+        // delete files matching your cleanup rules
+        // $history = $collector->getBackups()
+        // if you want to log some debug information use
+        // $result->debug('some message');
+        // throw a \phpbu\App\Backup\Cleaner\Exception if something is going wrong
+    }
+}]]></programlisting>
+      </example>
+
+  </section>
+
+  <section id="extending.adapter">
+
+    <title>Create a custom Adapter</title>
+
+    <para>
+      Custom Adapter implementation example.
+    </para>
+
+    <example>
+      <title>Create a custom adapter</title>
+      <programlisting><![CDATA[<?php
+namespace Acme;
+
+use \phpbu\App\Adapter;
+
+class MyAdapter implements Adapter
+{
+    /**
+     * Setup the adapter.
+     *
+     * @param  array $conf
+     * @return void
+     */
+    public function setup(array $conf)
+    {
+        // here you will get all configured adapter options
+    }
+
+    /**
+     * Return a value for a given path.
+     *
+     * @param  string $path
+     * @return string
+     */
+    public function getValue(string $path) : string
+    {
+        // path is everything behind the second colon
+        // adapter:name:$path
+        return 'some_value';
+    }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="extending.logger">
+
+    <title>Create a custom Logger</title>
+
+    <itemizedlist>
+      <title>List of available events:</title>
+      <listitem><para>phpbu.debug</para></listitem>
+      <listitem><para>phpbu.app_start</para></listitem>
+      <listitem><para>phpbu.app_end</para></listitem>
+
+      <listitem><para>phpbu.backup_start</para></listitem>
+      <listitem><para>phpbu.backup_failed</para></listitem>
+      <listitem><para>phpbu.backup_end</para></listitem>
+
+      <listitem><para>phpbu.crypt_start</para></listitem>
+      <listitem><para>phpbu.crypt_failed</para></listitem>
+      <listitem><para>phpbu.crypt_end</para></listitem>
+
+      <listitem><para>phpbu.check_start</para></listitem>
+      <listitem><para>phpbu.check_failed</para></listitem>
+      <listitem><para>phpbu.check_end</para></listitem>
+
+      <listitem><para>phpbu.sync_start</para></listitem>
+      <listitem><para>phpbu.sync_failed</para></listitem>
+      <listitem><para>phpbu.sync_skipped</para></listitem>
+      <listitem><para>phpbu.sync_end</para></listitem>
+
+      <listitem><para>phpbu.cleanup_start</para></listitem>
+      <listitem><para>phpbu.cleanup_failed</para></listitem>
+      <listitem><para>phpbu.cleanup_skipped</para></listitem>
+      <listitem><para>phpbu.cleanup_end</para></listitem>
+    </itemizedlist>
+
+    <para>
+      Implementing a custom logger.
+    </para>
+
+    <example>
+      <title>Create a custom logger</title>
+      <programlisting><![CDATA[<?php
+namespace Acme;
+
+use phpbu\App\Event;
+use phpbu\App\Log\Logger;
+
+class MyLogger implements Logger
+{
+    /**
+     * Logger interface requires 'getSubscribedEvents' method.
+     * Define the events you want to get notified about.
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            'phpbu.debug'   => 'onDebug',
+            'phpbu.app_end' => 'onPhpbuEnd',
+        ];
+    }
+
+    /**
+     * Logger interface requires 'setup' method to configure your logger.
+     * Here you should validate the configuration and setup your class.
+     */
+    public function setup(array $conf)
+    {
+        // here you are getting all of your configured options
+        // $conf[ <option name> ] = <option value>
+    }
+
+    /**
+     * Handle the debug event.
+     */
+    public function onDebug(Event\Debug $event)
+    {
+        // use $event->getMessage() to get the debug message
+    }
+
+    /**
+     * Handle phpbuEnd event
+     */
+    public function onPhpbuEnd(Event\App\End $event)
+    {
+        // handle the phpbuEnd
+        // use $event->getResult() to get the application result
+    }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="extending.summary">
+    <title>Summary</title>
+
+    <example>
+      <title>Example file structure</title>
+      <programlisting><![CDATA[acme/
+├── backup/
+├── src/
+|  ├── bootstrap.php
+|  ├── MyCheck.php
+|  ├── MyCleaner.php
+|  ├── MyCrypt.php
+|  ├── MySource.php
+|  └── MySync.php
+|
+├── phpbu.phar
+└── phpbu.xml.dist]]></programlisting>
+    </example>
+
+    <example>
+      <title>Example bootstrap.php</title>
+      <programlisting><![CDATA[<?php
+// use your autoloader or require your classes manually
+// so phpbu can find them while executing you backup
+// register your class as source, you may override already registered classes
+phpbu\App\Factory::register('source', 'mysource', '\\Acme\\MySource');
+phpbu\App\Factory::register('check', 'mycheck', '\\Acme\\MyCheck');
+phpbu\App\Factory::register('cleanup', 'mycleanup', '\\Acme\\MyCleaner');]]></programlisting>
+    </example>
+
+    <example>
+      <title>Example phpbu.xml.dist</title>
+      <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/5.2/phpbu.xsd">
+  <backups>
+    <backup>
+      <!-- source -->
+      <source type="mysource">
+        <option name="foo" value="bar"/>
+      </source>
+      <!-- where should the backup be stored -->
+      <target dirname="backup"
+              filename="mysource-%Y%m%d-%H%i.backup"
+              compress="bzip2"/>
+      <!-- check the created backup -->
+      <check type="mycheck" value="100"/>
+      <!-- cleanup the backup location -->
+      <cleanup type="mycleanup">
+        <option name="foo" value="bar"/>
+      </cleanup>
+    </backup>
+  </backups>
+</phpbu>]]></programlisting>
+    </example>
+
+  </section>
+</chapter>

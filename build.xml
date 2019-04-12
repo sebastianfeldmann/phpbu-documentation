@@ -1,10 +1,10 @@
 <project name="phpbu-manual" default="build-current" basedir=".">
 
-  <target name="check-current" depends="check-en-5.1"/>
-  <target name="build-current" depends="build-en-5.1"/>
+  <target name="check-current" depends="check-en-5.2"/>
+  <target name="build-current" depends="build-en-5.2"/>
 
-  <target name="check-old" depends="check-en-5.0,check-en-4.0,check-en-3.2,check-en-3.1,check-en-3.0,check-en-2.1"/>
-  <target name="build-old" depends="build-en-5.0,build-en-4.0,build-en-3.2,build-en-3.1,build-en-3.0,build-en-2.1"/>
+  <target name="check-old" depends="check-en-5.1,check-en-5.0,check-en-4.0,check-en-3.2,check-en-3.1,check-en-3.0,check-en-2.1"/>
+  <target name="build-old" depends="build-en-5.1,build-en-5.0,build-en-4.0,build-en-3.2,build-en-3.1,build-en-3.0,build-en-2.1"/>
   <target name="build-all" depends="build-current,build-old"/>
 
   <!-- check book xml syntax for a given version in a given language -->
@@ -78,6 +78,20 @@
 
 
   <!-- build and check all available versions -->
+
+  <!-- 5.2 -->
+  <target name="build-en-5.2" depends="check-en-5.2">
+    <antcall target="build">
+      <param name="language" value="en"/>
+      <param name="version" value="5.2"/>
+    </antcall>
+  </target>
+  <target name="check-en-5.2">
+    <antcall target="check">
+      <param name="language" value="en"/>
+      <param name="version" value="5.2"/>
+    </antcall>
+  </target>
 
   <!-- 5.1 -->
   <target name="build-en-5.1" depends="check-en-5.1">
