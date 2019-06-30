@@ -4,6 +4,7 @@ language:
 
 before_install:
 - sudo apt-get update
+- sudo apt-get install ant
 - sudo apt-get install xsltproc
 - sudo apt-get install libxml2-utils
 
