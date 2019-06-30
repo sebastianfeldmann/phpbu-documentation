@@ -150,7 +150,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>The remote cleanup strategy (capacity|oudated|quantity|stepwise).</entry>
+            <entry>The remote cleanup strategy (capacity|outdated|quantity|stepwise).</entry>
           </row>
           <row>
             <entry>cleanup.*</entry>
