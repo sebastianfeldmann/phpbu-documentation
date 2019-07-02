@@ -74,6 +74,11 @@
           <entry>Sync your backup to a <ulink url="http://www.softlayer.com/">Softlayer</ulink> Object Storage account.</entry>
           <entry>no</entry>
         </row>
+        <row>
+          <entry>Yandex Disk</entry>
+          <entry>Sync your backup to a <ulink url="http://yandex.ru/">Yandex</ulink> account.</entry>
+          <entry>no</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -768,6 +773,105 @@
     "secret": "topsecret",
     "host": "some.softlayer.domain.com",
     "container": "backup",
+    "path": "/backup/someName"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+
+  <section id="sync.yandex">
+
+    <title>Yandex Disk</title>
+
+    <para>
+      Sync your backup to Yandex account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"arhitector/yandex": "^2.0"</literal> in your composer file.
+    </para>
+
+    <para>
+      This is what you have to do:
+    </para>
+
+    <orderedlist>
+      <listitem>
+        <para>Go to https://oauth.yandex.ru/client/new</para>
+      </listitem>
+      <listitem>
+        <para>Create your app</para>
+      </listitem>
+      <listitem>
+        <para>Check all disk permissions</para>
+      </listitem>
+      <listitem>
+        <para>Generate access token</para>
+      </listitem>
+      <listitem>
+        <para>Go to https://oauth.yandex.ru/authorize?response_type=token&amp;client_id=APP_ID (replace APP_ID with ID given to you)</para>
+      </listitem>
+      <listitem>
+        <para>Then you should get token parameter from query parameters of opened page</para>
+      </listitem>
+    </orderedlist>
+
+    <table id="sync.tables.options.yandex">
+      <title>softlayer-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user you want to connect with.</entry>
+          </row>
+          <row>
+            <entry>token</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The api token to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where to put the backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.yandex.example.xml">
+      <title>Yandex XML example</title>
+      <programlisting><![CDATA[<!-- sync yandex disk -->
+<sync type="yandex-disk">
+  <option name="token" value="mnahg6-1knl2l2-b1vf4"/>
+  <option name="path" value="/backup/someName"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.yandex.example.json">
+      <title>Yandex JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "yandex-disk",
+  "options": {
+    "user": "mnahg6-1knl2l2-b1vf4",
     "path": "/backup/someName"
   }
 }]]></programlisting>
