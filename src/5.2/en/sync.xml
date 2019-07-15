@@ -45,6 +45,11 @@
           <entry>yes</entry>
         </row>
         <row>
+          <entry>Azure Blob</entry>
+          <entry>Sync your backup to your <ulink url="https://portal.azure.com">Azure Blob</ulink> storage.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
           <entry>Dropbox</entry>
           <entry>Sync your backup to a <ulink url="https://www.dropbox.com">Dropbox</ulink> account.</entry>
           <entry>yes</entry>
@@ -194,6 +199,97 @@
     "region": "eu-central-1",
     "path": "/some/dir",
     "useMultiPartUpload": "true"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="sync.azureblob">
+    <indexterm><primary>azure blob</primary></indexterm>
+    <title>Azure Blob</title>
+
+    <para>
+      Sync your backup to an Azure Blob storage.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require <literal>"microsoft/azure-storage-blob": "~1.4"</literal> in your composer file.
+    </para>
+
+    <table id="sync.tables.options.azureblob">
+      <title>azureblob-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>connection_string</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The Azure Blob storage account connection string.</entry>
+          </row>
+          <row>
+            <entry>container_name</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>A container where to store the backup.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>/</entry>
+            <entry>Path where to store the backup in your container.</entry>
+          </row>
+          <row>
+            <entry>cleanup.type</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The remote cleanup strategy (capacity|outdated|quantity|stepwise).</entry>
+          </row>
+          <row>
+            <entry>cleanup.*</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>
+              The remote cleanup strategy settings. For example "cleanup.size" if you use "cleanup.type" = "capacity".
+              For details have a look at the corresponding <link linkend="cleanup">Cleanup</link> configurations.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.azureblob.example.xml">
+      <title>azureblob XML example</title>
+      <programlisting><![CDATA[<!-- sync azure blob -->
+<sync type="azureblob">
+  <option name="connection_string" value="DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]"/>
+  <option name="container_name" value="backup"/>
+  <option name="path" value="/some/dir"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.azureblob.example.json">
+      <title>azureblob JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "azureblob",
+  "options": {
+    "connection_string": "DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]",
+    "container_name": "backup",
+    "path": "/some/dir"
   }
 }]]></programlisting>
     </example>
