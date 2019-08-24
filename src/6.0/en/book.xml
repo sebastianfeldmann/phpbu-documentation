@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<book xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" id="phpbu">
+  <bookinfo>
+    <title>PHPBU Manual</title>
+    <subtitle>Edition for PHPBU 6.0.</subtitle>
+    <pubdate><?dbtimestamp format="Y.m.d"?></pubdate>
+    <author>
+      <firstname>Sebastian</firstname>
+      <surname>Feldmann</surname>
+    </author>
+    <copyright>
+      <year>2014</year>
+      <year>2015</year>
+      <holder>Sebastian Feldmann</holder>
+    </copyright>
+    <legalnotice>
+      <para>This work is licensed under the Creative Commons Attribution 3.0 Unported License.</para>
+    </legalnotice>
+  </bookinfo>
+  <xi:include href="installation.xml"/>
+  <xi:include href="configuration.xml"/>
+  <xi:include href="adapters.xml"/>
+  <xi:include href="cli.xml"/>
+  <xi:include href="source.xml"/>
+  <xi:include href="check.xml"/>
+  <xi:include href="crypt.xml"/>
+  <xi:include href="sync.xml"/>
+  <xi:include href="cleanup.xml"/>
+  <xi:include href="logging.xml"/>
+  <xi:include href="extending-phpbu.xml"/>
+  <xi:include href="integrations.xml"/>
+  <xi:include href="index.xml"/>
+  <xi:include href="copyright.xml"/>
+</book>

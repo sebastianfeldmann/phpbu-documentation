@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="adapters">
+
+  <title>Configuration Adapters</title>
+
+  <para>
+    For a basic understanding why adapters are useful,
+    have a look at the <link linkend="configuration.adapters">configuration documentation</link>.
+  </para>
+  <para>
+    You can build your own configuration adapter.
+    Want to know how? Have a look at the <link linkend="extending.adapter">extending phpbu section</link>
+  </para>
+
+  <section id="adapters.env">
+    <indexterm><primary>env</primary></indexterm>
+    <title>Environment adapter "env"</title>
+    <para>
+      Adapter to use environment variables for option values.
+    </para>
+
+    <example>
+      <title>Adapter definition</title>
+      <programlisting><![CDATA[
+  <adapter type="env" name="myName"></adapter>
+]]></programlisting>
+    </example>
+    <example>
+      <title>Adapter reference</title>
+      <programlisting><![CDATA[
+  <option name="password" value="adapter:myName:SOME_ENV_VAR" />
+]]></programlisting>
+    </example>
+  </section>
+
+  <section id="adapters.dotenv">
+    <indexterm><primary>dotenv</primary></indexterm>
+    <title>Dotenv adapter "dotenv"</title>
+    <para>
+      Adapter to use .env files to load environment variables.
+    </para>
+
+    <table id="adapters.env.tables.options">
+      <title>Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>file</entry>
+            <entry>no</entry>
+            <entry>.env</entry>
+            <entry>Path to the .env file</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <example>
+      <title>Adapter definition</title>
+      <programlisting><![CDATA[
+  <adapter type="dotenv" name="myName">
+    <option name="file" value="my-dot-env-dir/.env" />
+  </adapter>
+]]></programlisting>
+    </example>
+    <example>
+      <title>Adapter reference</title>
+      <programlisting><![CDATA[
+  <option name="password" value="adapter:myName:SOME_DOTENV_VAR" />
+]]></programlisting>
+    </example>
+  </section>
+
+  <section id="adapters.array">
+    <indexterm><primary>dotenv</primary></indexterm>
+    <title>PHP config adapter "array"</title>
+    <para>
+      Adapter to use php array config files.
+    </para>
+
+    <example>
+      <title>Example PHP config file</title>
+      <programlisting><![CDATA[
+<?php return ['foo' => ['bar' => 'baz']];
+]]></programlisting>
+    </example>
+
+    <table id="adapters.array.tables.options">
+      <title>Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>file</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to the php config file</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <example>
+      <title>Adapter definition</title>
+      <programlisting><![CDATA[
+  <adapter type="array" name="myName">
+    <option name="file" value="my-config-dir/config.php" />
+  </adapter>
+]]></programlisting>
+    </example>
+    <example>
+      <title>Adapter reference</title>
+      <programlisting><![CDATA[
+  <option name="password" value="adapter:myName:foo.bar" />
+]]></programlisting>
+    </example>
+  </section>
+
+</chapter>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="cleanup">
+
+  <indexterm><primary>cleanup</primary></indexterm>
+  <title>Cleanup backups</title>
+
+    <para>
+        You can remove old backups to limit the space your backups consume on your local hard drive. It's important to note,
+        that only <emphasis>local</emphasis> backups will be cleaned up. So whatever kind of <literal>Sync</literal>
+        you are using. <literal>Cleanup</literal> won't touch your remote files.
+    </para>
+
+    <para>
+        If you want to remove your synced backups as well, and you are not using the
+        <link linkend="sync.rsync">Rsync</link> sync with it's <literal>delete</literal> option.
+      Have a look at the <link linkend="cleanup.remote">remote cleanup section</link>
+    </para>
+
+  <table id="cleanup.tables.available-cleanups">
+    <title>Supported types of cleanups:</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>Capacity</entry>
+          <entry>
+            Define the size your backups should occupy.
+            If your backups start to exceed this value PHPBU will start to delete backups,
+            starting with the oldest ones.
+          </entry>
+        </row>
+        <row>
+          <entry>Outdated</entry>
+          <entry>
+            Remove backups older than a configured time-value.
+            For example "2W" to delete all backup older than two weeks.
+          </entry>
+        </row>
+        <row>
+          <entry>Quantity</entry>
+          <entry>Keep only a configured amount of backups.</entry>
+        </row>
+        <row>
+          <entry>Stepwise</entry>
+          <entry>
+            Keep different amount of backups for different periods of time.
+            For example keep all backups you made for the last 3 days, keep one for each week for the last 4 weeks,
+            keep one for each month for the last 6 month and one for every year for at least 3 years.
+          </entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="cleanup.capacity">
+
+    <title>Cleanup by capacity</title>
+
+    <para>
+      Remove oldest backups if all created backups exceed the configured limit.
+    </para>
+
+    <table id="cleanup.tables.options.capacity">
+      <title>Capacity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>size</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Space your backups are allowed to occupy. e.g. 500M for 500 Megabytes or 1G for one Gigabyte.</entry>
+          </row>
+          <row>
+            <entry>deleteTarget</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>
+              If you don't want to keep any backups locally,
+              just specify a size of "0B", set this to "true"
+              and even the current backup will be deleted.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.capacity.example.xml">
+      <title>capacity XML example</title>
+      <programlisting><![CDATA[<!-- cleanup capacity: keep 250 Megabytes of backups -->
+<cleanup type="capacity">
+  <option name="size" value="250M"/>
+  <option name="deleteTarget" value="false"/>
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.capacity.example.json">
+      <title>capacity JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "capacity",
+  "options": {
+    "size": "250M",
+    "deleteTarget": "false"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.outdated">
+
+    <title>Cleanup by date</title>
+
+    <para>
+      Remove backups that are older than a configured value.
+    </para>
+
+    <table id="cleanup.tables.options.outdated">
+      <title>Outdated-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>older</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Time to keep backups. e.g. 1m for one month or 20d for twenty days.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.outdated.example.xml">
+      <title>outdated XML example</title>
+      <programlisting><![CDATA[<!-- cleanup outdated: keep backups for 2 weeks -->
+<cleanup type="outdated">
+  <option name="older" value="2W"/>
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.outdated.example.json">
+      <title>outdated JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "Outdated",
+  "options": {
+    "older": "2W"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.quantity">
+
+    <title>Cleanup by quantity</title>
+
+    <para>
+      Keep only a configured amount of backups.
+    </para>
+
+    <table id="cleanup.tables.options.quantity">
+      <title>Quantity-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>amount</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The amount of backups to keep.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.quantity.example.xml">
+      <title>quantity XML example</title>
+      <programlisting><![CDATA[<!-- cleanup quantity: keep the last 20 backups -->
+<cleanup type="quantity">
+  <option name="amount" value="20"/>
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.quantity.example.json">
+      <title>quantity JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "quantity",
+  "options": {
+    "amount": "20"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.stepwise">
+
+    <title>Cleanup stepwise</title>
+
+    <para>
+      Keep more backups in the recent past and keep less backups for the distant past. The following table illustrates
+      how this works.
+    </para>
+
+    <programlisting><![CDATA[        | for x days  | for x days        | for x weeks           | for x month keep   |
+        | keep all    | keep one per day  | keep one per week     | keep one per month |
+--------+-------------+-------------------+-----------------------+--------------------+-
+backups | ............| . . . . . . . . . | .       .       .     | .                . | ]]></programlisting>
+
+    <para>
+      So if you start to backup now your amount of backups will grow for the configured years to keep at least one backup.
+      But by then the amount of your backups will be constantly the same.
+    </para>
+
+
+    <table id="cleanup.tables.options.stepwise">
+      <title>Stepwise-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>daysToKeepAll</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Days to keep all backups you made.</entry>
+          </row>
+          <row>
+            <entry>daysToKeepDaily</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Days to keep at least one backup you made a day.</entry>
+          </row>
+          <row>
+            <entry>weeksToKeepWeekly</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Amount of weeks to keep at least one backup for each week.</entry>
+          </row>
+          <row>
+            <entry>monthToKeepMonthly</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Amount of month to keep at least one backup for each month.</entry>
+          </row>
+          <row>
+            <entry>yearsToKeepYearly</entry>
+            <entry>integer</entry>
+            <entry>yes</entry>
+            <entry>0</entry>
+            <entry>Amount of years to keep at least one backup for each year.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="cleanup.stepwise.example.xml">
+      <title>stepwise XML example</title>
+      <programlisting><![CDATA[<!-- cleanup stepwise -->
+<cleanup type="stepwise">
+  <option name="daysToKeepAll" value="2" />
+  <option name="daysToKeepDaily" value="5" />
+  <option name="weeksToKeepWeekly" value="3" />
+  <option name="monthToKeepMonthly" value="4" />
+  <option name="yearsToKeepYearly" value="10" />
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.stepwise.example.json">
+      <title>stepwise JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "stepwise",
+  "options": {
+    "daysToKeepAll": "2",
+    "daysToKeepDaily": "5",
+    "weeksToKeepWeekly": "3",
+    "monthToKeepMonthly": "4",
+    "yearsToKeepYearly": "10"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="cleanup.remote">
+    <title>Remote cleanup</title>
+
+    <para>
+      Some sync implementations support to cleanup remote files as well. To check if the sync of your
+      choice supports remote cleanup have a look at the <link linkend="sync">sync list</link>.
+    </para>
+
+    <para>
+      Remote cleanups are configured within your <link linkend="sync">Sync</link> configuration similar to local
+      cleanups. The only difference is that all options get prefixed by <literal>cleanup.</literal>.
+      To better understand this have a look at the following examples.
+    </para>
+
+    <example id="cleanup.remote.example.xml">
+      <title>Remote cleanup XML example</title>
+      <programlisting><![CDATA[<!-- cleanup stepwise -->
+<sync type="dropbox">
+  <!-- some sync relevant options -->
+  <option name="token" value="mysecrettoken" />
+  <option name="path" value="/backups" />
+  <!-- remote cleanup options -->
+  <option name="cleanup.type" value="quantity" />
+  <option name="cleanup.amount" value="10" />
+</cleanup>]]></programlisting>
+    </example>
+
+    <example id="cleanup.remote.example.json">
+      <title>Remote cleanup JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "dropbox",
+  "options": {
+    "token": "mysecrettoken",
+    "path": "/backups",
+    "cleanup.type": "quantity",
+    "cleanup.amount": "10"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+</chapter>

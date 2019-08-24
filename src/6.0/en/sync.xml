@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="sync">
+
+  <indexterm><primary>sync</primary></indexterm>
+  <title>Sync Backups</title>
+
+  <para>
+    It's a best practice to NOT store your backups locally, or at least not only storing them locally.
+    With PHPBU <literal>Sync</literal> adapters you can copy your backups to different locations.
+  </para>
+
+  <caution>
+    <title>Caution</title>
+    <para>
+      If you are syncing your backup to a cloud service it's advised to <link linkend="crypt">encrypt</link> your backup
+      beforehand. Especially if your backup contains
+      <ulink url="https://en.wikipedia.org/wiki/Personally_identifiable_information">personal identifiable information</ulink>.
+    </para>
+  </caution>
+
+  <para>
+    PHPBU supports cleaning up you locally stored backups by configuring a <link linkend="cleanup">Cleanup</link>.
+    Note that <literal>Cleanup</literal> configurations do not affect remote files synced with <literal>Sync</literal> configurations.
+  </para>
+  <para>
+    But some <literal>Sync</literal> adapters support cleaning up remote files as well.
+    This is done by using <literal>cleanup.*</literal> options in your <literal>Sync</literal> configuration.
+    In order to better understand how remote cleanups work and how they are configured have a look at the <link linkend="cleanup">Cleanups</link> section.
+  </para>
+
+  <table id="sync.tables.available-syncs">
+    <title>Supported types of syncs:</title>
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <thead>
+        <row>
+          <entry>Type</entry>
+          <entry>Description</entry>
+          <entry>Remote Cleanup</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>amazon</entry>
+          <entry>Sync your backup to your <ulink url="https://aws.amazon.com">Amazon S3</ulink> account.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>Azure Blob</entry>
+          <entry>Sync your backup to your <ulink url="https://portal.azure.com">Azure Blob</ulink> storage.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>Dropbox</entry>
+          <entry>Sync your backup to a <ulink url="https://www.dropbox.com">Dropbox</ulink> account.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>Google Drive</entry>
+          <entry>Sync your backup to a <ulink url="https://drive.google.com">Google Drive</ulink> account.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>OpenStack</entry>
+          <entry>Sync your backups to an <ulink url="https://www.openstack.org">OpenStack</ulink> storage.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>rsync</entry>
+          <entry>Sync your backups with rsync.</entry>
+          <entry>no</entry>
+        </row>
+        <row>
+          <entry>sftp</entry>
+          <entry>Sync your backup to a server via SFTP.</entry>
+          <entry>yes</entry>
+        </row>
+        <row>
+          <entry>SoftLayer Object Storage</entry>
+          <entry>Sync your backup to a <ulink url="http://www.softlayer.com/">Softlayer</ulink> Object Storage account.</entry>
+          <entry>no</entry>
+        </row>
+        <row>
+          <entry>Yandex Disk</entry>
+          <entry>Sync your backup to a <ulink url="http://yandex.ru/">Yandex</ulink> account.</entry>
+          <entry>no</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="sync.amazon">
+    <indexterm><primary>amazon s3</primary></indexterm>
+    <title>Amazon S3</title>
+
+    <para>
+      Sync your backup to an amazon S3 account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require <literal>"aws/aws-sdk-php": "^3.10"</literal> in your composer file.
+    </para>
+
+    <table id="sync.tables.options.amazon">
+      <title>amazons3-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>key</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The amazon s3 key.</entry>
+          </row>
+          <row>
+            <entry>secret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The amazon S3 secret.</entry>
+          </row>
+          <row>
+            <entry>bucket</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>A bucket where to store the backup.</entry>
+          </row>
+          <row>
+            <entry>region</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The region where the bucket is located e.g. 'eu-central-1'.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>/</entry>
+            <entry>Path where to store the backup in your bucket.</entry>
+          </row>
+          <row>
+            <entry>useMultiPartUpload</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use Amazon S3 MultiPartUpload functionality.</entry>
+          </row>
+          <row>
+            <entry>cleanup.type</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The remote cleanup strategy (capacity|outdated|quantity|stepwise).</entry>
+          </row>
+          <row>
+            <entry>cleanup.*</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>
+              The remote cleanup strategy settings. For example "cleanup.size" if you use "cleanup.type" = "capacity".
+              For details have a look at the corresponding <link linkend="cleanup">Cleanup</link> configurations.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.amazons3.example.xml">
+      <title>amazons3 XML example</title>
+      <programlisting><![CDATA[<!-- sync amazon s3 -->
+<sync type="amazons3">
+  <option name="key" value="myAwsKey"/>
+  <option name="secret" value="myAwsSecret"/>
+  <option name="bucket" value="backup"/>
+  <option name="region" value="eu-central-1"/>
+  <option name="path" value="/some/dir"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.amazons3.example.json">
+      <title>amazons3 JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "amazons3",
+  "options": {
+    "key": "myAwsKey",
+    "secret": "myAwsSecret",
+    "bucket": "backup",
+    "region": "eu-central-1",
+    "path": "/some/dir",
+    "useMultiPartUpload": "true"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="sync.azureblob">
+    <indexterm><primary>azure blob</primary></indexterm>
+    <title>Azure Blob</title>
+
+    <para>
+      Sync your backup to an Azure Blob storage.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require <literal>"microsoft/azure-storage-blob": "~1.4"</literal> in your composer file.
+    </para>
+
+    <table id="sync.tables.options.azureblob">
+      <title>azureblob-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>connection_string</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The Azure Blob storage account connection string.</entry>
+          </row>
+          <row>
+            <entry>container_name</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>A container where to store the backup.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>/</entry>
+            <entry>Path where to store the backup in your container.</entry>
+          </row>
+          <row>
+            <entry>cleanup.type</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The remote cleanup strategy (capacity|outdated|quantity|stepwise).</entry>
+          </row>
+          <row>
+            <entry>cleanup.*</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>
+              The remote cleanup strategy settings. For example "cleanup.size" if you use "cleanup.type" = "capacity".
+              For details have a look at the corresponding <link linkend="cleanup">Cleanup</link> configurations.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.azureblob.example.xml">
+      <title>azureblob XML example</title>
+      <programlisting><![CDATA[<!-- sync azure blob -->
+<sync type="azureblob">
+  <option name="connection_string" value="DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]"/>
+  <option name="container_name" value="backup"/>
+  <option name="path" value="/some/dir"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.azureblob.example.json">
+      <title>azureblob JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "azureblob",
+  "options": {
+    "connection_string": "DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]",
+    "container_name": "backup",
+    "path": "/some/dir"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="sync.dropbox">
+
+    <indexterm><primary>dropbox</primary></indexterm>
+    <title>Dropbox</title>
+
+    <para>
+      Sync your backup to a Dropbox account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"dropbox/dropbox-sdk": "1.1.*"</literal> in your composer file.
+    </para>
+
+    <table id="sync.tables.options.dropbox">
+      <title>Dropbox-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>token</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              The dropbox authentication token.
+              Go to <ulink url="https://www.dropbox.com/developers/apps">www.dropbox.com/developers/apps</ulink>
+              Create your app
+              Choose:
+              dropbox api app
+              files and datastore
+              yes
+              provide some app name "my-dropbox-app"
+              generate access token to authenticate connection to your dropbox
+            </entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Directory where to store the backup in your dropbox account.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.dropbox.example.xml">
+      <title>Dropbox XML example</title>
+      <programlisting><![CDATA[<!-- sync dropbox -->
+<sync type="dropbox">
+  <option name="token" value="myCrazyLongApiTokenThatIGotFromDropbox"/>
+  <option name="path" value="/some/dir"/>
+</sync>
+</section>]]></programlisting>
+    </example>
+
+    <example id="sync.dropbox.example.json">
+      <title>Dropbox JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "dropbox",
+  "options": {
+    "token": "myCrazyLongApiTokenThatIGotFromDropbox",
+    "path": "/some/dir"
+  }
+}]]></programlisting>
+    </example>
+  </section>
+
+  <section id="sync.googledrive">
+
+    <indexterm><primary>google drive</primary></indexterm>
+    <title>Google Drive</title>
+
+    <para>
+      Sync your backup to a Google Drive account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"google/apiclient":"^2.0"</literal> in your composer file.
+    </para>
+
+    <table id="sync.tables.options.googledrive">
+      <title>Google Drive-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>secret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Google Drive authentication json file.</entry>
+          </row>
+          <row>
+            <entry>access</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Json file containing your access token.</entry>
+          </row>
+          <row>
+            <entry>parentId</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The Google Drive element id where your backups should be stored.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>
+      If you are unsure on how to obtain the secret and access files or the directory ID have a look at
+      <literal><ulink url="https://github.com/sebastianfeldmann/phpbu-google-drive">sebastianfeldmann/phpbu-google-drive</ulink></literal>
+      a utility to generate your access token and to list the files and their IDs from your Google Drive account.
+    </para>
+
+    <example id="sync.googledrive.example.xml">
+      <title>Google Drive XML example</title>
+      <programlisting><![CDATA[<!-- sync dropbox -->
+<sync type="googledrive">
+  <option name="secret" value="config/google/secret.json"/>
+  <option name="access" value="config/google/access.json"/>
+  <option name="parentId" value="bkjnwqr8123njndcqw12r"/>
+</sync>
+</section>]]></programlisting>
+    </example>
+
+    <example id="sync.googledrive.example.json">
+      <title>Google Drive JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "googledrive",
+  "options": {
+    "secret": "config/google/secret.json",
+    "access": "config/google/access.json",
+    "parentId": "bkjnwqr8123njndcqw12r"
+  }
+}]]></programlisting>
+    </example>
+  </section>
+
+  <section id="sync.openstack">
+    <indexterm><primary>openstack</primary></indexterm>
+    <title>OpenStack</title>
+
+    <para>
+      Sync your backup to a provider supporting the OpenStack API.
+    </para>
+
+    <table id="sync.tables.options.openstack">
+      <title>OpenStack-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>auth_url</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote authentication url.</entry>
+          </row>
+          <row>
+            <entry>region</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The OpenStack region.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user name for authentication.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user password.</entry>
+          </row>
+          <row>
+            <entry>container_name</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The name of the container to store the backup.</entry>
+          </row>
+          <row>
+            <entry>service_name</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>swift</entry>
+            <entry>The service to use for the upload.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Remote path to store the backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.openstack.example.xml">
+      <title>OpenStack XML example</title>
+      <programlisting><![CDATA[<!-- sync openstack -->
+<sync type="openstack">
+  <option name="auth_url" value="www.example.com"/>
+  <option name="region" value="my-region"/>
+  <option name="user" value="username"/>
+  <option name="password" value="top-secret"/>
+  <option name="path" value="/some/path"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.openstack.example.json">
+      <title>OpenStack JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "openstack",
+  "options": {
+    "auth_url": "www.example.com",
+    "region": "my-region",
+    "user": "username"
+    "password": "my-secret"
+    "path": "/some/path",
+  }
+}]]></programlisting>
+    </example>
+  </section>
+
+
+  <section id="sync.rsync">
+    <indexterm><primary>rsync</primary></indexterm>
+    <title>Rsync</title>
+
+    <para>
+      Sync your backup via the rsync command.
+    </para>
+
+    <table id="sync.tables.options.rsync">
+      <title>rsync-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where your backups should be synced to.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote host where your backups should be synced to.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>OS-User</entry>
+            <entry>
+              The user to connect to the remote host.
+              Make sure the user is able to connect without entering a password
+              otherwise you get prompted for a password while executing phpbu.
+            </entry>
+          </row>
+          <row>
+            <entry>dirsync</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Sync the target directory instead of syncing only the target file.</entry>
+          </row>
+          <row>
+            <entry>delete</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Add the --delete option to the rsync call, so locally deleted files will be deleted remotely as well.</entry>
+          </row>
+          <row>
+            <entry>exclude</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>List of files to exclude from the sync separated by ":" e.g. "*.suffix:foo.bar".</entry>
+          </row>
+          <row>
+            <entry>args</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>
+              Advanced mode to use completely custom options. "rsync {args}".
+              WARNING: phpbu is not escaping this in any way so use with caution!
+              Use %TARGET_FILE% and %TARGET_DIR% as reference to your created backup.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.rsync.example.xml">
+      <title>rsync XML example</title>
+      <programlisting><![CDATA[<!-- sync rsync -->
+<sync type="rsync">
+  <option name="path" value="/backup/some/path"/>
+  <option name="dirsync" value="true"/>
+  <option name="host" value="backup.example.com"/>
+  <option name="user" value="backup"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.rsync.example.json">
+      <title>rsync JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "rsync",
+  "options": {
+    "path": "/backup/some/path",
+    "dirsync": "true",
+    "host": "backup.example.com",
+    "user": "backup"
+  }
+}]]></programlisting>
+    </example>
+  </section>
+
+
+  <section id="sync.sftp">
+    <title>SFTP / FTP</title>
+
+    <para>
+      Copy your backup to another server via SFTP or FTP.
+    </para>
+
+    <para>
+      If you want to use SFTP and you are not using the PHAR version you have to require
+      <literal>"phpseclib/phpseclib": "2.0.*@dev"</literal> in your composer file.
+      For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
+    </para>
+
+    <para>
+      If you want to use the FTP-Sync your PHP has to be compiled with <literal>--enable-ftp</literal>.
+    </para>
+
+    <table id="sync.tables.options.sftp">
+      <title>(s)ftp-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The host you want do copy your backups to.</entry>
+          </row>
+          <row>
+            <entry>port</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>22</entry>
+            <entry>The port you want do connect to.</entry>
+          </row>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user you want to connect with.</entry>
+          </row>
+          <row>
+            <entry>password</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The password to authenticate the user. If 'key' is provided this will be used as private key password.</entry>
+          </row>
+          <row>
+            <entry>key</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Path to private key file to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where to copy the backup.</entry>
+          </row>
+          <row>
+            <entry>passive</entry>
+            <entry>boolean</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Use passive ftp mode.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.sftp.example.xml">
+      <title>sftp XML example</title>
+      <programlisting><![CDATA[<!-- sync sftp -->
+<sync type="sftp">
+  <option name="host" value="backup.example.com"/>
+  <option name="port" value="22"/>
+  <option name="user" value="user.name"/>
+  <option name="password" value="topsecret"/>
+  <option name="path" value="backup/someName"/>
+  <option name="passive" value="true"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.sftp.example.json">
+      <title>sftp JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "sftp",
+  "options": {
+    "host": "backup.example.com",
+    "port": 22,
+    "user": "user.name",
+    "password": "topsecret",
+    "path": "backup/someName",
+    "passive": "false"
+  }
+}]]></programlisting>
+    </example>
+
+    <para>
+      If you want to use plain FTP just use <literal>ftp</literal> as type, options stay the same.
+    </para>
+
+  </section>
+
+  <section id="sync.softlayer">
+
+    <title>Softlayer Object Storage</title>
+
+    <para>
+      Sync your backup to a Softlayer account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"softlayer/objectstorage": "dev-master"</literal> in your composer file.
+      For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
+    </para>
+
+    <table id="sync.tables.options.softlayer">
+      <title>softlayer-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user you want to connect with.</entry>
+          </row>
+          <row>
+            <entry>secret</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The api key to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The host you want do copy your backups to.</entry>
+          </row>
+          <row>
+            <entry>container</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The Object Storage Container where to put the backup.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where to copy the backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.softlayer.example.xml">
+      <title>softlayer XML example</title>
+      <programlisting><![CDATA[<!-- sync softlayer object storage -->
+<sync type="softlayer">
+  <option name="user" value="user.name"/>
+  <option name="secret" value="topsecret"/>
+  <option name="host" value="some.softlayer.domain.com"/>
+  <option name="container" value="backup"/>
+  <option name="path" value="/backup/someName"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.softlayer.example.json">
+      <title>softlayer JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "softlayer",
+  "options": {
+    "user": "user.name",
+    "secret": "topsecret",
+    "host": "some.softlayer.domain.com",
+    "container": "backup",
+    "path": "/backup/someName"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+
+  <section id="sync.yandex">
+
+    <title>Yandex Disk</title>
+
+    <para>
+      Sync your backup to Yandex account.
+    </para>
+
+    <para>
+      If you are not using the PHAR Version you have to require
+      <literal>"arhitector/yandex": "^2.0"</literal> in your composer file.
+    </para>
+
+    <para>
+      This is what you have to do:
+    </para>
+
+    <orderedlist>
+      <listitem>
+        <para>Go to https://oauth.yandex.ru/client/new</para>
+      </listitem>
+      <listitem>
+        <para>Create your app</para>
+      </listitem>
+      <listitem>
+        <para>Check all disk permissions</para>
+      </listitem>
+      <listitem>
+        <para>Generate access token</para>
+      </listitem>
+      <listitem>
+        <para>Go to https://oauth.yandex.ru/authorize?response_type=token&amp;client_id=APP_ID (replace APP_ID with ID given to you)</para>
+      </listitem>
+      <listitem>
+        <para>Then you should get token parameter from query parameters of opened page</para>
+      </listitem>
+    </orderedlist>
+
+    <table id="sync.tables.options.yandex">
+      <title>softlayer-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>user</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The user you want to connect with.</entry>
+          </row>
+          <row>
+            <entry>token</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>The api token to authenticate the user.</entry>
+          </row>
+          <row>
+            <entry>path</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>The remote path where to put the backup.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="sync.yandex.example.xml">
+      <title>Yandex XML example</title>
+      <programlisting><![CDATA[<!-- sync yandex disk -->
+<sync type="yandex-disk">
+  <option name="token" value="mnahg6-1knl2l2-b1vf4"/>
+  <option name="path" value="/backup/someName"/>
+</sync>]]></programlisting>
+    </example>
+
+    <example id="sync.yandex.example.json">
+      <title>Yandex JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "yandex-disk",
+  "options": {
+    "user": "mnahg6-1knl2l2-b1vf4",
+    "path": "/backup/someName"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+</chapter>

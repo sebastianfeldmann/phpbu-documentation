@@ -30,6 +30,10 @@
           <entry>Backup Elasticsearch with the elasticdump command line tool.</entry>
         </row>
         <row>
+          <entry>influxdump</entry>
+          <entry>Backup Influxdb with the influxd command line tool.</entry>
+        </row>
+        <row>
           <entry>mongodump</entry>
           <entry>Backup MongoDB with the mongodump command line tool.</entry>
         </row>
@@ -258,6 +262,77 @@
   "type": "elasticdump",
   "options": {
     "index": "myIndex"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
+  <section id="source.influxdump">
+
+    <indexterm><primary>InfluxDB</primary></indexterm>
+    <indexterm><primary>influxdump</primary></indexterm>
+
+    <title>InfluxDB - influxdump</title>
+
+    <para>
+      Backup an InfluxDB database with influxdump.
+    </para>
+
+    <table id="source.tables.options.influxdump">
+      <title>influxdump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>localhost:8088</entry>
+            <entry>Hostname and port of your InfluxDB-Server.</entry>
+          </row>
+          <row>
+            <entry>database</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>all</entry>
+            <entry>Name of database you want to backup, all by default.</entry>
+          </row>
+          <row>
+            <entry>pathToInfluxdump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom influxdump executable location.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.influxdump.example.xml">
+      <title>influxdump XML example</title>
+      <programlisting><![CDATA[<!-- source influxdump -->
+<source type="influxdump">
+  <option name="host" value="localhost:8088"/>
+  <option name="database" value="myDatabase"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.influxdump.example.json">
+      <title>influxdump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "influxdump",
+  "options": {
+    "host": "localhost:8088",
+    "database": "myDatabase"
   }
 }]]></programlisting>
     </example>
@@ -1099,5 +1174,6 @@
     </section>
 
   </section>
+
 
 </chapter>
