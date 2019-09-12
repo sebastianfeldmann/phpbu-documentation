@@ -143,7 +143,7 @@ Usage: phpbu [option]
     <caution>
       <title>Warning</title>
       <para>
-        If phpbu has to use any kind of credentials executing a binaries, like for example the
+        If phpbu has to use any kind of credentials executing a binary, like for example the
         <literal>mysqldump</literal> command, this credentials will maybe displayed in the simulation output.
       </para>
     </caution>
