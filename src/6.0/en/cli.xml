@@ -44,6 +44,7 @@ Usage: phpbu [option]
 --colors               Use colors in output.
 --debug                Display debugging information during backup generation.
 --limit=<subset>       Limit backup execution to a subset.
+--restore              Output a guide to restore your backup.
 --simulate             Perform a trial run with no changes made.
 -h, --help             Print this usage information.
 -v, --verbose          Output more verbose information.
@@ -94,6 +95,16 @@ Usage: phpbu [option]
           <para>
             Limit backup execution to a subset.
             See the <link linkend="cli.limit">limit section</link> for details.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>--restore</literal></term>
+        <listitem>
+          <para>
+            Output a guide how to restore your backup.
+            For this to work all your <literal>Sources</literal> and <literal>Crypts</literal> have to implement the <literal>Restorable</literal> interface
           </para>
         </listitem>
       </varlistentry>
