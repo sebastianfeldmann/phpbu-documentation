@@ -179,6 +179,74 @@
 
   </section>
 
+  <section id="logging.telegram">
+    <title>Telegram</title>
+
+    <para>
+      You can log to a Telegram group or contact.
+    </para>
+    <table id="logging.tables.options.telegram">
+      <title>Telegram-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>chat_id</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Telegram chat ID</entry>
+          </row>
+          <row>
+            <entry>bot_id</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Telegram bot ID.</entry>
+          </row>
+          <row>
+            <entry>bot_token</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Telegram bot authentication token.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="logging.telegram.example.xml">
+      <title>Telegram XML example</title>
+      <programlisting><![CDATA[<!-- write to Telegram chat -->
+<log type="telegram">
+  <option name="chat_id" value="YOUR_CHAT_ID"/>
+  <option name="bot_id" value="YOUR_BOT_ID"/>
+  <option name="bot_token" value="YOUR_BOT_TOKEN"/>
+</log>]]></programlisting>
+    </example>
+
+    <example id="logging.telegram.example.json">
+      <title>Telegram JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "telegram",
+  "options": {
+     "chat_id": "YOUR_CHAT_ID",
+     "bot_id": "YOUR_BOT_ID",
+     "bot_token": "YOUR_BOT_TOKEN"
+   }
+}]]></programlisting>
+    </example>
+
+  </section>
+
   <section id="logging.webhook">
 
     <title>Webhook</title>

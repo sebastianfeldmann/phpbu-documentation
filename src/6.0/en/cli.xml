@@ -102,6 +102,16 @@ Usage: phpbu [option]
       </varlistentry>
 
       <varlistentry>
+        <term><literal>--restore</literal></term>
+        <listitem>
+          <para>
+            Output a guide how to restore your backup.
+            For this to work all your <literal>Sources</literal> and <literal>Crypts</literal> have to implement the <literal>Restorable</literal> interface
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
         <term><literal>--simulate</literal></term>
         <listitem>
           <para>
@@ -135,7 +145,7 @@ Usage: phpbu [option]
     <caution>
       <title>Warning</title>
       <para>
-        If phpbu has to use any kind of credentials executing a binaries, like for example the
+        If phpbu has to use any kind of credentials executing a binary, like for example the
         <literal>mysqldump</literal> command, this credentials will maybe displayed in the simulation output.
       </para>
     </caution>

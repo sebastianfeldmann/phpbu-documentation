@@ -550,11 +550,18 @@
             <entry>Use the --single-transaction option to add BEGIN SQL statement before dumping data from server.</entry>
           </row>
           <row>
-            <entry>extendedInsert</entry>
+            <entry>skipExtendedInsert</entry>
             <entry>true | false</entry>
             <entry>no</entry>
             <entry>false</entry>
-            <entry>Use multiple-row INSERT syntax. This results in a smaller dump file and speeds up inserts when the file is reloaded.</entry>
+            <entry>Do not use multiple-row INSERT syntax.</entry>
+          </row>
+          <row>
+            <entry>skipTriggers</entry>
+            <entry>true | false</entry>
+            <entry>no</entry>
+            <entry>false</entry>
+            <entry>Do not execute triggers during backup.</entry>
           </row>
           <row>
             <entry>pathToMysqldump</entry>
