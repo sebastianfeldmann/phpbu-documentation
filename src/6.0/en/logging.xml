@@ -31,9 +31,9 @@
     <title>E-Mail</title>
 
     <para>
-      PHPBU uses SwiftMailer to send backup reports to one or more configured E-Mail-Addresses.
+      PHPBU uses SwiftMailer to send backup reports to one or more configured email addresses.
       If you just want to get notified if something went wrong,
-      you can use the <literal>sendOnlyOnError</literal> option to not send any E-Mail on a successful backup.
+      you can use the <literal>sendOnlyOnError</literal> option to not send any email on a successful backup.
     </para>
 
     <table id="logging.tables.options.email">
@@ -68,21 +68,21 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>PHPBU Backup Report from $HOSTNAME</entry>
-            <entry>E-Mail subject of the backup report.</entry>
+            <entry>Email subject of the backup report.</entry>
           </row>
           <row>
             <entry>transport</entry>
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>SwiftMailer Transport that's used to send the E-Mail (mail, sendmail, smtp, null).</entry>
+            <entry>SwiftMailer Transport that's used to send the email (mail, sendmail, smtp, null).</entry>
           </row>.
           <row>
             <entry>sender.mail</entry>
             <entry>string</entry>
             <entry>phpbu@hostname</entry>
             <entry>-</entry>
-            <entry>The sender E-Mail-Address</entry>
+            <entry>The sender email address</entry>
           </row>
           <row>
             <entry>sender.name</entry>
@@ -159,7 +159,7 @@
 
     <example id="logging.mail.example.xml">
       <title>mail XML example</title>
-      <programlisting><![CDATA[<!-- use mail to keep up to date with you backup creation -->
+      <programlisting><![CDATA[<!-- use mail to keep up to date with your backup creation -->
 <log type="mail">
   <option name="transport" value="mail"/>
   <option name="recipients" value="user.name@example.com"/>
@@ -252,7 +252,7 @@
     <title>Webhook</title>
 
     <para>
-      You can call a webhook and phpbu will send report data to the webhook.
+      You can call a webhook and PHPBU will send report data to the webhook.
     </para>
 
     <table id="logging.tables.options.webhook">
