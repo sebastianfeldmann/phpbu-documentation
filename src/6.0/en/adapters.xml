@@ -9,7 +9,7 @@
   </para>
   <para>
     You can build your own configuration adapter.
-    Want to know how? Have a look at the <link linkend="extending.adapter">extending phpbu section</link>
+    Want to know how? Have a look at the <link linkend="extending.adapter">extending PHPBU section</link>
   </para>
 
   <section id="adapters.env">
@@ -81,7 +81,7 @@
     <indexterm><primary>dotenv</primary></indexterm>
     <title>PHP config adapter "array"</title>
     <para>
-      Adapter to use php array config files.
+      Adapter to use PHP array config files.
     </para>
 
     <example>
