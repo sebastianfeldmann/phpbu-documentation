@@ -9,9 +9,9 @@
     <title>Laravel</title>
 
     <para>
-      The <literal>laravel-phpbu</literal> package integrates <literal>phpbu</literal> into the laravel
+      The <literal>laravel-phpbu</literal> package integrates <literal>phpbu</literal> into the Laravel
       framework so you can use the <literal>artisan</literal> command to execute your backups
-      and a laravel style php configuration to set them up.
+      and a Laravel style PHP configuration to set them up.
     </para>
 
     <bridgehead>Requirements</bridgehead>
@@ -38,7 +38,7 @@
       <title>Installation</title>
 
       <para>
-        Use composer to install the package.
+        Use Composer to install the package.
       </para>
 
       <screen><userinput>composer require "phpbu/phpbu-laravel"</userinput></screen>
@@ -55,7 +55,7 @@
 ];]]></programlisting>
 
       <para>
-        Finally use the laravel <literal>artisan</literal> command
+        Finally use the Laravel <literal>artisan</literal> command
         to create a configuration skeleton by publishing the package.
       </para>
 
@@ -91,11 +91,11 @@
       </para>
 
       <para>
-        While the phpbu configuration files give you full access to all features of phpbu
-        the laravel configuration file currently does not support all features of phpbu f.e. encryption.
+        While the PHPBU configuration files give you full access to all features of PHPBU
+        the Laravel configuration file currently does not support all features of PHPBU, for example: encryption.
       </para>
 
-      <bridgehead>Using the laravel configuration</bridgehead>
+      <bridgehead>Using the Laravel configuration</bridgehead>
 
       <para>
         The main concept of configuring backups stays the same. A backup consists of a source and a target.
@@ -105,7 +105,7 @@
       </para>
 
       <para>
-        In the laravel configuration file you can specify two types of backups,
+        In the Laravel configuration file you can specify two types of backups,
         <literal>directories</literal> and <literal>databases</literal> (MySQL, PostgreSQL).
       </para>
 
@@ -132,15 +132,15 @@
       <bridgehead>Databases</bridgehead>
 
       <para>
-        Just define the laravel database connection configured in your <literal>databases.php</literal> configuration
-        you want to backup and you are done. You can overwrite every setting defined with the specific option f.e.
+        Just define the Laravel database connection configured in your <literal>databases.php</literal> configuration
+        you want to backup and you are done. You can overwrite every setting defined with the specific option, for example
         <literal>username</literal> or <literal>password</literal> in case you have to use different credentials to
         backup your database.
       </para>
 
       <para>
         You can use every option the <link linkend="source.mysqldump">mysqldump</link> source supports
-        f.e. to exclude some tables.
+        for example to exclude some tables.
         Just use the <emphasis>option-name</emphasis> as index and the <emphasis>option-value</emphasis> as value.
       </para>
 
@@ -187,14 +187,14 @@
       </para>
 
       <para>
-        To sync your backups you can use every filesystem defined in your laravel <literal>filesystems.php</literal>
+        To sync your backups you can use every filesystem defined in your Laravel <literal>filesystems.php</literal>
         configuration file.
       </para>
 
-      <bridgehead>Using a phpbu configuration file</bridgehead>
+      <bridgehead>Using a PHPBU configuration file</bridgehead>
 
       <para>
-        If you want to use a phpbu configuration file your laravel phpbu.php
+        If you want to use a PHPBU configuration file your Laravel phpbu.php
         configuration should look something like this.
       </para>
 
@@ -217,8 +217,8 @@ return [
       </para>
 
       <para>
-        Remember that all paths in a phpbu configuration have to to absolute
-        or relative to the specified phpbu configuration file.
+        Remember that all paths in a PHPBU configuration have to be absolute
+        or relative to the specified PHPBU configuration file.
       </para>
 
 

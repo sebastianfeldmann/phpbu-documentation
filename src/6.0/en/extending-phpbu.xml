@@ -31,7 +31,7 @@
   </example>
 
   <para>
-    For this to work your class Acme\MySource hast to implement
+    For this to work your class Acme\MySource has to implement
     the <literal>phpbu\App\Backup\Source</literal> Interface.
     After registering your Source you can use <literal>mysource</literal> as source-type
     within your XML or JSON configuration like this.
@@ -49,8 +49,8 @@
 
   <para>
     If the alias is already taken this will throw an Exception.
-    You can force phpbu to overwrite any previously registered class using the $force Parameter.
-    Even the phpbu sources could be replaced with custom implementations.
+    You can force PHPBU to overwrite any previously registered class using the $force parameter.
+    Even the PHPBU sources could be replaced with custom implementations.
   </para>
 
   <example>
@@ -67,13 +67,13 @@ phpbu\App\Factory::register('source', 'mysqldump', '\\Acme\\MyMysqldump', true);
     <title>Executing and simulating</title>
 
     <para>
-      If you are extending phpbu you have two options. The first is to simply implement the execution interface. This way
+      If you are extending PHPBU you have two options. The first is to simply implement the execution interface. This way
       you can execute your own Source, Check, Crypt, Sync or Cleanup tasks. The second option is to implement the
       respective <literal>Simulator</literal> interface. Choosing this option you not only have to implement the execution
       part but rather implement a simulation part as well.
     </para>
     <para>
-      Simulation is supported out of the box for every implementation, but choosing option two enables you to add
+      Simulation is supported out of the box for every implementation, but choosing option two allows you to add
       viable information about the actions you perform in your code within a simulation run.
     </para>
 

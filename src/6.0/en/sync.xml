@@ -5,7 +5,7 @@
   <title>Sync Backups</title>
 
   <para>
-    It's a best practice to NOT store your backups locally, or at least not only storing them locally.
+    It's considered best practice to NOT store your backups locally, or at least not only storing them locally.
     With PHPBU <literal>Sync</literal> adapters you can copy your backups to different locations.
   </para>
 
@@ -19,7 +19,7 @@
   </caution>
 
   <para>
-    PHPBU supports cleaning up you locally stored backups by configuring a <link linkend="cleanup">Cleanup</link>.
+    PHPBU supports cleaning up your locally stored backups by configuring a <link linkend="cleanup">Cleanup</link>.
     Note that <literal>Cleanup</literal> configurations do not affect remote files synced with <literal>Sync</literal> configurations.
   </para>
   <para>
@@ -41,7 +41,7 @@
       <tbody>
         <row>
           <entry>amazon</entry>
-          <entry>Sync your backup to your <ulink url="https://aws.amazon.com">Amazon S3</ulink> account.</entry>
+          <entry>Sync your backup to your <ulink url="https://aws.amazon.com/s3/">Amazon S3</ulink> account.</entry>
           <entry>yes</entry>
         </row>
         <row>
@@ -93,11 +93,11 @@
     <title>Amazon S3</title>
 
     <para>
-      Sync your backup to an amazon S3 account.
+      Sync your backup to an Amazon S3 account.
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require <literal>"aws/aws-sdk-php": "^3.10"</literal> in your composer file.
+      If you are not using the PHAR version you have to require <literal>"aws/aws-sdk-php": "^3.10"</literal> in your Composer file.
     </para>
 
     <table id="sync.tables.options.amazon">
@@ -118,21 +118,21 @@
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>The amazon s3 key.</entry>
+            <entry>The Amazon S3 key.</entry>
           </row>
           <row>
             <entry>secret</entry>
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>The amazon S3 secret.</entry>
+            <entry>The Amazon S3 secret.</entry>
           </row>
           <row>
             <entry>bucket</entry>
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>A bucket where to store the backup.</entry>
+            <entry>The bucket name where the backup is stored.</entry>
           </row>
           <row>
             <entry>region</entry>
@@ -214,7 +214,7 @@
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require <literal>"microsoft/azure-storage-blob": "~1.4"</literal> in your composer file.
+      If you are not using the PHAR version you have to require <literal>"microsoft/azure-storage-blob": "~1.4"</literal> in your Composer file.
     </para>
 
     <table id="sync.tables.options.azureblob">
@@ -306,8 +306,8 @@
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require
-      <literal>"dropbox/dropbox-sdk": "1.1.*"</literal> in your composer file.
+      If you are not using the PHAR version you have to require
+      <literal>"dropbox/dropbox-sdk": "1.1.*"</literal> in your Composer file.
     </para>
 
     <table id="sync.tables.options.dropbox">
@@ -329,7 +329,7 @@
             <entry>yes</entry>
             <entry>-</entry>
             <entry>
-              The dropbox authentication token.
+              The Dropbox authentication token.
               Go to <ulink url="https://www.dropbox.com/developers/apps">www.dropbox.com/developers/apps</ulink>
               Create your app
               Choose:
@@ -345,7 +345,7 @@
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>Directory where to store the backup in your dropbox account.</entry>
+            <entry>Directory where to store the backup in your Dropbox account.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -383,8 +383,8 @@
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require
-      <literal>"google/apiclient":"^2.0"</literal> in your composer file.
+      If you are not using the PHAR version you have to require
+      <literal>"google/apiclient":"^2.0"</literal> in your Composer file.
     </para>
 
     <table id="sync.tables.options.googledrive">
@@ -674,12 +674,12 @@
 
     <para>
       If you want to use SFTP and you are not using the PHAR version you have to require
-      <literal>"phpseclib/phpseclib": "2.0.*@dev"</literal> in your composer file.
+      <literal>"phpseclib/phpseclib": "2.0.*@dev"</literal> in your Composer file.
       For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
     </para>
 
     <para>
-      If you want to use the FTP-Sync your PHP has to be compiled with <literal>--enable-ftp</literal>.
+      If you want to use the FTP sync your PHP has to be compiled with <literal>--enable-ftp</literal>.
     </para>
 
     <table id="sync.tables.options.sftp">
@@ -700,14 +700,14 @@
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>The host you want do copy your backups to.</entry>
+            <entry>The host you want to copy your backups to.</entry>
           </row>
           <row>
             <entry>port</entry>
             <entry>integer</entry>
             <entry>no</entry>
             <entry>22</entry>
-            <entry>The port you want do connect to.</entry>
+            <entry>The port you want to connect to.</entry>
           </row>
           <row>
             <entry>user</entry>
@@ -742,7 +742,7 @@
             <entry>boolean</entry>
             <entry>no</entry>
             <entry>false</entry>
-            <entry>Use passive ftp mode.</entry>
+            <entry>Use passive FTP mode.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -791,8 +791,8 @@
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require
-      <literal>"softlayer/objectstorage": "dev-master"</literal> in your composer file.
+      If you are not using the PHAR version you have to require
+      <literal>"softlayer/objectstorage": "dev-master"</literal> in your Composer file.
       For this to work you have to set the <literal>minimum-stability</literal> to <literal>dev</literal>.
     </para>
 
@@ -821,21 +821,21 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>The api key to authenticate the user.</entry>
+            <entry>The API key to authenticate the user.</entry>
           </row>
           <row>
             <entry>host</entry>
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>The host you want do copy your backups to.</entry>
+            <entry>The host you want to copy your backups to.</entry>
           </row>
           <row>
             <entry>container</entry>
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>The Object Storage Container where to put the backup.</entry>
+            <entry>The Object Storage Container where the backup is stored.</entry>
           </row>
           <row>
             <entry>path</entry>
@@ -886,8 +886,8 @@
     </para>
 
     <para>
-      If you are not using the PHAR Version you have to require
-      <literal>"arhitector/yandex": "^2.0"</literal> in your composer file.
+      If you are not using the PHAR version you have to require
+      <literal>"arhitector/yandex": "^2.0"</literal> in your Composer file.
     </para>
 
     <para>
@@ -940,7 +940,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>The api token to authenticate the user.</entry>
+            <entry>The API token to authenticate the user.</entry>
           </row>
           <row>
             <entry>path</entry>
