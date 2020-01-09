@@ -12,12 +12,12 @@
 
     <para>
         If you want to remove your synced backups as well, and you are not using the
-        <link linkend="sync.rsync">Rsync</link> sync with it's <literal>delete</literal> option.
-      Have a look at the <link linkend="cleanup.remote">remote cleanup section</link>
+        <link linkend="sync.rsync">Rsync</link> sync with its <literal>delete</literal> option.
+      Have a look at the <link linkend="cleanup.remote">remote cleanup section</link>.
     </para>
 
   <table id="cleanup.tables.available-cleanups">
-    <title>Supported types of cleanups:</title>
+    <title>Supported types of cleanup:</title>
     <tgroup cols="2" align="left" colsep="1" rowsep="1">
       <thead>
         <row>
@@ -38,7 +38,7 @@
           <entry>Outdated</entry>
           <entry>
             Remove backups older than a configured time-value.
-            For example "2W" to delete all backup older than two weeks.
+            For example "2W" to delete all backups older than two weeks.
           </entry>
         </row>
         <row>
@@ -50,7 +50,7 @@
           <entry>
             Keep different amount of backups for different periods of time.
             For example keep all backups you made for the last 3 days, keep one for each week for the last 4 weeks,
-            keep one for each month for the last 6 month and one for every year for at least 3 years.
+            keep one for each month for the last 6 months and one for each year for at least 3 years.
           </entry>
         </row>
       </tbody>
