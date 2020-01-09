@@ -5,7 +5,7 @@
   <title>The Command-Line-Runner</title>
 
   <para>
-    If you have a configuration file named <literal>phpbu.xml</literal> in your current working directory you can execute phpbu like this
+    If you have a configuration file named <literal>phpbu.xml</literal> in your current working directory you can execute PHPBU like this
   </para>
 
   <screen>~$ <userinput>phpbu</userinput>
@@ -18,7 +18,7 @@ OK (1 backup, 0 checks, 0 encryption, 0 syncs, 0 cleanups)</screen>
   </para>
 
   <screen>~$ <userinput>phpbu --configuration=MyConfig.xml</userinput>
-phpbu 6.0.0 by Sebastian Feldmann abd Contributors.
+phpbu 6.0.0 by Sebastian Feldmann and Contributors.
 
 OK (1 backup, 0 checks, 0 encryption, 0 syncs, 0 cleanups)</screen>
 
@@ -40,17 +40,17 @@ OK (1 backup, 0 checks, 0 encryption, 0 syncs, 0 cleanups)</screen>
 Usage: phpbu [option]
 
 --bootstrap=<file>       A "bootstrap" PHP file that is included before the backup.
---configuration=<file>   A phpbu configuration file.
+--configuration=<file>   A PHPBU configuration file.
 --colors                 Use colors in output.
 --debug                  Display debugging information during backup generation.
 --generate-configuration Create a new configuration skeleton.
 --limit=<subset>         Limit backup execution to a subset.
---simulate               Perform a trial run with no changes made.
+--simulate               Perform a simulation run with no changes made.
 -h, --help               Print this usage information.
 -v, --verbose            Output more verbose information.
 -V, --version            Output version information and exit.
---version-check          Check whether phpbu is up to date.
---self-update            Upgrade phpbu to the latest version.]]></screen>
+--version-check          Check whether PHPBU is up to date.
+--self-update            Upgrade PHPBU to the latest version.]]></screen>
 
     <variablelist>
 
@@ -115,7 +115,7 @@ Usage: phpbu [option]
         <term><literal>--simulate</literal></term>
         <listitem>
           <para>
-            Execute phpbu without actually executing any backup, check, encryption, sync or cleanup task.
+            Execute PHPBU without actually executing any backup, check, encryption, sync or cleanup task.
             See the <link linkend="cli.simulation">simulation section</link> for details.
           </para>
         </listitem>
@@ -133,9 +133,9 @@ Usage: phpbu [option]
     <title>Simulation</title>
 
     <para>
-      In order to check what actions phpbu would perform, phpbu supports a simulation mode where no backup is actually created and no
-      sync and cleanup tasks are executed. In simulation mode, phpbu will show you, what it would have done, if it would
-      not have been a simulation run. You will get detailed output, which enables you to track every action phpbu
+      In order to check what actions PHPBU would perform, PHPBU supports a simulation mode where no backup is actually created and no
+      sync and cleanup tasks are executed. In simulation mode, PHPBU will show you, what it would have done, if it would
+      not have been a simulation run. You will get detailed output, which enables you to track every action PHPBU
       would have performed.
     </para>
     <para>
@@ -145,12 +145,12 @@ Usage: phpbu [option]
     <caution>
       <title>Warning</title>
       <para>
-        If phpbu has to use any kind of credentials executing a binary, like for example the
-        <literal>mysqldump</literal> command, this credentials will maybe displayed in the simulation output.
+        If PHPBU has to use any kind of credentials executing a binary, like for example the
+        <literal>mysqldump</literal> command, these credentials will be displayed in the simulation output.
       </para>
     </caution>
     <para>
-      If you are extending phpbu, you can support simulation as well. You can find detailed information on this
+      If you are extending PHPBU, you can support simulation as well. You can find detailed information on this
       in <xref linkend="extending-phpbu"/>.
     </para>
   </section>
@@ -172,7 +172,7 @@ Usage: phpbu [option]
     <caution>
       <title>Warning</title>
       <para>
-        If you don't define explicit backup names, phpbu will use the source type as backup name as fallback.
+        If you don't define explicit backup names, PHPBU will use the source type as backup name as fallback.
       </para>
     </caution>
   </section>
