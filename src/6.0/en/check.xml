@@ -7,7 +7,7 @@
   <title>Backup Validation</title>
 
   <para>
-    You can validate your backup after creation with some simple Checks.
+    You can validate your backup after creation with some simple checks.
   </para>
 
   <table id="check.tables.available-checks">
@@ -22,11 +22,11 @@
       <tbody>
         <row>
           <entry>SizeMin</entry>
-          <entry>Checks if the backups is at least as big as the configured size.</entry>
+          <entry>Checks if your backup is at least as big as the configured size.</entry>
         </row>
         <row>
           <entry>SizeDiffPreviousPercent</entry>
-          <entry>Checks if your backup doesn't differ more then a configured value from the previous backup.</entry>
+          <entry>Checks if your backup differs more than a configured value from the previous backup.</entry>
         </row>
       </tbody>
     </tgroup>
