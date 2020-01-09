@@ -6,7 +6,7 @@
   <title>Backup Sources</title>
 
   <para>
-    You can configure multiple Backups in one configuration file.
+    You can configure multiple backups in one configuration file.
     Each backup is represented by a <literal><![CDATA[<backup>]]></literal> Tag.
     To configure the data that is stored use the <literal><![CDATA[<source>]]></literal> Tag.
   </para>
@@ -43,7 +43,7 @@
         </row>
         <row>
           <entry>pgdump</entry>
-          <entry>Backup PostgresSQL with the pg_dump command line tool.</entry>
+          <entry>Backup PostgreSQL with the pg_dump command line tool.</entry>
         </row>
         <row>
           <entry>redis</entry>
@@ -59,7 +59,7 @@
         </row>
         <row>
           <entry>xtrabackup</entry>
-          <entry>Backup MySQL with the percona xtrabackup command line tool.</entry>
+          <entry>Backup MySQL with the Percona xtrabackup command line tool.</entry>
         </row>
       </tbody>
     </tgroup>
@@ -610,7 +610,7 @@
     <title>MySQL - xtrabackup</title>
 
     <para>
-      Backup a MySQL database with percona xtrabackup.
+      Backup a MySQL database with Percona xtrabackup.
     </para>
 
     <table id="source.tables.options.xtrabackup">
@@ -704,7 +704,7 @@
 
     <title>pgdump</title>
 
-    <para>Backup PostgresSQL databases using the pg_dump command line tool.</para>
+    <para>Backup PostgreSQL databases using the pg_dump command line tool.</para>
 
     <table id="source.pgdump.options">
       <title>pgdump-Options</title>
@@ -731,7 +731,7 @@
             <entry>integer</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Port to use to connect to the PostgresSQL server.</entry>
+            <entry>Port to use to connect to the PostgreSQL server.</entry>
           </row>
           <row>
             <entry>user</entry>
@@ -872,7 +872,7 @@
     <title>redis</title>
 
     <para>
-      Backup redis data structure store using redis-cli.
+      Backup Redis data structure store using redis-cli.
     </para>
 
     <table id="source.tables.options.redis">
@@ -893,7 +893,7 @@
             <entry>string</entry>
             <entry>yes</entry>
             <entry>-</entry>
-            <entry>Path to the redis data .rdb file.</entry>
+            <entry>Path to the Redis data .rdb file.</entry>
           </row>
           <row>
             <entry>port</entry>
@@ -995,7 +995,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>false</entry>
-            <entry>Keep the directory instead of archiving it at every phpbu execution.</entry>
+            <entry>Keep the directory instead of archiving it at every PHPBU execution.</entry>
           </row>
           <row>
             <entry>pathToRsync</entry>
@@ -1154,7 +1154,7 @@
       <title>IO Throttling</title>
       <para>
         If you are experiencing high CPU load during your backups with <emphasis>tar</emphasis>
-        you can throttle the IO to take load of your CPU
+        you can throttle the IO to reduce CPU load.
       </para>
 
       <example id="source.tar.example.xml.throttle">
@@ -1172,10 +1172,10 @@
       </para>
       <para>
         This is done via the CLI tool <emphasis>pv</emphasis>. To use this feature you must have <emphasis>pv</emphasis>
-        installed on your server. If you are using phpbu on Windows, this feature is not available.
+        installed on your server. If you are using PHPBU on Windows, this feature is not available.
       </para>
       <para>
-        For more information on <emphasis>pv</emphasis> have a look <ulink url="https://packages.debian.org/de/stable/pv">here</ulink>
+        For more information on <emphasis>pv</emphasis> have a look <ulink url="https://packages.debian.org/en/stable/pv">here</ulink>
       </para>
 
     </section>
