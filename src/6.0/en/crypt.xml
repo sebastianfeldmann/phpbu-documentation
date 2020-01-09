@@ -151,7 +151,7 @@
             <entry>boolean</entry>
             <entry>no</entry>
             <entry>false</entry>
-            <entry>Don't remove the uncrypted backup.</entry>
+            <entry>Don't remove the unencrypted backup.</entry>
           </row>
           <row>
             <entry>pathToOpenSSL</entry>
