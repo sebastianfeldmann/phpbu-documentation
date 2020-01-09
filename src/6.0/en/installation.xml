@@ -31,7 +31,7 @@
 
     <para>
       The easiest way to install PHPBU is to download a <ulink
-      url="http://php.net/phar">PHP Archive (PHAR)</ulink> that has all required
+      url="http://php.net/phar">PHP Archive (PHAR)</ulink> that has all the required
       dependencies of PHPBU bundled in a single file.
     </para>
 
