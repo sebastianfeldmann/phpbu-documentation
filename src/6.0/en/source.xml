@@ -34,6 +34,10 @@
           <entry>Backup Influxdb with the influxd command line tool.</entry>
         </row>
         <row>
+          <entry>ldapdump</entry>
+          <entry>Backup LDAP data with the ldapdump command line tool.</entry>
+        </row>
+        <row>
           <entry>mongodump</entry>
           <entry>Backup MongoDB with the mongodump command line tool.</entry>
         </row>
@@ -339,6 +343,98 @@
 
   </section>
 
+  <section id="source.ldapdump">
+
+    <indexterm><primary>ldapdump</primary></indexterm>
+    <indexterm><primary>ldapdump</primary></indexterm>
+
+    <title>LDAP - ldapdump</title>
+
+    <para>
+      Backup you LDAP data with ldapdump.
+    </para>
+
+    <table id="source.tables.options.ldapdump">
+      <title>ldapdump-Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>host</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>localhost</entry>
+            <entry>Hostname of you LDAP server.</entry>
+          </row>
+          <row>
+            <entry>port</entry>
+            <entry>int</entry>
+            <entry>no</entry>
+            <entry>all</entry>
+            <entry>Port to connect to your LDAP server.</entry>
+          </row>
+          <row>
+            <entry>searchBase</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>LDAP search base.</entry>
+          </row>
+          <row>
+            <entry>filter</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>LDAP search filter.</entry>
+          </row>
+          <row>
+            <entry>attrs</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>LDAP search attributes.</entry>
+          </row>
+          <row>
+            <entry>pathToLdapdump</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Custom path to ldapdump binary.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <example id="source.ldapdump.example.xml">
+      <title>influxdump XML example</title>
+      <programlisting><![CDATA[<!-- source ldapdump -->
+<source type="ldapdump">
+  <option name="host" value="localhost"/>
+  <option name="searchBase" value="ou=Users,dc=fr"/>
+</source>]]></programlisting>
+    </example>
+
+    <example id="source.ldapdump.example.json">
+      <title>influxdump JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "ldapdump",
+  "options": {
+    "host": "localhost",
+    "searchBase": "ou=Users,dc=fr"
+  }
+}]]></programlisting>
+    </example>
+
+  </section>
+
   <section id="source.mongodump">
 
     <indexterm><primary>MongoDB</primary></indexterm>
@@ -548,6 +644,13 @@
             <entry>no</entry>
             <entry>null</entry>
             <entry>Use the --single-transaction option to add BEGIN SQL statement before dumping data from server.</entry>
+          </row>
+          <row>
+            <entry>sslCa</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry></entry>
+            <entry>Path to your ssl-ca file.</entry>
           </row>
           <row>
             <entry>skipExtendedInsert</entry>
