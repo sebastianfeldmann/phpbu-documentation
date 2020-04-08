@@ -629,7 +629,7 @@
             <entry>true | false</entry>
             <entry>no</entry>
             <entry>false</entry>
-            <entry>Use the --hex-blob option to dump blog fields in hex.</entry>
+            <entry>Use the --hex-blob option to dump blob fields in hex.</entry>
           </row>
           <row>
             <entry>lockTables</entry>
