@@ -219,7 +219,7 @@
       <programlisting><![CDATA[{
   "type": "quantity",
   "options": {
-    "amount": "20"
+    "amount": 20
   }
 }]]></programlisting>
     </example>
@@ -315,11 +315,11 @@ backups | ............| . . . . . . . . . | .       .       .     | .           
       <programlisting><![CDATA[{
   "type": "stepwise",
   "options": {
-    "daysToKeepAll": "2",
-    "daysToKeepDaily": "5",
-    "weeksToKeepWeekly": "3",
-    "monthToKeepMonthly": "4",
-    "yearsToKeepYearly": "10"
+    "daysToKeepAll": 2,
+    "daysToKeepDaily": 5,
+    "weeksToKeepWeekly": 3,
+    "monthToKeepMonthly": 4,
+    "yearsToKeepYearly": 10
   }
 }]]></programlisting>
     </example>
@@ -361,7 +361,7 @@ backups | ............| . . . . . . . . . | .       .       .     | .           
     "token": "mysecrettoken",
     "path": "/backups",
     "cleanup.type": "quantity",
-    "cleanup.amount": "10"
+    "cleanup.amount": 10
   }
 }]]></programlisting>
     </example>
