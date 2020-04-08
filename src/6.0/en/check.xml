@@ -74,7 +74,7 @@
       <title>SizeDiffPreviousPercent JSON example</title>
 
       <programlisting><![CDATA[
-{"type": "SizeDiffPreviousPercent", "value": "10"}]]></programlisting>
+{"type": "SizeDiffPreviousPercent", "value": 10}]]></programlisting>
 
     </example>
 
