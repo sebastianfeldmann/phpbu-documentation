@@ -310,6 +310,13 @@
             <entry>-</entry>
             <entry>A template to use for the request body For example if you want to you xml over json.</entry>
           </row>
+          <row>
+            <entry>timeout</entry>
+            <entry>integer</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>How long until the request times out (seconds)</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
