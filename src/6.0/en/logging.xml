@@ -327,8 +327,7 @@
       <programlisting><![CDATA[{
   "type": "webhook",
   "options": {
-     "transport": "uri",
-     "recipients": "http://example.com/hook"
+     "uri": "http://example.com/hook"
    }
 }]]></programlisting>
     </example>
