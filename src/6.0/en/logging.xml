@@ -408,4 +408,54 @@
     </example>
 
   </section>
+
+  <section id="logging.prometheus">
+
+    <title>Prometheus</title>
+
+    <para>
+      You can create a file containing meta data which can be consumed by  <link href="https://prometheus.io/">Prometheus</link>.
+    </para>
+
+    <example id="logging.prometheus.example.xml">
+      <title>Prometheus XML example</title>
+      <programlisting><![CDATA[<!-- call prometheus -->
+<log type="prometheus">
+  <option name="target" value="backup/log.prom"/>
+</log>]]></programlisting>
+    </example>
+
+    <example id="logging.prometheus.example.json">
+      <title>Prometheus JSON example</title>
+      <programlisting><![CDATA[{
+  "type": "prometheus",
+  "target": "backup/log.prom"
+}]]></programlisting>
+    </example>
+
+    <example id="logging.prometheus.example.output">
+      <title>Example output</title>
+      <programlisting><![CDATA[# HELP phpbu_backup_success Whether or not the backup succeeded
+# TYPE phpbu_backup_success gauge
+phpbu_backup_success{name="backupName0"} 1
+phpbu_backup_success{name="backupName1"} 0
+
+# HELP phpbu_backup_duration The total time the backup took to execute
+# TYPE phpbu_backup_duration gauge
+phpbu_backup_duration{name="backupName0} 10.14783922
+phpbu_backup_duration{name="backupName1} 166.72893933
+
+# HELP phpbu_backup_last_run The unix timestamp of the last run
+# TYPE phpbu_backup_last_run counter
+phpbu_backup_last_run{name="backupName0} 1586983854
+phpbu_backup_last_run{name="backupName1} 1586985773
+
+# HELP phpbu_backup_size The size of the last successful backup
+# TYPE phpbu_backup_size gauge
+phpbu_backup_size{name="backupName0} 92474832
+phpbu_backup_size{name="backupName1} 374893
+]]></programlisting>
+    </example>
+
+  </section>
 </chapter>
