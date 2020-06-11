@@ -1176,6 +1176,20 @@
             <entry>Ignore changing source directory.</entry>
           </row>
           <row>
+            <entry>incrementalFile</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Incremental cache file.</entry>
+          </row>
+          <row>
+            <entry>forceLevelZeroOn</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>Force a level zero backup at specific times.</entry>
+          </row>
+          <row>
             <entry>compressProgram</entry>
             <entry>string</entry>
             <entry>no</entry>
@@ -1224,6 +1238,50 @@
   }
 }]]></programlisting>
     </example>
+
+    <section id="source.tar.incremental">
+      <title>Incremental backups</title>
+      <para>
+        Doing incremental backups with <emphasis>tar</emphasis> is also supported.
+        To activate incremental backups you have to specify a cache file where tar can store state information.
+        Tar will then only do incremental backups unless told otherwise. You can force full
+        backups (level zero backups) by removing the cache file manually or by using the
+        <emphasis>forceLevelZeroOn</emphasis> option. In the following example incremental backups are activated by
+        storing the backup state in a <emphasis>metadata.snar</emphasis> file and <literal>phpbu</literal> will
+        force a level zero backup every Sunday and Wednesday. The backups on Monday, Tuesday, Thursday, Friday and
+        Saturday will only contain the changes to the day before. To for example restore a Saturday backup
+        you will need the backups from Wednesday, Thursday, Friday and Saturday.
+      </para>
+      <para>
+        Please configure your cleanup strategies accordingly to not use any data.
+      </para>
+
+      <example id="source.tar.incremental">
+        <title>tar XML example</title>
+        <programlisting><![CDATA[<!-- source tar -->
+<source type="tar">
+  <option name="path" value="htdocs/uploads"/>
+  <option name="incrementalFile" value="path/to/metadata.snar" />
+  <option name="forceLevelZeroOn" value="%D@Sun|Wed" />
+</source>]]></programlisting>
+      </example>
+
+      <varlistentry>
+        <term>forceLevelZeroOn</term>
+        <listitem>
+          <para>
+            <literal>date mask</literal> @ <literal>value</literal> [<literal>|value</literal>]
+          </para>
+          <para>
+            <literal>%D</literal> @ <literal>Sun|Web</literal> - Level zero backups on Sunday, and Wednesday
+          </para>
+          <para>
+            <literal>%H</literal> @ <literal>3|15</literal> - Level zero backups at 3am, and 15pm
+          </para>
+        </listitem>
+      </varlistentry>
+
+    </section>
 
     <section id="source.tar.exclude">
       <title>Exclude files or directories</title>
