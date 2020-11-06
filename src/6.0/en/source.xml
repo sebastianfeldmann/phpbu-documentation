@@ -1256,7 +1256,7 @@
         Please configure your cleanup strategies accordingly to not use any data.
       </para>
 
-      <example id="source.tar.incremental">
+      <example id="source.tar.incremental.incremental">
         <title>tar XML example</title>
         <programlisting><![CDATA[<!-- source tar -->
 <source type="tar">

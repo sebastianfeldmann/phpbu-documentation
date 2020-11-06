@@ -79,13 +79,13 @@
 
   <section id="adapters.array">
     <indexterm><primary>dotenv</primary></indexterm>
-    <title>PHP config adapter "array"</title>
+    <title>PHP array adapter</title>
     <para>
       Adapter to use PHP array config files.
     </para>
 
     <example>
-      <title>Example PHP config file</title>
+      <title>Example PHP array config file</title>
       <programlisting><![CDATA[
 <?php return ['foo' => ['bar' => 'baz']];
 ]]></programlisting>
@@ -124,6 +124,101 @@
       <title>Adapter reference</title>
       <programlisting><![CDATA[
   <option name="password" value="adapter:myName:foo.bar" />
+]]></programlisting>
+    </example>
+  </section>
+
+  <section id="adapters.constant">
+    <indexterm><primary>constant</primary></indexterm>
+    <title>PHP constant adapter</title>
+    <para>
+      Adapter to use PHP constant config files.
+    </para>
+
+    <example>
+      <title>Example PHP constant config file</title>
+      <programlisting><![CDATA[
+<?php define('DB_NAME', 'foo');
+]]></programlisting>
+    </example>
+
+    <table id="adapters.constant.tables.options">
+      <title>Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>file</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to the php config file</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <example>
+      <title>Adapter definition</title>
+      <programlisting><![CDATA[
+  <adapter type="constant" name="myName">
+    <option name="file" value="my-config-dir/config.php" />
+  </adapter>
+]]></programlisting>
+    </example>
+    <example>
+      <title>Adapter reference</title>
+      <programlisting><![CDATA[
+  <option name="password" value="adapter:myName:DB_NAME" />
+]]></programlisting>
+    </example>
+  </section>
+
+  <section id="adapters.wordpress">
+    <indexterm><primary>wordpress</primary></indexterm>
+    <title>Wordpress config adapter</title>
+    <para>
+      Adapter to use wordpress config files.
+    </para>
+
+    <table id="adapters.wordpress.tables.options">
+      <title>Options</title>
+      <tgroup cols="5" align="left" colsep="1" rowsep="1">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Required</entry>
+            <entry>Default</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>file</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>Path to the wordpress config file</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <example>
+      <title>Adapter definition</title>
+      <programlisting><![CDATA[
+  <adapter type="wordpress" name="wp">
+    <option name="file" value="wordpress/wp-config.php" />
+  </adapter>
+]]></programlisting>
+    </example>
+    <example>
+      <title>Adapter reference</title>
+      <programlisting><![CDATA[
+  <option name="password" value="adapter:wp:DB_NAME" />
 ]]></programlisting>
     </example>
   </section>
