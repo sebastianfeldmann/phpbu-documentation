@@ -837,6 +837,13 @@
             <entry>Port to use to connect to the PostgreSQL server.</entry>
           </row>
           <row>
+            <entry>sslMode</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>-</entry>
+            <entry>SSL_MODE to use.</entry>
+          </row>
+          <row>
             <entry>user</entry>
             <entry>string</entry>
             <entry>no</entry>
