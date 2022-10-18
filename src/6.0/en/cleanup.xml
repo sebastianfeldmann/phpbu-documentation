@@ -38,7 +38,7 @@
           <entry>Outdated</entry>
           <entry>
             Remove backups older than a configured time-value.
-            For example "2W" to delete all backups older than two weeks.
+            For example, "2W" to delete all backups older than two weeks.
           </entry>
         </row>
         <row>
@@ -48,8 +48,8 @@
         <row>
           <entry>Stepwise</entry>
           <entry>
-            Keep different amount of backups for different periods of time.
-            For example keep all backups you made for the last 3 days, keep one for each week for the last 4 weeks,
+            Keep different number of backups for different periods of time.
+            For example, keep all backups you made for the last 3 days, keep one for each week for the last 4 weeks,
             keep one for each month for the last 6 months and one for each year for at least 3 years.
           </entry>
         </row>
@@ -241,7 +241,7 @@
 backups | ............| . . . . . . . . . | .       .       .     | .                . | ]]></programlisting>
 
     <para>
-      So if you start to backup now your amount of backups will grow for the configured years to keep at least one backup.
+      So, if you start to backup now your amount of backups will grow for the configured years to keep at least one backup.
       But by then the amount of your backups will be constantly the same.
     </para>
 
@@ -337,7 +337,7 @@ backups | ............| . . . . . . . . . | .       .       .     | .           
     <para>
       Remote cleanups are configured within your <link linkend="sync">Sync</link> configuration similar to local
       cleanups. The only difference is that all options get prefixed by <literal>cleanup.</literal>.
-      To better understand this have a look at the following examples.
+      To better understand this, have a look at the following examples.
     </para>
 
     <example id="cleanup.remote.example.xml">
