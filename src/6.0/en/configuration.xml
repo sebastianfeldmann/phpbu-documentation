@@ -35,7 +35,7 @@
 <phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/6.0/phpbu.xsd">
   <backups>
-    <backup name="MyDatabase">
+    <backup name="myDatabase">
       <!-- backup source -->
       <source type="mysqldump">
         <option name="databases" value="mydbname"/>
@@ -464,7 +464,7 @@
   ],
   "backups": [
     {
-      "name": "MyDatabase",
+      "name": "myDatabase",
       "source": {
         "type": "mysqldump",
         "options": {
