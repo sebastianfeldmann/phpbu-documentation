@@ -769,7 +769,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Pattern to include databases and tables to the backup e.g. <literal>^mydatabase[.]mytable</literal>.</entry>
+            <entry>Pattern to include databases and tables to the backup e.g. <literal>^myDatabase[.]mytable</literal>.</entry>
           </row>
           <row>
             <entry>pathToXtraBackup</entry>
@@ -956,7 +956,7 @@
       <title>pgdump XML example</title>
       <programlisting><![CDATA[<!-- source pgdump -->
 <source type="pgdump">
-  <option name="database" value="myDstabase"/>
+  <option name="database" value="myDatabase"/>
   <option name="user" value="myName"/>
   <option name="password" value="topSecret"/>
 </source>]]></programlisting>
@@ -1301,7 +1301,7 @@
         <programlisting><![CDATA[<!-- source tar -->
 <source type="tar">
   <option name="path" value="htdocs/uploads"/>
-  <option name="exclude" value="folderA,fileA.txt,folderB"/>
+  <option name="exclude" value="directoryA,fileA.txt,directoryB"/>
 </source>]]></programlisting>
       </example>
 
@@ -1311,7 +1311,7 @@
   "type": "tar",
   "options": {
     "path": "htdocs/uploads",
-    "exclude": "folderA,fileA.txt,folderB"
+    "exclude": "directoryA,fileA.txt,directoryB"
   }
 }]]></programlisting>
       </example>

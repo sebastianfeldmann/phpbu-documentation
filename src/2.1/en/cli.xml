@@ -66,7 +66,7 @@ Usage: phpbu [option]
         <term><literal>--configuration</literal></term>
         <listitem>
           <para>
-            Path to the phpbu config file to use.
+            Path to the PHPBU config file to use.
             See <xref linkend="configuration" /> for more details.
           </para>
         </listitem>

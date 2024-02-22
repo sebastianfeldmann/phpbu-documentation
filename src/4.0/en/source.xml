@@ -484,7 +484,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Pattern to include databases and tables to the backup e.g. <literal>^mydatabase[.]mytable</literal>.</entry>
+            <entry>Pattern to include databases and tables to the backup e.g. <literal>^myDatabase[.]mytable</literal>.</entry>
           </row>
           <row>
             <entry>pathToXtraBackup</entry>
@@ -664,7 +664,7 @@
       <title>pgdump XML example</title>
       <programlisting><![CDATA[<!-- source pgdump -->
 <source type="pgdump">
-  <option name="database" value="myDstabase"/>
+  <option name="database" value="myDatabase"/>
   <option name="user" value="myName"/>
   <option name="password" value="topSecret"/>
 </source>]]></programlisting>
