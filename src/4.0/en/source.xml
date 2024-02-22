@@ -484,7 +484,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Pattern to include databases and tables to the backup e.g. <literal>^myDatabase[.]mytable</literal>.</entry>
+            <entry>Pattern to include databases and tables to the backup e.g. <literal>^mydatabase[.]mytable</literal>.</entry>
           </row>
           <row>
             <entry>pathToXtraBackup</entry>
