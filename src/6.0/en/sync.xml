@@ -341,6 +341,41 @@
             </entry>
           </row>
           <row>
+            <entry>token</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              The Dropbox authentication token.
+              Go to <ulink url="https://www.dropbox.com/developers/apps">www.dropbox.com/developers/apps</ulink>
+              Create your app
+              Choose:
+              dropbox api app
+              files and datastore
+              yes
+              provide some app name "my-dropbox-app"
+              generate access token to authenticate connection to your dropbox
+            </entry>
+          </row>
+          <row>
+            <entry>appKey</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              The Dropbox AppKey
+            </entry>
+          </row>
+          <row>
+            <entry>appSecret</entry>
+            <entry>string</entry>
+            <entry>yes</entry>
+            <entry>-</entry>
+            <entry>
+              The Dropbox AppSecret
+            </entry>
+          </row>
+          <row>
             <entry>path</entry>
             <entry>string</entry>
             <entry>yes</entry>
