@@ -300,7 +300,7 @@
             <entry>contentType</entry>
             <entry>string</entry>
             <entry>no</entry>
-            <entry>application/json</entry>
+            <entry>multipart/form-data</entry>
             <entry>Post method request body content type.</entry>
           </row>
           <row>
