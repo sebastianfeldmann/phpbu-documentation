@@ -94,6 +94,7 @@
 
     <para>
       Sync your backup to an Amazon S3, or any S3 compatible account.
+      Use the <em>endpoint</em> config to setup a custom storage provider.
     </para>
 
     <para>
@@ -114,7 +115,7 @@
         </thead>
         <tbody>
           <row>
-            <entry>entrypoint</entry>
+            <entry>endpoint</entry>
             <entry>string</entry>
             <entry>no</entry>
             <entry>Amazon S3</entry>
