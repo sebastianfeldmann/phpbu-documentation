@@ -90,10 +90,10 @@
 
   <section id="sync.amazon">
     <indexterm><primary>amazon s3</primary></indexterm>
-    <title>Amazon S3</title>
+    <title>Amazon S3 (and compatible)</title>
 
     <para>
-      Sync your backup to an Amazon S3 account.
+      Sync your backup to an Amazon S3, or any S3 compatible account.
     </para>
 
     <para>
@@ -113,6 +113,13 @@
           </row>
         </thead>
         <tbody>
+          <row>
+            <entry>entrypoint</entry>
+            <entry>string</entry>
+            <entry>no</entry>
+            <entry>Amazon S3</entry>
+            <entry>The API URL.</entry>
+          </row>
           <row>
             <entry>key</entry>
             <entry>string</entry>
