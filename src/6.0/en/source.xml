@@ -31,7 +31,7 @@
         </row>
         <row>
           <entry>influxdump</entry>
-          <entry>Backup Influxdb with the influxd command line tool.</entry>
+          <entry>Backup InfluxDB with the influxd command line tool.</entry>
         </row>
         <row>
           <entry>ldapdump</entry>
