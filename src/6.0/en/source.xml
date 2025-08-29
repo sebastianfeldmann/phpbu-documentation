@@ -194,7 +194,7 @@
     </para>
 
     <table id="source.tables.options.elasticdump">
-      <title>arangodump-Options</title>
+      <title>elasticdump-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
