@@ -351,7 +351,7 @@
     <title>LDAP - ldapdump</title>
 
     <para>
-      Backup you LDAP data with ldapdump.
+      Backup your LDAP data with ldapdump.
     </para>
 
     <table id="source.tables.options.ldapdump">
