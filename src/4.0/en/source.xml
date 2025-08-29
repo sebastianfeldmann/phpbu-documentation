@@ -895,7 +895,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Set custom compression program f.e. lbzip2.</entry>
+            <entry>Set custom compression program e.g. lbzip2.</entry>
           </row>
           <row>
             <entry>removeSourceDir</entry>

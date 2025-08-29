@@ -27,7 +27,7 @@
     </para>
 
     <para>
-      The different backup sources may need their respective executable binary f.e. <literal>mysqldump</literal>.
+      The different backup sources may need their respective executable binary e.g. <literal>mysqldump</literal>.
     </para>
 
   </section>
