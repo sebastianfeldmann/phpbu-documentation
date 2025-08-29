@@ -60,7 +60,7 @@
     <title>ArangoDB</title>
 
     <para>
-      Backup a ArangoDB database with arangodump.
+      Backup an ArangoDB database with arangodump.
     </para>
 
     <table id="source.tables.options.arangodump">

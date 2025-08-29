@@ -68,7 +68,7 @@
     <title>ArangoDB</title>
 
     <para>
-      Backup a ArangoDB database with arangodump.
+      Backup an ArangoDB database with arangodump.
     </para>
 
     <table id="source.tables.options.arangodump">
@@ -182,7 +182,7 @@
     <title>Elastic</title>
 
     <para>
-      Backup a Elastic index with elasticdump.
+      Backup an Elastic index with elasticdump.
     </para>
 
     <table id="source.tables.options.elasticdump">
