@@ -167,7 +167,7 @@ Usage: phpbu [option]
       limit option.
     </para>
     <para>
-      All you have to to, is to set the limit option to a comma separated list of backup names (nameA,nameB,nameC).
+      All you have to do, is to set the limit option to a comma separated list of backup names (nameA,nameB,nameC).
     </para>
     <caution>
       <title>Warning</title>
