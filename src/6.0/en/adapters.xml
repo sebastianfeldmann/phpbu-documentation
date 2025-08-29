@@ -183,7 +183,7 @@
     <indexterm><primary>wordpress</primary></indexterm>
     <title>Wordpress config adapter</title>
     <para>
-      Adapter to use wordpress config files.
+      Adapter to use Wordpress config files.
     </para>
 
     <table id="adapters.wordpress.tables.options">

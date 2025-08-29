@@ -35,7 +35,7 @@
         </row>
         <row>
           <entry>redis</entry>
-          <entry>Backup redis with the redis-cli command line tool.</entry>
+          <entry>Backup Redis with the redis-cli command line tool.</entry>
         </row>
         <row>
           <entry>tar</entry>
@@ -56,7 +56,7 @@
     <title>ArangoDB</title>
 
     <para>
-      Backup a ArangoDB database with arangodump.
+      Backup an ArangoDB database with arangodump.
     </para>
 
     <table id="source.tables.options.arangodump">
@@ -501,7 +501,7 @@
     <title>redis</title>
 
     <para>
-      Backup redis data structure store using redis-cli.
+      Backup Redis data structure store using redis-cli.
     </para>
 
     <table id="source.tables.options.redis">

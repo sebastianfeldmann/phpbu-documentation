@@ -31,7 +31,7 @@
         </row>
         <row>
           <entry>influxdump</entry>
-          <entry>Backup Influxdb with the influxd command line tool.</entry>
+          <entry>Backup InfluxDB with the influxd command line tool.</entry>
         </row>
         <row>
           <entry>ldapdump</entry>
@@ -51,7 +51,7 @@
         </row>
         <row>
           <entry>redis</entry>
-          <entry>Backup redis with the redis-cli command line tool.</entry>
+          <entry>Backup Redis with the redis-cli command line tool.</entry>
         </row>
         <row>
           <entry>rsync</entry>
@@ -76,7 +76,7 @@
     <title>ArangoDB</title>
 
     <para>
-      Backup a ArangoDB database with arangodump.
+      Backup an ArangoDB database with arangodump.
     </para>
 
     <table id="source.tables.options.arangodump">
@@ -190,11 +190,11 @@
     <title>Elastic</title>
 
     <para>
-      Backup a Elastic index with elasticdump.
+      Backup an Elastic index with elasticdump.
     </para>
 
     <table id="source.tables.options.elasticdump">
-      <title>arangodump-Options</title>
+      <title>elasticdump-Options</title>
       <tgroup cols="5" align="left" colsep="1" rowsep="1">
         <thead>
           <row>
@@ -351,7 +351,7 @@
     <title>LDAP - ldapdump</title>
 
     <para>
-      Backup you LDAP data with ldapdump.
+      Backup your LDAP data with ldapdump.
     </para>
 
     <table id="source.tables.options.ldapdump">
@@ -372,7 +372,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>localhost</entry>
-            <entry>Hostname of you LDAP server.</entry>
+            <entry>Hostname of your LDAP server.</entry>
           </row>
           <row>
             <entry>port</entry>
@@ -956,7 +956,7 @@
       <title>pgdump XML example</title>
       <programlisting><![CDATA[<!-- source pgdump -->
 <source type="pgdump">
-  <option name="database" value="myDstabase"/>
+  <option name="database" value="myDatabase"/>
   <option name="user" value="myName"/>
   <option name="password" value="topSecret"/>
 </source>]]></programlisting>
@@ -1084,7 +1084,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Host to connecto to.</entry>
+            <entry>Host to connect to.</entry>
           </row>
           <row>
             <entry>user</entry>
@@ -1201,7 +1201,7 @@
             <entry>string</entry>
             <entry>no</entry>
             <entry>-</entry>
-            <entry>Set custom compression program f.e. lbzip2.</entry>
+            <entry>Set custom compression program e.g. lbzip2.</entry>
           </row>
           <row>
             <entry>removeSourceDir</entry>
