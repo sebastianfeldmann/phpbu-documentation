@@ -45,24 +45,15 @@
     </para>
 
     <para>
-      To globally install the PHAR:
+      The easiest way to get PHPBU is by using
+      <ulink url="https://phar.io">phive</ulink>
+      or by manually downloading the PHAR-Archive from the GitHub.com
+      <ulink url="https://github.com/sebastianfeldmann/phpbu/releases/latest">release page</ulink>
     </para>
 
     <screen>
-<prompt>$</prompt> <userinput>wget http://phar.phpbu.de/phpbu.phar</userinput>
-<prompt>$</prompt> <userinput>chmod +x phpbu.phar</userinput>
-<prompt>$</prompt> <userinput>sudo mv phpbu.phar /usr/local/bin/phpbu</userinput>
+<prompt>$</prompt> <userinput>phive install phpbu</userinput>
 <prompt>$</prompt> <userinput>phpbu --version</userinput>
-<computeroutput>phpbu x.y.z by Sebastian Feldmann and Contributors.</computeroutput>
-</screen>
-
-    <para>
-      You may also use the downloaded PHAR file directly:
-    </para>
-
-    <screen>
-<prompt>$</prompt> <userinput>wget https://phar.phpbu.de/phpbu.phar</userinput>
-<prompt>$</prompt> <userinput>php phpbu.phar --version</userinput>
 <computeroutput>phpbu x.y.z by Sebastian Feldmann and Contributors.</computeroutput>
 </screen>
 

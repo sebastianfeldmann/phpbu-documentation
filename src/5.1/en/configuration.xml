@@ -10,8 +10,8 @@
 
   <para>
     The configuration of PHPBU is done with a simple XML file.
-    You can validate your config files with the respective PHPBU schema definition found at
-    <ulink url="http://schema.phpbu.de">schema.phpbu.de</ulink>.
+    You can validate your config files with the respective PHPBU schema definition found
+    <ulink url="http://www.phpbu.de/schema.html">here</ulink>.
   </para>
 
   <section id="configuration.xml">
@@ -33,7 +33,7 @@
     <programlisting><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/5.1/phpbu.xsd">
+       xsi:noNamespaceSchemaLocation="http://www.phpbu.de/schema/5.1/phpbu.xsd">
   <backups>
     <backup name="MyDatabase">
       <!-- backup source -->
@@ -562,7 +562,7 @@
       <programlisting><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/5.1/phpbu.xsd">
+       xsi:noNamespaceSchemaLocation="http://www.phpbu.de/schema/5.1/phpbu.xsd">
   <adapters>
     <adapter type="dotenv" name="environment">
       <option name="file" value=".env" />

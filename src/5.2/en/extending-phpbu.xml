@@ -506,7 +506,7 @@ phpbu\App\Factory::register('cleanup', 'mycleanup', '\\Acme\\MyCleaner');]]></pr
       <title>Example phpbu.xml.dist</title>
       <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/5.2/phpbu.xsd">
+       xsi:noNamespaceSchemaLocation="http://www.phpbu.de/schema/5.2/phpbu.xsd">
   <backups>
     <backup>
       <!-- source -->
